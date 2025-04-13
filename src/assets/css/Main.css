@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: "HK Grotesk";
+    src: url('/public/fonts/HKGrotesk-Regular.ttf');
+}
+
+@theme {
+    --default-font-family: "HK Grotesk"
+}
+
+@layer components {
+    html,
+    body,
+    #root {
+        @apply m-0 p-0 w-full select-none overflow-x-hidden;
+    }
+
+    h1 {
+        @apply text-4xl font-medium;
+    }   
+    
+    h2 {
+        @apply text-3xl font-medium;
+    }
+
+    h3 {
+        @apply text-2xl font-medium;
+    }
+
+    h4 {
+        @apply text-xl font-medium;
+    }
+
+    h5 {
+        @apply text-lg font-medium;
+    }
+
+    h6 {
+        @apply text-base font-medium;
+    }
+
+    .btn-primary {
+        @apply bg-[#3F72AF] border text-[#F9F7F7] px-2 py-1 rounded-[6px] hover:cursor-pointer hover:bg-[#F9F7F7] hover:text-[#3F72AF]
+    }
+    
+    .bg-primary {
+        @apply bg-[#3F72AF];
+    }
+
+    .bg-secondary {
+        @apply bg-[#E0D2C3];
+    }
+
+    .bg-danger {
+        @apply bg-[#E05454];
+    }
+
+    .bg-semi-white {
+        @apply bg-[#F9F7F7];
+    }
+
+}
