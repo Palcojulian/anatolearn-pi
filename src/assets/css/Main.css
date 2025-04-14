@@ -60,4 +60,21 @@
         @apply bg-[#F9F7F7];
     }
 
+    .text-primary {
+        @apply text-[#3F72AF];
+    }
+
+    .text-secondary {
+        @apply text-[#E0D2C3];
+    }
+
+    .text-danger {
+        @apply text-[#E05454];
+    }
+
+    .text-semi-white {
+        @apply text-[#F9F7F7];
+    }
+
+
 }
