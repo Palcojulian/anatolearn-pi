@@ -33,7 +33,7 @@
     }
 
     h5 {
-        @apply text-lg font-medium;
+        @apply text-lg font-bold;
     }
 
     h6 {
@@ -42,6 +42,10 @@
 
     .btn-primary {
         @apply bg-[#3F72AF] border text-[#F9F7F7] px-2 py-1 rounded-[6px] hover:cursor-pointer hover:bg-[#F9F7F7] hover:text-[#3F72AF]
+    }
+
+    .btn-primary-light {
+        @apply border border-[#3F72AF] rounded-[6px] px-2 py-1 text-[#3F72AF]
     }
     
     .bg-primary {
