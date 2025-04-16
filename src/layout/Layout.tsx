@@ -6,14 +6,13 @@ interface Children {
   children: JSX.Element;
 }
 
-// flex flex-col min-h-screen w-full
-// flex flex-col items-center w-full
-// 
 const Layout = ({ children }: Children) => {
   return (
-    <div className="flex flex-col min-h-screen w-full">
+    <div className="flex flex-col h-screen w-full ">
       <Header />
-      <main className="flex flex-col items-center justify-center text-center w-full flex-1">{children}</main>
+      <main className="flex flex-col items-center justify-center text-center w-full flex-1 p-5">
+        {children}
+      </main>
       <Footer />
     </div>
   );
