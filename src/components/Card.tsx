@@ -10,7 +10,7 @@ interface Props {
 const Card = (props: Props) => {
     const navigate = useNavigate();
     return (
-    <div className="flex flex-col gap-4 border border-gray-200 shadow-sm rounded-[6px] w-[440px] p-4">
+    <div className="flex flex-col gap-4 border bg-white border-gray-200 shadow-sm rounded-[6px] w-[440px] p-4 z-10">
       <div className="flex flex-col items-start">
         <h5>{props.title}</h5>
         <span className="text-sm font-semibold">{props.subtitle}</span>
