@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router";
+
 const NotFound = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
@@ -11,7 +15,7 @@ const NotFound = () => {
             Lo sentimos, no pudimos encontrar la página que estás buscando.
           </p>
           <div className="mt-10 flex items-center justify-center gap-2">
-            <a href="#" className="btn-primary">
+            <a onClick={() => navigate('/')} className="btn-primary">
               Volver al inicio
             </a>
           </div>
