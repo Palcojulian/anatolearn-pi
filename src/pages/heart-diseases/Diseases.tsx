@@ -1,8 +1,8 @@
-import { Canvas } from "@react-three/fiber";
-import Card from "../../components/Card";
-import NormalHeart from "./models-3d/NormalHeart";
-import { OrbitControls, Environment } from "@react-three/drei";
 import { Suspense } from "react";
+import { OrbitControls, Environment } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import NormalHeart from "./models-3d/NormalHeart";
+import Card from "../../components/Card";
 
 const Diseases = () => {
   return (
@@ -20,7 +20,7 @@ const Diseases = () => {
             title="Arritmia cardiaca"
             subtitle="Trastorno del ritmo cardíaco"
             description="Una arritmia cardiaca es un trastorno del ritmo cardíaco. El corazón puede latir demasiado rápido (taquicardia), demasiado lento (bradicardia) o de manera irregular. "
-            path="/"
+            path="/enfermedades-corazon/arritmia"
           />
         </div>
 
