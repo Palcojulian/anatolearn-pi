@@ -1,9 +1,13 @@
+import { Canvas } from "@react-three/fiber";
 import Card from "../../components/Card";
+import NormalHeart from "./models-3d/NormalHeart";
+import { OrbitControls, Environment } from "@react-three/drei";
+import { Suspense } from "react";
 
-function Diseases() {
+const Diseases = () => {
   return (
     <>
-      <div className="flex flex-col justify-between w-full h-full p-10">
+      <div className="flex flex-col justify-between w-full h-full p-10 relative">
         <div className="flex justify-between w-full">
           <Card
             title="Enfermedad del corazón roto"
@@ -34,9 +38,20 @@ function Diseases() {
             path="#"
           />
         </div>
+        <div className="flex items-center justify-center absolute w-full h-full">
+          <Suspense fallback={<h5>Cargando...</h5>}>
+            <Canvas camera={{ position: [2, 0, 5] }}>
+              <OrbitControls enableZoom={false} enableRotate={true} />
+              <ambientLight intensity={3} />
+              <directionalLight position={[5, 5, 10]} intensity={7} />
+              <Environment preset="city" background={false} />
+              <NormalHeart scale={3} />
+            </Canvas>
+          </Suspense>
+        </div>
       </div>
     </>
   );
-}
+};
 
 export default Diseases;
