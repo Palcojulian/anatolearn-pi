@@ -4,7 +4,7 @@ import Heart from "./components/canvas/Heart";
 const Diseases = () => {
   return (
     <>
-      <div className="flex flex-col gap-5 justify-between w-full h-full p-10 relative">
+      <div className="flex flex-col gap-5 justify-between w-full h-full relative p-5">
         <div className="grid grid-cols-2">
           <div className="col-span-1 flex justify-center" >
             <Card
