@@ -23,6 +23,13 @@ import TakotsuboSymptoms from "./pages/heart-diseases/takotsubo/sections/Symptom
 import TakotsuboTreatment from "./pages/heart-diseases/takotsubo/sections/Treatment.tsx";
 import TakotsuboPrevention from "./pages/heart-diseases/takotsubo/sections/Prevention.tsx";
 
+/* STENOSIS */
+import Stenosis from "./pages/heart-diseases/stenosis/Stenosis.tsx";
+import StenosisWhatIs from "./pages/heart-diseases/stenosis/sections/WhatIs.tsx";
+import StenosisSymptoms from "./pages/heart-diseases/stenosis/sections/Symptoms.tsx";
+import StenosisTreatment from "./pages/heart-diseases/stenosis/sections/Treatment.tsx";
+import StenosisPrevention from "./pages/heart-diseases/stenosis/sections/Prevention.tsx";
+
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
     <Layout>
@@ -41,6 +48,13 @@ createRoot(document.getElementById("root")!).render(
           <Route path="sintomas" element={<TakotsuboSymptoms />} />
           <Route path="tratamiento" element={<TakotsuboTreatment />} />
           <Route path="prevencion" element={<TakotsuboPrevention />} />
+        </Route>
+
+        <Route path="enfermedades-corazon/stenosis" element={<Stenosis />}>
+          <Route path="que-es" element={<StenosisWhatIs />} />
+          <Route path="sintomas" element={<StenosisSymptoms />} />
+          <Route path="tratamiento" element={<StenosisTreatment />} />
+          <Route path="prevencion" element={<StenosisPrevention />} />
         </Route>
 
         <Route path="quiz" element={<Quiz />} />
