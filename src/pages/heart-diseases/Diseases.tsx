@@ -30,7 +30,7 @@ const Diseases = () => {
               title="Válvula del corazón estrecha"
               subtitle="Estenosis valvular"
               description="La estenosis valvular es una cardiopatía congénita que se produce cuando una de las válvulas del corazón no abre completamente dificultando el flujo normal de la sangre."
-              path="#"
+              path="/enfermedades-corazon/stenosis"
             />
           </div>
           <div className="col-span-1 flex justify-center">
