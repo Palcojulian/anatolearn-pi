@@ -6,15 +6,15 @@ const Diseases = () => {
     <>
       <div className="flex flex-col gap-5 justify-between w-full h-full relative p-5">
         <div className="grid grid-cols-2">
-          <div className="col-span-1 flex justify-center" >
+          <div className="col-span-1 flex justify-center">
             <Card
               title="Enfermedad del corazón roto"
               subtitle="Miocardiopatía de takotsubo"
               description="La enfermedad del corazón roto, también conocida como miocardiopatía de Takotsubo, es una afección cardíaca temporal que se desencadena por situaciones de estrés emocional o físico intenso"
-              path="#"
+              path="/enfermedades-corazon/takotsubo"
             />
           </div>
-          <div className="col-span-1 flex justify-center" >
+          <div className="col-span-1 flex justify-center">
             <Card
               title="Arritmia cardiaca"
               subtitle="Trastorno del ritmo cardíaco"
@@ -25,7 +25,7 @@ const Diseases = () => {
         </div>
 
         <div className="grid grid-cols-2">
-          <div className="col-span-1 flex justify-center" >
+          <div className="col-span-1 flex justify-center">
             <Card
               title="Válvula del corazón estrecha"
               subtitle="Estenosis valvular"
@@ -33,8 +33,7 @@ const Diseases = () => {
               path="#"
             />
           </div>
-          <div className="col-span-1 flex justify-center" >
-
+          <div className="col-span-1 flex justify-center">
             <Card
               title="Coágulo en la sangre"
               subtitle="Trombosis"

@@ -16,18 +16,33 @@ import ArrhythmiaSymptoms from "./pages/heart-diseases/arrhythmia/sections/Sympt
 import ArrhythmiaTreatment from "./pages/heart-diseases/arrhythmia/sections/Treatment.tsx";
 import ArrhythmiaPrevention from "./pages/heart-diseases/arrhythmia/sections/Prevention.tsx";
 
+/* TAKOTSUBO */
+import Takotsubo from "./pages/heart-diseases/takotsubo/Takotsubo.tsx";
+import TakotsuboWhatIs from "./pages/heart-diseases/takotsubo/sections/WhatIs.tsx";
+import TakotsuboSymptoms from "./pages/heart-diseases/takotsubo/sections/Symptoms.tsx";
+import TakotsuboTreatment from "./pages/heart-diseases/takotsubo/sections/Treatment.tsx";
+import TakotsuboPrevention from "./pages/heart-diseases/takotsubo/sections/Prevention.tsx";
+
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
     <Layout>
       <Routes>
         <Route index path="/" element={<Home />} />
         <Route path="enfermedades-corazon" element={<Diseases />} />
-        <Route path="enfermedades-corazon/arritmia" element={<Arrhythmia />} >
+        <Route path="enfermedades-corazon/arritmia" element={<Arrhythmia />}>
           <Route path="que-es" element={<ArrhythmiaWhatIs />} />
           <Route path="sintomas" element={<ArrhythmiaSymptoms />} />
           <Route path="tratamiento" element={<ArrhythmiaTreatment />} />
           <Route path="prevencion" element={<ArrhythmiaPrevention />} />
         </Route>
+
+        <Route path="enfermedades-corazon/takotsubo" element={<Takotsubo />}>
+          <Route path="que-es" element={<TakotsuboWhatIs />} />
+          <Route path="sintomas" element={<TakotsuboSymptoms />} />
+          <Route path="tratamiento" element={<TakotsuboTreatment />} />
+          <Route path="prevencion" element={<TakotsuboPrevention />} />
+        </Route>
+
         <Route path="quiz" element={<Quiz />} />
         <Route path="about-us" element={<AboutUs />} />
         <Route path="*" element={<NotFound />} />
