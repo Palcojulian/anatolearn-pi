@@ -7,6 +7,7 @@ import { tabsStenosis } from "../helpers/stenosisTabs";
 // import { Canvas } from "@react-three/fiber";
 // import { OrbitControls, Environment } from "@react-three/drei";
 import StenosisH from "../components/canvas/Stenosis";
+import Sintomas from "../components/canvas/Sintomas";
 
 
 const Stenosis = () => {
@@ -21,7 +22,7 @@ const Stenosis = () => {
     if (tabSelected == 1) {
       return <div style={{ width: '100%', height: '500px' }}><StenosisH /></div>;    
     } else if (tabSelected == 2) {
-      return <div>Modelo 3d </div>;
+      return <div style={{ width: '100%', height: '500px' }}><Sintomas /></div>;   
     } else if (tabSelected == 3) {
       return <div>Modelo 3d </div>;
     } else if (tabSelected == 4) {
