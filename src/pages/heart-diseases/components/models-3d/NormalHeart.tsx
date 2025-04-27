@@ -1,6 +1,6 @@
 import { type JSX } from "react";
 import { useGLTF } from "@react-three/drei";
-import * as THREE from "three";
+import { Mesh, MeshStandardMaterial } from "three";
 
 const NormalHeart = (props: JSX.IntrinsicElements["group"]) => {
   const { materials, nodes } = useGLTF("models-3d/normal-heart.glb");
@@ -8,11 +8,10 @@ const NormalHeart = (props: JSX.IntrinsicElements["group"]) => {
   return (
     <group {...props} dispose={null}>
       <mesh
-
         material={materials.HeartMaterial}
-        geometry={(nodes.Heart as THREE.Mesh).geometry}
+        geometry={(nodes.Heart as Mesh).geometry}
         onUpdate={(self) => {
-          const mat = self.material as THREE.MeshStandardMaterial;
+          const mat = self.material as MeshStandardMaterial;
           mat.metalness = 0.9;
           mat.roughness = 0.6;
           mat.needsUpdate = true;
