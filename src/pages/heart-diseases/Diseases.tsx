@@ -35,9 +35,9 @@ const Diseases = () => {
           </div>
           <div className="col-span-1 flex justify-center">
             <Card
-              title="Coágulo en la sangre"
-              subtitle="Trombosis"
-              description="La trombosis (enfermedad trombótica) es un trastorno que implica la formación de trombos o coágulos en el sistema circulatorio. Pueden ser trombos arteriales o venosos."
+              title="Obtrucción de arteria coronaria"
+              subtitle="Cardiopatía isquémica"
+              description="La Cardiopatía isquémica es una enfermedad en la que el flujo de sangre al corazón se reduce debido a obstrucciones en las arterias coronarias."
               path="#"
             />
           </div>
