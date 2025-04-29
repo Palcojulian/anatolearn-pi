@@ -18,7 +18,7 @@ const Diseases = () => {
             <Card
               title="Arritmia cardiaca"
               subtitle="Trastorno del ritmo cardíaco"
-              description="Una arritmia cardiaca es un trastorno del ritmo cardíaco. El corazón puede latir demasiado rápido (taquicardia), demasiado lento (bradicardia) o de manera irregular. "
+              description="Una arritmia cardiaca es un trastorno del ritmo cardíaco. El corazón puede latir demasiado rápido (taquicardia), demasiado lento (bradicardia) o de manera irregular. "
               path="/enfermedades-corazon/arritmia"
             />
           </div>
