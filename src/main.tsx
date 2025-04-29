@@ -23,14 +23,14 @@ import TakotsuboSymptoms from "./pages/heart-diseases/takotsubo/sections/Symptom
 import TakotsuboTreatment from "./pages/heart-diseases/takotsubo/sections/Treatment.tsx";
 import TakotsuboPrevention from "./pages/heart-diseases/takotsubo/sections/Prevention.tsx";
 
-/* CORONARY ARTERY */
+/* STENOSIS */
 import Stenosis from "./pages/heart-diseases/stenosis/Stenosis.tsx";
 import StenosisWhatIs from "./pages/heart-diseases/stenosis/sections/WhatIs.tsx";
 import StenosisSymptoms from "./pages/heart-diseases/stenosis/sections/Symptoms.tsx";
 import StenosisTreatment from "./pages/heart-diseases/stenosis/sections/Treatment.tsx";
 import StenosisPrevention from "./pages/heart-diseases/stenosis/sections/Prevention.tsx";
 
-/* STENOSIS */
+/* CORONARY ARTERY */
 import CoronaryArtery from "./pages/heart-diseases/coronary-artery/CoronaryArtery.tsx";
 import CoronaryWhatIs from "./pages/heart-diseases/coronary-artery/sections/WhatIs.tsx";
 import CoronarySymptoms from "./pages/heart-diseases/coronary-artery/sections/Symptoms.tsx";
