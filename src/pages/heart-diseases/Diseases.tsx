@@ -38,7 +38,7 @@ const Diseases = () => {
               title="Obtrucción de arteria coronaria"
               subtitle="Cardiopatía isquémica"
               description="La Cardiopatía isquémica es una enfermedad en la que el flujo de sangre al corazón se reduce debido a obstrucciones en las arterias coronarias."
-              path="#"
+              path="/enfermedades-corazon/coronary-artery"
             />
           </div>
         </div>

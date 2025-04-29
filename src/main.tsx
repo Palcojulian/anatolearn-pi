@@ -23,12 +23,19 @@ import TakotsuboSymptoms from "./pages/heart-diseases/takotsubo/sections/Symptom
 import TakotsuboTreatment from "./pages/heart-diseases/takotsubo/sections/Treatment.tsx";
 import TakotsuboPrevention from "./pages/heart-diseases/takotsubo/sections/Prevention.tsx";
 
-/* STENOSIS */
+/* CORONARY ARTERY */
 import Stenosis from "./pages/heart-diseases/stenosis/Stenosis.tsx";
 import StenosisWhatIs from "./pages/heart-diseases/stenosis/sections/WhatIs.tsx";
 import StenosisSymptoms from "./pages/heart-diseases/stenosis/sections/Symptoms.tsx";
 import StenosisTreatment from "./pages/heart-diseases/stenosis/sections/Treatment.tsx";
 import StenosisPrevention from "./pages/heart-diseases/stenosis/sections/Prevention.tsx";
+
+/* STENOSIS */
+import CoronaryArtery from "./pages/heart-diseases/coronary-artery/CoronaryArtery.tsx";
+import CoronaryWhatIs from "./pages/heart-diseases/coronary-artery/sections/WhatIs.tsx";
+import CoronarySymptoms from "./pages/heart-diseases/coronary-artery/sections/Symptoms.tsx";
+import CoronaryTreatment from "./pages/heart-diseases/coronary-artery/sections/Treatment.tsx";
+import CoronaryPrevention from "./pages/heart-diseases/coronary-artery/sections/Prevention.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
@@ -55,6 +62,13 @@ createRoot(document.getElementById("root")!).render(
           <Route path="sintomas" element={<StenosisSymptoms />} />
           <Route path="tratamiento" element={<StenosisTreatment />} />
           <Route path="prevencion" element={<StenosisPrevention />} />
+        </Route>
+
+        <Route path="enfermedades-corazon/coronary-artery" element={<CoronaryArtery />}>
+          <Route path="que-es" element={<CoronaryWhatIs />} />
+          <Route path="sintomas" element={<CoronarySymptoms />} />
+          <Route path="tratamiento" element={<CoronaryTreatment />} />
+          <Route path="prevencion" element={<CoronaryPrevention />} />
         </Route>
 
         <Route path="quiz" element={<Quiz />} />
