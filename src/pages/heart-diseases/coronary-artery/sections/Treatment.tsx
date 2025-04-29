@@ -13,5 +13,4 @@ const CoronaryTreatment = () => {
   };
   
   export default CoronaryTreatment;
-
   
