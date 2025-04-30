@@ -3,6 +3,10 @@ import { Outlet, useNavigate } from "react-router";
 import Tabs from "../../../components/Tabs";
 import IconArrowLeft from "../../../components/IconArrowLeft";
 import { tabsTakotsubo } from "../helpers/takotsuboTabs";
+import TakotsuboTreatmentCanvas from "../components/canvas/TakotsuboTreatmentCanvas";
+import TakotsuboPreventionCanvas from "../components/canvas/TakotsuboPreventionCanvas";
+import TakotsuboWhatIsCanvas from "../components/canvas/TakotsuboWhatIsCanvas";
+import TakotsuboSymtomsCanvas from "../components/canvas/TakotsuboSymptomsCanvas";
 
 const Takotsubo = () => {
   const navigate = useNavigate();
@@ -14,13 +18,29 @@ const Takotsubo = () => {
 
   const renderModelo = () => {
     if (tabSelected == 1) {
-      return <div>Modelo 3d</div>;
+      return (
+        <div style={{ width: "100%", height: "500px" }}>
+          <TakotsuboWhatIsCanvas />
+        </div>
+      );
     } else if (tabSelected == 2) {
-      return <div>Modelo 3d</div>;
+      return (
+        <div style={{ width: "100%", height: "500px" }}>
+          <TakotsuboSymtomsCanvas />
+        </div>
+      );
     } else if (tabSelected == 3) {
-      return <div>Modelo 3d</div>;
+      return (
+        <div style={{ width: "100%", height: "500px" }}>
+          <TakotsuboTreatmentCanvas />
+        </div>
+      );
     } else if (tabSelected == 4) {
-      return <div>Modelo 3d</div>;
+      return (
+        <div style={{ width: "100%", height: "500px" }}>
+          <TakotsuboPreventionCanvas />
+        </div>
+      );
     } else {
       return <h6>Selecciona una sección</h6>;
     }
