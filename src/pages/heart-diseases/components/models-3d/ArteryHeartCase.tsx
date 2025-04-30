@@ -2,7 +2,7 @@ import { type JSX } from "react";
 import { useGLTF } from "@react-three/drei";
 
 const ArteryHeartCase = (props: JSX.IntrinsicElements["group"]) => {
-  const { scene } = useGLTF("/models-3d/ArteryHeartCase.glb") as any;
+  const { scene } = useGLTF("/models-3d/ArteryHeartCase.glb");
 
   return (
     <group {...props} dispose={null}>
