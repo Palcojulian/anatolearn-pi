@@ -4,6 +4,8 @@ import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 
+// esto es un comentario para verificar algo
+
 const TakotsuboTreatment = (props: JSX.IntrinsicElements["group"]) => {
   const groupRef = useRef<THREE.Group>(null);
   const { nodes, materials } = useGLTF("/models-3d/takotsubo/Brain.glb") as any;
