@@ -1,6 +1,6 @@
 const Quiz = () => {
     return (
-        <h1>Quiz Page</h1>
+        <h1>Sección en construcción...</h1>
     )
 }
 
