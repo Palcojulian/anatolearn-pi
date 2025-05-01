@@ -10,7 +10,7 @@ const TakotsuboTreatment = (props: JSX.IntrinsicElements["group"]) => {
   const groupRef = useRef<THREE.Group>(null);
   const { nodes, materials } = useGLTF("/models-3d/takotsubo/Brain.glb") as any;
 
-  useFrame((state, delta) => {
+  useFrame((state) => {
     if (groupRef.current) {
       groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 2) * 0.1;
     }
