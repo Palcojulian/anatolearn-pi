@@ -20,7 +20,7 @@ const Stenosis = () => {
 
   const renderModelo = () => {
     if (tabSelected == 1) {
-      return <div style={{ width: '100%', height: '500px' }}><StenosisH /></div>;    
+      return <div><StenosisH /></div>;    
     } else if (tabSelected == 2) {
       return <div style={{ width: '100%', height: '500px' }}><Sintomas /></div>;   
     } else if (tabSelected == 3) {

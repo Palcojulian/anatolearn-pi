@@ -2,12 +2,25 @@ import { useCallback, type JSX } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import { useRef, useEffect, useState } from "react";
 import * as THREE from "three";
+import Texto3D from "../models-3d/Texto3D";
+import useStoreSintomas from "../../arrhythmia/stores/useStoreSintomas";
+import { useMemo } from "react";
+import { Vector3 } from "three";
+
+
+
 
 const SintomaStenosis = (props: JSX.IntrinsicElements["group"]) => {
+  const { isAlertText } = useStoreSintomas();
+  const positionText = new Vector3(-0.5, 1.4, 0);
+  const positionTextAlert = new Vector3(0, 2.5, 1);
   const group = useRef<THREE.Group>(null);
   const { nodes, materials, animations } = useGLTF('/models-3d/Student.glb');
   const { actions } = useAnimations(animations, group);
   const [currentAction, setCurrentAction] = useState("Sick");
+
+
+  
 
   useEffect(() => {
     actions[currentAction]?.fadeIn(0.5).play();
@@ -26,8 +39,13 @@ const SintomaStenosis = (props: JSX.IntrinsicElements["group"]) => {
       <ambientLight intensity={-3.5} />
 
       <group ref={group} {...props} dispose={null} onDoubleClick={handleStudent}>
+      
         <group name="Scene">
+   
+      
+     
           <group name="Armature">
+        
             <skinnedMesh
               castShadow
               receiveShadow
@@ -101,6 +119,7 @@ const SintomaStenosis = (props: JSX.IntrinsicElements["group"]) => {
               morphTargetInfluences={(nodes.Wolf3D_Teeth as THREE.SkinnedMesh).morphTargetInfluences}
             />
             <primitive object={nodes.Hips} />
+     
           </group>
         </group>
       </group>
