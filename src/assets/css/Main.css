@@ -80,5 +80,12 @@
         @apply text-[#F9F7F7];
     }
 
+    .title-sintomas-stenosis {
+        position: absolute;
+        z-index: 1;
+        color: black;
+        font-size: 14px; /* Más pequeño */
+       
+    }
 
 }

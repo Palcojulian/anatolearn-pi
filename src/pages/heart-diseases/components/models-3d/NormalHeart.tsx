@@ -3,7 +3,7 @@ import { useGLTF } from "@react-three/drei";
 import { Mesh, MeshStandardMaterial } from "three";
 
 const NormalHeart = (props: JSX.IntrinsicElements["group"]) => {
-  const { materials, nodes } = useGLTF("models-3d/normal-heart.glb");
+  const { materials, nodes } = useGLTF("/models-3d/normal-heart.glb");
 
   return (
     <group {...props} dispose={null}>
@@ -22,4 +22,4 @@ const NormalHeart = (props: JSX.IntrinsicElements["group"]) => {
 };
 
 export default NormalHeart;
-useGLTF.preload("models-3d/normal-heart.glb");
+useGLTF.preload("/models-3d/normal-heart.glb");
