@@ -24,17 +24,17 @@ const Stenosis = () => {
     } else if (tabSelected == 2) {
       return <div style={{ width: '100%', height: '500px' }}><Sintomas /></div>;   
     } else if (tabSelected == 3) {
-      return <div>Modelo 3d </div>;
+      return <div>Modelo en construcción...</div>;
     } else if (tabSelected == 4) {
-      return <div>Modelo 3d </div>;
+      return <div>Modelo en construcción...</div>;
     } else {
-      return <h6>...</h6>;
+      return <h6>Seleccione una sección</h6>;
     }
   };
 
   return (
-    <div className="flex w-[90%] ">
-      <div className="gap-4 flex flex-col w-full">
+    <div className="grid grid-cols-2 w-[90%] ">
+      <div className="col-span-1 gap-4 flex flex-col  justify-center">
         <h2 className="text-start" >Stenosis</h2>
         <Tabs tabs={tabsStenosis} tabSelected={tabSelected} action={getIdTab} />
         <Outlet />
@@ -46,7 +46,7 @@ const Stenosis = () => {
         </div>
 
       </div>
-      <div className="flex flex-col w-full">{renderModelo()}</div>
+      <div className="col-span-1 flex flex-col justify-center  h-ful">{renderModelo()}</div>
     </div>
   );
 };

@@ -7,7 +7,7 @@ const Heart = () => {
     return (
         <Suspense fallback={<h5>Cargando...</h5>}>
             <Canvas camera={{ position: [2, 0, 5] }}>
-                <OrbitControls enableZoom={false} enableRotate={true} />
+                <OrbitControls enableZoom={false} enableRotate={true} autoRotate autoRotateSpeed={3} />
                 <ambientLight intensity={3} />
                 <directionalLight position={[5, 5, 10]} intensity={7} />
                 <Environment preset="city" background={false} />
