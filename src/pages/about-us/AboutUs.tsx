@@ -8,8 +8,8 @@ const AboutUs = () => {
         <BubbleHeart />
       </div>
 
-      <div className="w-full flex flex-col items-center justify-center gap-5">
-        <h1 className="mb-4" >Conócenos</h1>
+      <div className="w-full flex flex-col items-center justify-center gap-5 pb-5">
+        <h1 className="mb-3" >Conócenos</h1>
 
         <AboutUsCard
           title="¿Quiénes somos?"

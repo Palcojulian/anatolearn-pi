@@ -10,6 +10,7 @@ const pathNamesMap: Record<string, string> = {
     "prevencion": "Prevención",
     "quiz": "Quiz",
     "about-us": "Sobre Nosotros",
+    "iniciar-sesion": "Iniciar sesión",
 };
 
 const Breadcrumbs: React.FC = () => {

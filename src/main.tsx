@@ -8,6 +8,10 @@ import Diseases from "./pages/heart-diseases/Diseases.tsx";
 import Quiz from "./pages/interactive-quiz/Quiz.tsx";
 import AboutUs from "./pages/about-us/AboutUs.tsx";
 import NotFound from "./pages/not-found/NotFound.tsx";
+import LogIn from "./pages/log-in/LogIn.tsx";
+import ProfileUser from "./pages/profile-user/ProfileUser.tsx";
+import ProtectedRoute from "./components/ProtectedRoute.tsx";
+import PublicRoute from "./components/PublicRoute.tsx";
 
 /* ARRITMIA */
 import Arrhythmia from "./pages/heart-diseases/arrhythmia/Arrhythmia.tsx";
@@ -41,7 +45,16 @@ createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
     <Layout>
       <Routes>
+        <Route element={<ProtectedRoute />}>
+          <Route path="/mi-perfil" element={<ProfileUser />} />
+        </Route>
+        
+        <Route element={<PublicRoute />}>
+          <Route path="/iniciar-sesion" element={<LogIn />} />
+        </Route>
+
         <Route index path="/" element={<Home />} />
+
         <Route path="enfermedades-corazon" element={<Diseases />} />
         <Route path="enfermedades-corazon/arritmia" element={<Arrhythmia />}>
           <Route path="que-es" element={<ArrhythmiaWhatIs />} />
@@ -64,7 +77,10 @@ createRoot(document.getElementById("root")!).render(
           <Route path="prevencion" element={<StenosisPrevention />} />
         </Route>
 
-        <Route path="enfermedades-corazon/coronary-artery" element={<CoronaryArtery />}>
+        <Route
+          path="enfermedades-corazon/coronary-artery"
+          element={<CoronaryArtery />}
+        >
           <Route path="que-es" element={<CoronaryWhatIs />} />
           <Route path="sintomas" element={<CoronarySymptoms />} />
           <Route path="tratamiento" element={<CoronaryTreatment />} />
@@ -73,6 +89,7 @@ createRoot(document.getElementById("root")!).render(
 
         <Route path="quiz" element={<Quiz />} />
         <Route path="about-us" element={<AboutUs />} />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Layout>
