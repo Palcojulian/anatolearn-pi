@@ -28,13 +28,16 @@ const Header = () => {
         </NavLink>
       </nav>
 
-      <img
+      <button className={`${styleNavLink} border hover:cursor-pointer`} onClick={() =>  navigate('/iniciar-sesion')} >
+        Iniciar sesión
+      </button>
+      {/* <img
         src={avatar}
         alt="avatar"
         height={35}
         width={35}
         className="rounded-full object-contain"
-      />
+      /> */}
     </header>
   );
 };
