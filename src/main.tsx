@@ -8,6 +8,7 @@ import Diseases from "./pages/heart-diseases/Diseases.tsx";
 import Quiz from "./pages/interactive-quiz/Quiz.tsx";
 import AboutUs from "./pages/about-us/AboutUs.tsx";
 import NotFound from "./pages/not-found/NotFound.tsx";
+import LogIn from "./pages/log-in/LogIn.tsx";
 
 /* ARRITMIA */
 import Arrhythmia from "./pages/heart-diseases/arrhythmia/Arrhythmia.tsx";
@@ -42,6 +43,7 @@ createRoot(document.getElementById("root")!).render(
     <Layout>
       <Routes>
         <Route index path="/" element={<Home />} />
+        <Route path="/iniciar-sesion" element={<LogIn />} />
         <Route path="enfermedades-corazon" element={<Diseases />} />
         <Route path="enfermedades-corazon/arritmia" element={<Arrhythmia />}>
           <Route path="que-es" element={<ArrhythmiaWhatIs />} />
