@@ -1,14 +1,25 @@
-import avatar from "../../../public/img/avatar.png";
+import { useEffect } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router";
 import logoHorizontal from "../../../public/img/logo_horizontal_blanco.png"
-
+import { useAuthUser } from "../../pages/log-in/composables/useAuthUser";
+import BtnLogIn from "../../components/BtnLogIn";
+import UserInfo from "../../components/UserInfo";
 
 const Header = () => {
+  const { userLooged, getInfoUserLocalStore } = useAuthUser();
   const location = useLocation();
   const navigate = useNavigate();
   const paths = location.pathname.split("/").filter(Boolean);
   const styleNavLink = "text-semi-white text-base font-medium hover:bg-[#F9F7F7] hover:text-[#3F72AF] rounded-md px-2 py-1"
   const navSelected = "bg-[#F9F7F7] text-[#3F72AF]";
+
+  const viewInfoIUser = () => {
+    return userLooged ? <UserInfo {...userLooged} /> : <BtnLogIn />;
+  }
+
+  useEffect(() => {
+    getInfoUserLocalStore();
+  },[]);
 
   return (
     <header className="bg-primary flex items-center justify-between px-8 py-2"  >
@@ -27,17 +38,7 @@ const Header = () => {
           Sobre nosotros
         </NavLink>
       </nav>
-
-      <button className={`${styleNavLink} border hover:cursor-pointer`} onClick={() =>  navigate('/iniciar-sesion')} >
-        Iniciar sesión
-      </button>
-      {/* <img
-        src={avatar}
-        alt="avatar"
-        height={35}
-        width={35}
-        className="rounded-full object-contain"
-      /> */}
+      {viewInfoIUser()}
     </header>
   );
 };
