@@ -4,15 +4,14 @@ import { useAuthUser } from "./composables/useAuthUser";
 import { useCallback } from "react";
 
 const LogIn = () => {
-
-    const { loginWithGoogle, userLooged} = useAuthUser();
+    const { loginWithGoogle } = useAuthUser();
 
     const handleLogIn = useCallback(async() => {
         await loginWithGoogle();
-    }, [loginWithGoogle])
+    }, [loginWithGoogle]);
 
     return (
-    
+    <>
         <div className="flex justify-center w-full" >
             <div className="flex flex-col gap-3 items-center shadow w-[300px] min-w-[170px] py-7 px-4 rounded">
                 <img src={logo} alt="anatolearn-logo"  width={180} />
@@ -21,10 +20,9 @@ const LogIn = () => {
                     <img src={logoGoogle} alt="logo-google" width={25} />
                     Iniciar sesión
                 </button>
-                <div>{userLooged?.email}</div>
-                <img src={userLooged?.photoURL ?? ''} alt="" />
             </div>
         </div>
+    </>
     )
 }
 
