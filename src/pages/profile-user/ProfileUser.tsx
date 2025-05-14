@@ -1,12 +1,14 @@
 import { useNavigate } from "react-router";
 import { useAuthUser } from "../log-in/composables/useAuthUser";
+import Nquizs from "./canvas/Nquizs";
+
 
 const ProfileUser = () => {
-  const { userLooged, fecha_inicio_sesion } = useAuthUser();
+  const { userLooged, fecha_inicio_sesion, logOut } = useAuthUser();
 
   return (
-    <div className="flex bg-gray-100 p-5 w-[95%] h-full mb-5 rounded-xl">
-      <div className="min-w-[400px] flex flex-col  gap-5 border border-gray-400 rounded-xl px-8 py-6 shadow-lg">
+    <div className="flex bg-gray-100 p-5 w-[95%]  mb-5 rounded-xl ">
+      <div className="min-w-[400px] flex flex-col  gap-5 border border-gray-400 rounded-xl px-8 py-6 shadow-lg h-full">
         <div className="flex flex-col items-center gap-2">
           <img
             src={`${userLooged?.photoURL}`}
@@ -39,19 +41,20 @@ const ProfileUser = () => {
             {fecha_inicio_sesion}
           </span>
         </div>
-        <div className="flex flex-col justify-between h-full">
+        <div className="flex flex-col gap-5 ">
           <div className="flex justify-around">
-            <div className="flex flex-col">
-              <span>QUIZ's REALIZADOS</span>
-              <h6>45</h6>
+            <div className="flex flex-col items-center justify-center">
+              <span className="font-bold" >QUIZ's REALIZADOS</span>
+              <Nquizs  text="56" />
             </div>
 
-            <div className="flex flex-col">
-              <span>PROMEDIO</span>
-              <h6>4.8</h6>
+            <div className="flex flex-col items-center justify-center">
+              <span className="font-bold" >PROMEDIO</span>
+              <Nquizs  text="4.8" />
+              
             </div>
           </div>
-          <button className="btn-primary text-sm" >
+          <button onClick={logOut} className="btn-primary text-sm" >
             Cerrar sesión
           </button>
         </div>
