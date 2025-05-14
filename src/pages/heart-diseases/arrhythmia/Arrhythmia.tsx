@@ -8,7 +8,7 @@ import SintomaArrhytmia from "../components/canvas/SintomaArrhytmia";
 
 const Arrhythmia = () => {
   const navigate = useNavigate();
-  const [tabSelected, setIdTab] = useState(0);
+  const [tabSelected, setIdTab] = useState(1);
 
   const getIdTab = (id: number) => {
     setIdTab(id);
