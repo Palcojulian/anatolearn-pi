@@ -1,5 +1,5 @@
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Route, Routes } from "react-router";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 import "./assets/css/Main.css";
 
 import Layout from "./layout/Layout.tsx";
@@ -57,6 +57,7 @@ createRoot(document.getElementById("root")!).render(
 
         <Route path="enfermedades-corazon" element={<Diseases />} />
         <Route path="enfermedades-corazon/arritmia" element={<Arrhythmia />}>
+          <Route index element={<Navigate to="que-es" replace />} />
           <Route path="que-es" element={<ArrhythmiaWhatIs />} />
           <Route path="sintomas" element={<ArrhythmiaSymptoms />} />
           <Route path="tratamiento" element={<ArrhythmiaTreatment />} />
