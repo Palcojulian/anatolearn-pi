@@ -9,7 +9,7 @@ import { Canvas } from "@react-three/fiber";
 import { Vector3 } from "three";
 
 import SintomaArrhytmiaModel from "../models-3d/SintomaArrhytmia";
-import Floor from "../models-3d/Floor";
+import Floor from "../../../../components/Floor";
 import Texto3D from "../../../../components/Texto3D";
 import useStoreSintomas from "../../arrhythmia/stores/useStoreSintomas";
 
