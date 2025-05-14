@@ -5,12 +5,13 @@ interface Props {
   position: Vector3;
   metalnesVal: number;
   roughness: number;
+  scale?: number;
 }
 
 const Floor = (props: Props) => {
   return (
-    <mesh rotation-x={-Math.PI} receiveShadow={true} position={props.position}>
-      <cylinderGeometry args={[2.5, 2.5, 0.15, 50]} />
+    <mesh rotation-x={-Math.PI} receiveShadow={true} position={props.position} scale={props.scale ?? 1}>
+      <cylinderGeometry args={[2.5, 2.5, 0.15, 50]}  />
       <meshStandardMaterial
         roughness={props.roughness}
         metalness={props.metalnesVal}

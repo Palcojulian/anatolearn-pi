@@ -2,7 +2,7 @@ import { useCallback, type JSX } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import { useRef, useEffect, useState } from "react";
 import * as THREE from "three";
-import Texto3D from "../models-3d/Texto3D";
+import Texto3D from "../../../../components/Texto3D";
 import useStoreSintomas from "../../arrhythmia/stores/useStoreSintomas";
 import { useMemo } from "react";
 import { Vector3 } from "three";

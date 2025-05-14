@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { OrbitControls, Environment } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import ArrhytmiaHeart from "../models-3d/ArrhytmiaHeart";
-import Floor from "../models-3d/Floor";
+import Floor from "../../../../components/Floor";
 import { Vector3 } from 'three';
 
 
