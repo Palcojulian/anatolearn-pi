@@ -6,6 +6,7 @@ interface State {
     fecha_inicio_sesion: string;
     setUserLogged: (user: User|null) => void,
     setFechaInicioSesion: (date: string) => void,
+    deleteInfoUser: () => void,
 }
 
 const useStoreAuth =create <State>((set) => {
@@ -13,7 +14,8 @@ const useStoreAuth =create <State>((set) => {
         userLooged: null,
         fecha_inicio_sesion: '',
         setUserLogged: (user) => { set({userLooged: user}) },
-        setFechaInicioSesion: (date) => { set({fecha_inicio_sesion: date})}
+        setFechaInicioSesion: (date) => { set({fecha_inicio_sesion: date})},
+        deleteInfoUser:  () => {set({fecha_inicio_sesion: '', userLooged: null})},
     }
 })
 

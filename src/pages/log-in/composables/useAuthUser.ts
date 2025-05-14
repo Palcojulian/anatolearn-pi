@@ -1,10 +1,10 @@
 import useStoreAuth from "../stores/useStoreAuth"
 import { auth } from '../../../../firebase.config';
-import { onAuthStateChanged, GoogleAuthProvider, signInWithPopup, type User, UserCredential } from 'firebase/auth';
-import { getData, saveData } from '../../../utils/local-store-service';
+import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
+import { getData, saveData, destroyAllData } from '../../../utils/local-store-service';
 
 export function useAuthUser() {
-    const { setUserLogged, setFechaInicioSesion,userLooged, fecha_inicio_sesion } = useStoreAuth();
+    const { setUserLogged, setFechaInicioSesion,userLooged, fecha_inicio_sesion, deleteInfoUser } = useStoreAuth();
     
     const getInfoUserLocalStore = ():void => {
         const user  = getData('info-user');
@@ -26,9 +26,20 @@ export function useAuthUser() {
         }
     }
 
+    const logOut = async():Promise<void> => {
+        try {
+            await signOut(auth);
+            deleteInfoUser();
+            destroyAllData();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return {
         getInfoUserLocalStore,
         loginWithGoogle,
+        logOut,
         userLooged,
         fecha_inicio_sesion,
     }
