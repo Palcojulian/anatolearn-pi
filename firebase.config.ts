@@ -1,5 +1,6 @@
 import { initializeApp, type FirebaseOptions } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
+import { getDatabase } from 'firebase/database';
 
 const firebaseConfig:FirebaseOptions = {
     apiKey: import.meta.env.VITE_FIRE_BASE_API_KEY,
@@ -9,9 +10,10 @@ const firebaseConfig:FirebaseOptions = {
     messagingSenderId: import.meta.env.VITE_FIRE_BASE_MESSAGING_SENDER_ID,
     appId: import.meta.env.VITE_FIRE_BASE_APP_ID,
     measurementId: import.meta.env.VITE_FIRE_BASE_MEASUREMENT_ID,
+    databaseURL: import.meta.env.VITE_FIRE_BASE_DB_URL,
 }
 
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-
+export const database = getDatabase(app);
