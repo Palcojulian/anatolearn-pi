@@ -13,26 +13,24 @@ interface Params {
     respuestas: Respuesta;
 }
 
-export const setInfoQuiz = async (params: Params): Promise<void> => {
+export const setInfoQuiz = async (params: Params): Promise<boolean> => {
     const refDb = push(ref(database, `users/${params.user.uid}/intentos`));
-    await set(refDb, {
-        created_at: Date.now(),
-        calificacion: params.calificacion,
-        tiempo: params.tiempo,
-        respuestas: params.respuestas,
-    });
 
-    const quizsUser = await getQuizsUser(params.user);
-
-    const promedioTiempo = quizsUser.map(quiz => quiz.tiempo).reduce((total, val) => total + val, 0) / quizsUser.length;
-    const promedioCalificacion = quizsUser.map(cal => cal.calificacion).reduce((total, val) => total + val, 0) / quizsUser.length;
-    
+    try {
+        await set(refDb, {
+            created_at: Date.now(),
+            calificacion: params.calificacion,
+            tiempo: params.tiempo,
+            respuestas: params.respuestas,
+        });
+        return true;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }    
 }
 
-
-
-
-type Quiz = {
+export type Quiz = {
     created_at: number;
     respuestas: Respuesta,
     calificacion: number;
