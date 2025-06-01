@@ -7,6 +7,7 @@ interface ImportMetaEnv {
     readonly VITE_FIRE_BASE_MESSAGING_SENDER_ID: string;
     readonly VITE_FIRE_BASE_APP_ID: string;
     readonly VITE_FIRE_BASE_MEASUREMENT_ID: string;
+    readonly VITE_FIRE_BASE_DB_URL: string;
 
 }
 interface ImportMeta {
