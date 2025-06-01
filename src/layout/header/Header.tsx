@@ -3,7 +3,7 @@ import { NavLink, useLocation, useNavigate } from "react-router";
 import logoHorizontal from "../../../public/img/logo_horizontal_blanco.png"
 import { useAuthUser } from "../../pages/log-in/composables/useAuthUser";
 import BtnLogIn from "../../components/BtnLogIn";
-import UserInfo from "../../components/UserInfo";
+import ImgUser from "../../components/ImgUser";
 
 const Header = () => {
   const { userLooged, getInfoUserLocalStore } = useAuthUser();
@@ -14,7 +14,7 @@ const Header = () => {
   const navSelected = "bg-[#F9F7F7] text-[#3F72AF]";
 
   const viewInfoIUser = () => {
-    return userLooged ? <UserInfo {...userLooged} /> : <BtnLogIn />;
+    return userLooged ? <ImgUser {...userLooged} /> : <BtnLogIn />;
   }
 
   useEffect(() => {
