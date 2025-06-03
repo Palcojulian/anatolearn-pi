@@ -11,7 +11,7 @@ const Quiz = () => {
 
 
   return (
-    <RankingCanva />
+    <RankingCanva data={ranking} />
   );
 };
 

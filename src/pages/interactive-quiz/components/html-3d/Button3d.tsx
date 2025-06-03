@@ -1,19 +1,19 @@
-import React from 'react'
-import { Html } from '@react-three/drei'
+import React from "react";
+import { Html } from "@react-three/drei";
 
 const Button3d = () => {
   return (
     <Html
-        center
-        position={[-7,3,3]}
-        transform
-        distanceFactor={5}
+      occlude={false}
+      center
+      position={[-7, 3, 2]}
+      distanceFactor={15}
     >
-        <button className='btn-primary'>
-            Realizar quiz
-        </button>
+      <button className="btn-primary inline-block w-[140px] h-[50px] text-lg">
+        Realizar quiz
+      </button>
     </Html>
-  )
-}
+  );
+};
 
 export default Button3d;
