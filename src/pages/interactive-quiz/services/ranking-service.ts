@@ -7,6 +7,7 @@ export interface Ranking {
     name_user: string;
     calificacion: number;
     tiempo: number;
+    photo_user: string;
 }
 
 interface Params {
@@ -25,6 +26,7 @@ export const updateRanking = async(params: Params):Promise<void> => {
             name_user: params.user.displayName,
             calificacion: params.calificacion,
             tiempo: params.tiempo,
+            photo_user: params.user.photoURL,
         })
         console.log("Actualizo ranking usuario");
         
@@ -34,6 +36,7 @@ export const updateRanking = async(params: Params):Promise<void> => {
             name_user: params.user.displayName,
             calificacion: params.calificacion,
             tiempo: params.tiempo,
+            photo_user: params.user.photoURL,
         })
         console.log("Agrego ranking usuario");
     }

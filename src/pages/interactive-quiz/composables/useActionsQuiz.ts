@@ -92,6 +92,29 @@ export const useQuizsUser = (user: User) => {
 export const useRanking = () => {
     const [ranking, setRanking] = useState<Ranking[]>([]);
     
+    const orderRanking = (ranking: Ranking[]):Ranking[] => {
+        let orderData = [...ranking];
+
+        for (let i = 0; i < orderData.length; i++) {
+            for (let j = (i + 1); j < orderData.length; j++) {
+                if(orderData[i].calificacion == orderData[j].calificacion) {
+                    if(orderData[j].tiempo < orderData[i].tiempo) {
+                        const aux = orderData[i];
+                        orderData[i] = orderData[j];
+                        orderData[j] = aux;
+                    }
+                }else if(orderData[j].calificacion > orderData[i].calificacion){
+                    const aux = orderData[i];
+                    orderData[i] = orderData[j];
+                    orderData[j] = aux;   
+                }
+            }
+        }
+        
+        return orderData;
+    }
+
+
     useEffect(() => {
         const refDb = ref(database, 'ranking');
 
@@ -106,7 +129,9 @@ export const useRanking = () => {
                 ...(value as Ranking)
             }))
 
-            setRanking(allRanking);
+            const positionsRanking = orderRanking(allRanking);
+
+            setRanking(positionsRanking);
         })
 
         return () => unsubscribe();
