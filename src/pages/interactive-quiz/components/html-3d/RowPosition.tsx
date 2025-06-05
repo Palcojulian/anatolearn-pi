@@ -28,17 +28,17 @@ const RowPosition = (props: Props) => {
           <div className="w-[35px] h-[35px] bg-blue-600 rounded-full flex items-center justify-center text-white text-xl">
             {props.calificacion}
           </div>
-          <div className="text-xs" >Calificiación</div>
+          <div className="text-xs" >PUNTAJE</div>
         </div>
 
         <div className="w-full flex flex-col items-center">
           <div className="w-[35px] h-[35px] bg-violet-600 rounded-full flex items-center justify-center text-white text-xs ">
             {props.tiempo}
           </div>
-          <div className="text-xs" >Minutos</div>
+          <div className="text-xs" >SEGUNGOS</div>
         </div>
 
-        <div className="absolute top-[-11px] w-[25px] h-[25px] rounded-full left-[-12px] bg-green-800 text-white flex items-center justify-center">
+        <div className="absolute top-[-11px] w-[25px] h-[25px] rounded-full left-[-12px] bg-indigo-800 text-white flex items-center justify-center">
           {props.index}
         </div>
       </div>
