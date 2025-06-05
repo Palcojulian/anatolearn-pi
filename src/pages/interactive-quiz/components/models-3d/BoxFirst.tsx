@@ -11,16 +11,15 @@ interface Props {
   depth?: number;
 }
 
-const Box3d = ({
+const BoxFirst = ({
   color,
   position,
   metalnesVal,
   roughness,
   scale = 1,
-  width = 7,
-  height = 20,
+  width = 1.8,
+  height = 2,
   depth = 1,
-
 }: Props) => {
   return (
     <mesh receiveShadow position={position} scale={scale}>
@@ -34,4 +33,4 @@ const Box3d = ({
   );
 };
 
-export default Box3d;
+export default BoxFirst;
