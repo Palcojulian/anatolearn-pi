@@ -8,7 +8,7 @@ const Footer = () => {
   const paths = location.pathname.split("/").filter(Boolean);
 
   const showLogo = () => {
-    if (paths[0] == 'iniciar-sesion' || paths[0] == 'quiz') {
+    if (paths[0] == 'iniciar-sesion' || paths[0] == 'quiz' || paths[0] == 'ranking-quiz') {
       return (<hr />)
     } else {
       return (
