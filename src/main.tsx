@@ -5,7 +5,7 @@ import "./assets/css/Main.css";
 import Layout from "./layout/Layout.tsx";
 import Home from "./pages/home/Home.tsx";
 import Diseases from "./pages/heart-diseases/Diseases.tsx";
-import Quiz from "./pages/interactive-quiz/Quiz.tsx";
+import Ranking from "./pages/interactive-quiz/Ranking.tsx";
 import AboutUs from "./pages/about-us/AboutUs.tsx";
 import NotFound from "./pages/not-found/NotFound.tsx";
 import LogIn from "./pages/log-in/LogIn.tsx";
@@ -88,7 +88,7 @@ createRoot(document.getElementById("root")!).render(
           <Route path="prevencion" element={<CoronaryPrevention />} />
         </Route>
 
-        <Route path="quiz" element={<Quiz />} />
+        <Route path="quiz" element={<Ranking />} />
         <Route path="about-us" element={<AboutUs />} />
 
         <Route path="*" element={<NotFound />} />
