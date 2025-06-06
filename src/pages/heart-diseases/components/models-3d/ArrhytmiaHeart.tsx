@@ -12,7 +12,7 @@ const ArrhytmiaHeart = (props: JSX.IntrinsicElements["group"]) => {
   const { actions } = useAnimations(animations, arrhymiaModelRef);
 
   useEffect(() => {
-    console.log(actions);
+
     if (actions?.BeatingHeart) {
       actions.BeatingHeart.play();
       actions.BeatingHeart.timeScale = 0.7;
