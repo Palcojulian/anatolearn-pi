@@ -1,10 +1,12 @@
 import { type User } from 'firebase/auth';
 import { setInfoQuiz, getQuizsUser, type Quiz } from "../services/quiz-service";
 import { updateRanking, type Ranking } from "../services/ranking-service";
-import useStoreQuestions from "../stores/useStoreQuestions";
 import { ref, onValue } from 'firebase/database';
 import { useEffect, useState } from 'react';
 import { database } from '../../../../firebase.config';
+import useStoreQuestions from "../stores/useStoreQuestions";
+import useStoreProgressQuiz from '../stores/useStoreProgressQuiz';
+
 
 export const useQuiz = (user: User) => {
     const {
@@ -142,3 +144,13 @@ export const useRanking = () => {
         ranking,
     }
 } 
+
+export const useProgressQuiz = () => {
+    const { nQuestion, nextQuestion, restoreState } = useStoreProgressQuiz();
+    return {
+        nQuestion,
+        nextQuestion,
+        restoreState,
+    }
+
+}
