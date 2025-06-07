@@ -5,13 +5,16 @@ import "./assets/css/Main.css";
 import Layout from "./layout/Layout.tsx";
 import Home from "./pages/home/Home.tsx";
 import Diseases from "./pages/heart-diseases/Diseases.tsx";
-import Ranking from "./pages/interactive-quiz/Ranking.tsx";
 import AboutUs from "./pages/about-us/AboutUs.tsx";
 import NotFound from "./pages/not-found/NotFound.tsx";
 import LogIn from "./pages/log-in/LogIn.tsx";
 import ProfileUser from "./pages/profile-user/ProfileUser.tsx";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
 import PublicRoute from "./components/PublicRoute.tsx";
+
+/* Quiz */
+import Ranking from "./pages/interactive-quiz/Ranking.tsx";
+import Quiz from "./pages/interactive-quiz/pages/Quiz.tsx";
 
 /* ARRITMIA */
 import Arrhythmia from "./pages/heart-diseases/arrhythmia/Arrhythmia.tsx";
@@ -48,6 +51,8 @@ createRoot(document.getElementById("root")!).render(
         <Route element={<ProtectedRoute />}>
           <Route path="/mi-perfil" element={<ProfileUser />} />
         </Route>
+        
+        <Route path="/quiz" element={<Quiz />} />
         
         <Route element={<PublicRoute />}>
           <Route path="/iniciar-sesion" element={<LogIn />} />
@@ -88,7 +93,7 @@ createRoot(document.getElementById("root")!).render(
           <Route path="prevencion" element={<CoronaryPrevention />} />
         </Route>
 
-        <Route path="quiz" element={<Ranking />} />
+        <Route path="ranking-quiz" element={<Ranking />} />
         <Route path="about-us" element={<AboutUs />} />
 
         <Route path="*" element={<NotFound />} />
