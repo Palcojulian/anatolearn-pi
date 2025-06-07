@@ -4,7 +4,7 @@ import { useRanking } from "./composables/useActionsQuiz";
 import RankingCanva from "./components/canvas/RankingCanva";
 
 
-const Quiz = () => {
+const Ranking = () => {
   const { userLooged: user } = useAuthUser();
   const { ranking } = useRanking();
 
@@ -15,4 +15,4 @@ const Quiz = () => {
   );
 };
 
-export default Quiz;
+export default Ranking;

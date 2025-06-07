@@ -31,7 +31,7 @@ const Header = () => {
         <NavLink className={`${styleNavLink} ${paths[0] == 'enfermedades-corazon' ? navSelected : '' }`}  to="/enfermedades-corazon"  end>
           Enfermedades
         </NavLink>
-        <NavLink className={`${styleNavLink} ${paths[0] == 'quiz' ? navSelected : '' }`}   to="/quiz" end>
+        <NavLink className={`${styleNavLink} ${paths[0] == 'ranking-quiz' ? navSelected : '' }`}   to="/ranking-quiz" end>
           Quiz interactivo
         </NavLink>
         <NavLink  className={`${styleNavLink} ${paths[0] == 'about-us' ? navSelected : '' }`} to="/about-us" end>
