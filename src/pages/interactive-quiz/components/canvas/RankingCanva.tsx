@@ -4,7 +4,7 @@ import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import { Vector3 } from "three";
 import { type Ranking } from "../../services/ranking-service";
 
-import Button3d from "../html-3d/Button3d";
+import ToQuizBtn from "../html-3d/ToQuizBtn";
 import RowPosition from "../html-3d/RowPosition";
 import Box3d from "../models-3d/Box3d";
 import RankingStaging from "../staging/RankingStaging";
@@ -82,7 +82,7 @@ const RankingCanva = (props: Props) => {
           maxAzimuthAngle={Math.PI / 8}
           minAzimuthAngle={Math.PI / -8}
         />
-        <Button3d />
+        <ToQuizBtn />
         <Box3d
           color="#3F72AF"
           position={new Vector3(0, -10, 0)}
