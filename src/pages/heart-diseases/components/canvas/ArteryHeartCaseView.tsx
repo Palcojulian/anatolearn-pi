@@ -7,6 +7,7 @@ const ArteryHeartCaseView = () => {
     <Canvas camera={{ position: [0, 0, 6], fov: 45 }}>
       <ambientLight intensity={1.5} />
       <directionalLight position={[3, 3, 3]} intensity={2} />
+      <pointLight position={[-5,5,5]} intensity={0.8} />
       <Environment preset="apartment" />
       <ArteryHeartCase scale={1.5} position={[0, -1.5, 0]} />
       <OrbitControls enableZoom={true} enableRotate={true} />

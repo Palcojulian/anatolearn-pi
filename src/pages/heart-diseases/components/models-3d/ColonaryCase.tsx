@@ -1,16 +1,26 @@
-import { useGLTF } from "@react-three/drei";
 import { type JSX } from "react";
+import { useGLTF } from "@react-three/drei";
+import * as THREE from "three";
 
 const ColonaryCase = (props: JSX.IntrinsicElements["group"]) => {
-  const { scene } = useGLTF("/models-3d/ColonaryCase.glb") as any;
+  const { materials, nodes } = useGLTF("models-3d/ColonaryCase.glb");
 
   return (
     <group {...props} dispose={null}>
-      <primitive object={scene} />
+      <mesh
+
+        material={materials.ColonaryCaseMaterial}
+        geometry={(nodes.ColonaryCase as THREE.Mesh).geometry}
+        onUpdate={(self) => {
+          const mat = self.material as THREE.MeshStandardMaterial;
+          mat.metalness = 0.9;
+          mat.roughness = 0.6;
+          mat.needsUpdate = true;
+        }}
+      />
     </group>
   );
 };
 
 export default ColonaryCase;
-
-useGLTF.preload("/models-3d/ColonaryCase.glb");
+useGLTF.preload("models-3d/ColonaryCase.glb");
