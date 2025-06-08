@@ -13,6 +13,7 @@ import SeventhQuestion from "../questions/SeventhQuestion";
 import EighthQuestion from "../questions/EighthQuestion";
 
 import { useProgressQuiz } from "../../composables/useActionsQuiz";
+import ProgressQuiz from "../html-3d/ProgressQuiz";
 
 const QuizCanva = () => {
 
@@ -40,6 +41,11 @@ const QuizCanva = () => {
     }
   }
 
+  const renderProgress = () => {
+    if(nQuestion != 0) return <ProgressQuiz />
+    return;
+  }
+
   return (
     <Suspense fallback={<h6>Cargando...</h6>}>
       <Canvas camera={{ position: [0, 2, 7], fov: 100,  }}>
@@ -52,7 +58,7 @@ const QuizCanva = () => {
           maxAzimuthAngle={Math.PI / 10}
           minAzimuthAngle={Math.PI / -10}
         />
-
+        {renderProgress()}
         {renderModels()}
       </Canvas>
     </Suspense>
