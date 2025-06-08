@@ -9,9 +9,9 @@ const EighthQuestion = () => {
   return (
     <>
       <Btn3DHtml
-        position={new Vector3(8, -3, 0)}
+        position={new Vector3(8, -5, 0)}
         action={restoreState}
-        label="Siguiente"
+        label="Enviar"
         scale={0.7}
       />
       <Texto3D

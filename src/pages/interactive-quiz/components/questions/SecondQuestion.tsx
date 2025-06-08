@@ -9,7 +9,7 @@ const SecondQuestion = () => {
   return (
     <>
       <Btn3DHtml
-        position={new Vector3(8, -3, 0)}
+        position={new Vector3(8, -5, 0)}
         action={nextQuestion}
         label="Siguiente"
         scale={0.7}
