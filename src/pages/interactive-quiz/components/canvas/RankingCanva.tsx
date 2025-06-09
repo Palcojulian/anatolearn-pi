@@ -36,7 +36,6 @@ const RankingCanva = (props: Props) => {
         return (
           <FirstPosition
             {...item}
-            photo_user="https://lh3.googleusercontent.com/a/ACg8ocL9zPDUH4ql98o378MPwdjaOrkFboutDIKxwEcDKmYtfbx9WUWV=s96-c"
           />
         );
       }
@@ -45,7 +44,6 @@ const RankingCanva = (props: Props) => {
         return (
           <SecondPosition
             {...item}
-            photo_user="https://lh3.googleusercontent.com/a/ACg8ocL9zPDUH4ql98o378MPwdjaOrkFboutDIKxwEcDKmYtfbx9WUWV=s96-c"
           />
         );
       }
@@ -54,7 +52,6 @@ const RankingCanva = (props: Props) => {
         return (
           <ThirdPosition
             {...item}
-            photo_user="https://lh3.googleusercontent.com/a/ACg8ocL9zPDUH4ql98o378MPwdjaOrkFboutDIKxwEcDKmYtfbx9WUWV=s96-c"
           />
         );
       }
@@ -62,12 +59,12 @@ const RankingCanva = (props: Props) => {
       if (i > 3) ejeYVal -= 0.9;
       return (
         <RowPosition
-          photoUrl="https://lh3.googleusercontent.com/a/ACg8ocL9zPDUH4ql98o378MPwdjaOrkFboutDIKxwEcDKmYtfbx9WUWV=s96-c"
-          calificacion={item.calificacion}
+          photoUrl={item.photo_user}
+          calificacion={+item.calificacion.toFixed(1)}
           index={i + 1}
           nameUser={item.name_user.toUpperCase()}
           position={new Vector3(0, ejeYVal, 0.7)}
-          tiempo={item.tiempo}
+          tiempo={+item.tiempo.toFixed(1)}
         />
       );
     });
