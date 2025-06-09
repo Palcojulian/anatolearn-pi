@@ -10,6 +10,7 @@ import useStoreProgressQuiz from '../stores/useStoreProgressQuiz';
 
 export const useQuiz = (user: User) => {
     const navigate = useNavigate();
+    const { restoreState } = useStoreProgressQuiz();
     const {
         respuestas,
         tiempoInicio,
@@ -40,6 +41,7 @@ export const useQuiz = (user: User) => {
 
             await updateRanking({ calificacion, tiempo, user });
             limpiarStore();
+            restoreState();
             navigate('/ranking-quiz');
         }
     }
