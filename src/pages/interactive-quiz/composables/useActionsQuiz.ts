@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router';
 import { type User } from 'firebase/auth';
 import { setInfoQuiz, getQuizsUser, type Quiz } from "../services/quiz-service";
 import { updateRanking, type Ranking } from "../services/ranking-service";
@@ -7,23 +8,22 @@ import { database } from '../../../../firebase.config';
 import useStoreQuestions from "../stores/useStoreQuestions";
 import useStoreProgressQuiz from '../stores/useStoreProgressQuiz';
 
-
 export const useQuiz = (user: User) => {
+    const navigate = useNavigate();
     const {
         respuestas,
         tiempoInicio,
         tiempoFin,
         setRespuesta,
         limpiarStore,
-        setTiempoFin,
         setTiempoInicio,
+        setTiempoFin,
     } = useStoreQuestions();
-
-    const setLastAnswer = async (key: string, val: boolean): Promise<void> => {
-        setRespuesta(key, val);
-        setTiempoFin(new Date());
-
+    
+    const saveAllAnswers = async (): Promise<void> => {
+        
         let tiempo = (tiempoFin.getTime() - tiempoInicio.getTime()) / 1000;
+        
         const puntosPorPregunta = 5 / Object.values(respuestas).length;
         let calificacion = Object.values(respuestas).filter(val => val).length * puntosPorPregunta;
         const isSuccess = await setInfoQuiz({ calificacion, respuestas, tiempo, user })
@@ -40,6 +40,7 @@ export const useQuiz = (user: User) => {
 
             await updateRanking({ calificacion, tiempo, user });
             limpiarStore();
+            navigate('/ranking-quiz');
         }
     }
 
@@ -50,7 +51,12 @@ export const useQuiz = (user: User) => {
         setAnswer: (key: string, val: boolean) => {
             setRespuesta(key, val)
         },
-        setLastAnswer,
+        setEndTime: () => {
+            setTiempoFin(new Date());
+        },
+        saveAllAnswers,
+        respuestas,
+        tiempoInicio,
     }
 }
 
