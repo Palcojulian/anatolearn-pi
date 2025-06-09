@@ -55,7 +55,7 @@ const InfoUser = (props: Props) => {
 
           <div className="flex flex-col items-center justify-center">
             <span className="font-bold" >PROMEDIO</span>
-            <Nquizs text={props.promedio + ''} />
+            <Nquizs text={props.promedio.toFixed(1)} />
 
           </div>
         </div>
