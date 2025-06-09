@@ -164,7 +164,7 @@ const RankingCanva = (props: Props) => {
         />
 
         <Texto3D
-          text="posiciones!"
+          text="resultados!"
           color="#3F72AF"
           position={new Vector3(6.1, -0.3, 1)}
           bevelEnabled
