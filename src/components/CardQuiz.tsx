@@ -5,7 +5,7 @@ import CircleX from './CircleX'
 
 const CardQuiz = (props:{quiz: Quiz, index: number}) => {
   return (
-    <div className='flex flex-col bg-white p-4 rounded border border-gray-200 md:col-span-12 lg:col-span-6 xl:col-span-4 2xl:col-span-2' >
+    <div className='flex flex-col bg-white p-4 rounded border border-gray-200 md:col-span-12 lg:col-span-6 xl:col-span-4 2xl:col-span-2 h-[380px]' >
         <div>QUIZ N°: {(props.index+1)}</div>
         <div>Realizado el: {new Date(props.quiz.created_at).toLocaleString().split(",")[0]}</div>
         <div>Puntaje: {props.quiz.calificacion.toFixed(1)}</div>
