@@ -9,35 +9,41 @@ import ThirdQuestion from "../questions/ThirdQuestion";
 import FourthQuestion from "../questions/FourthQuestion";
 import FifthQuestion from "../questions/FifthQuestion";
 import SixthQuestion from "../questions/SixthQuestion";
-import SeventhQuestion from "../questions/SeventhQuestion";
-import EighthQuestion from "../questions/EighthQuestion";
+import Resumen from "../questions/Resumen";
+
 
 import { useProgressQuiz } from "../../composables/useActionsQuiz";
+import ProgressQuiz from "../html-3d/ProgressQuiz";
+import { useAuthUser } from "../../../log-in/composables/useAuthUser";
 
 const QuizCanva = () => {
 
   const { nQuestion } = useProgressQuiz();
+  const { userLooged } = useAuthUser();
 
   const renderModels = () => {
     if(nQuestion == 1)  {
-      return <FirstQuestion />
+      return <FirstQuestion {...userLooged!} />
     }else if(nQuestion == 2) {
-      return <SecondQuestion />
+      return <SecondQuestion {...userLooged!} />
     } else if(nQuestion == 3) {
-      return <ThirdQuestion />
+      return <ThirdQuestion {...userLooged!} />
     }else if(nQuestion == 4) {
-      return <FourthQuestion />
+      return <FourthQuestion {...userLooged!} />
     }else if(nQuestion == 5)  {
-      return <FifthQuestion />
+      return <FifthQuestion {...userLooged!} />
     }else if(nQuestion == 6) {
-      return <SixthQuestion />
+      return <SixthQuestion {...userLooged!} />
     }else if(nQuestion == 7) {
-      return <SeventhQuestion />
-    }else if(nQuestion == 8) {
-      return <EighthQuestion />
+      return <Resumen {...userLooged!} />
     }else {
-      return <WelcomeQuiz />
+      return <WelcomeQuiz {...userLooged!} />
     }
+  }
+
+  const renderProgress = () => {
+    if(nQuestion != 0) return <ProgressQuiz />
+    return;
   }
 
   return (
@@ -52,7 +58,7 @@ const QuizCanva = () => {
           maxAzimuthAngle={Math.PI / 10}
           minAzimuthAngle={Math.PI / -10}
         />
-
+        {renderProgress()}
         {renderModels()}
       </Canvas>
     </Suspense>

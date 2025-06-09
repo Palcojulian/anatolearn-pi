@@ -12,26 +12,39 @@ interface Props {
   height: number;
   size: number;
   letterSpacing: number;
+  scale?:number;
 }
 
-const Texto3D = (props: Props) => {
+const Texto3D = ({
+  position,
+  bevelEnabled,
+  bevelSize,
+  bevelThickness,
+  color,
+  height,
+  letterSpacing,
+  size,
+  text,
+  scale=1,
+}: Props) => {
   const text3DRef = useRef<Mesh>(null);
 
   return (
-    <Center position={props.position}>
+    <Center position={position}>
       <Text3D
         ref={text3DRef}
         font={"/fonts/Hanken_Grotesk_Regular.json"}
-        bevelEnabled={props.bevelEnabled}
-        bevelSize={props.bevelSize}
-        bevelThickness={props.bevelThickness}
-        height={props.height}
-        size={props.size}
-        letterSpacing={props.letterSpacing}
+        bevelEnabled={bevelEnabled}
+        bevelSize={bevelSize}
+        bevelThickness={bevelThickness}
+        height={height}
+        size={size}
+        letterSpacing={letterSpacing}
         castShadow
+        scale={scale}
       >
-        {props.text}
-        <meshStandardMaterial color={props.color} metalness={0.7} roughness={0.1} />
+        {text}
+        <meshStandardMaterial color={color} metalness={0.7} roughness={0.1} />
       </Text3D>
     </Center>
   );

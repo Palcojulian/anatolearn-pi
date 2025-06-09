@@ -13,7 +13,7 @@ interface Props {
 const InfoUser = (props: Props) => {
 
   return (
-    <div className="w-full flex flex-col  gap-5 border border-gray-400 rounded-xl px-8 py-6 shadow-lg h-full">
+    <div className="w-full flex flex-col  gap-5 border border-gray-400 rounded-xl px-8 py-6 shadow-lg h-[510px]">
       <div className="flex flex-col items-center gap-2">
         <img
           src={`${props.user?.photoURL}`}
@@ -55,7 +55,7 @@ const InfoUser = (props: Props) => {
 
           <div className="flex flex-col items-center justify-center">
             <span className="font-bold" >PROMEDIO</span>
-            <Nquizs text={props.promedio + ''} />
+            <Nquizs text={props.promedio.toFixed(1)} />
 
           </div>
         </div>

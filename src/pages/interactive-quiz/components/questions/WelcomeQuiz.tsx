@@ -2,17 +2,22 @@ import Btn3DHtml from "../html-3d/Btn3DHtml";
 import Texto3D from "../../../../components/Texto3D";
 import ArrhytmiaHeart from "../../../heart-diseases/components/models-3d/ArrhytmiaHeart";
 import { Vector3 } from "three";
-import { useProgressQuiz } from "../../composables/useActionsQuiz";
+import { useProgressQuiz, useQuiz } from "../../composables/useActionsQuiz";
+import { type User } from 'firebase/auth';
 
-
-const WelcomeQuiz = () => {
+const WelcomeQuiz = (user: User) => {
   const { nextQuestion } = useProgressQuiz();
+  const { startQuiz } = useQuiz(user);
+
   return (
     <>
       <Btn3DHtml 
         label="¡Iniciar quiz!"
         position={new Vector3(0, -5, 0)}
-        action={nextQuestion}
+        action={() => {
+          nextQuestion();
+          startQuiz();
+        }}
         key={0}
       />
       <Texto3D
