@@ -50,10 +50,9 @@ createRoot(document.getElementById("root")!).render(
       <Routes>
         <Route element={<ProtectedRoute />}>
           <Route path="/mi-perfil" element={<ProfileUser />} />
+          <Route path="/quiz" element={<Quiz />} />
         </Route>
-        
-        <Route path="/quiz" element={<Quiz />} />
-        
+
         <Route element={<PublicRoute />}>
           <Route path="/iniciar-sesion" element={<LogIn />} />
         </Route>
