@@ -17,6 +17,8 @@ import BoxThird from "../models-3d/BoxThird";
 import FirstPosition from "../html-3d/FirstPosition";
 import SecondPosition from "../html-3d/SecondPosition";
 import ThirdPosition from "../html-3d/ThirdPosition";
+import Texto3D from "../../../../components/Texto3D";
+import { useAuthUser } from "../../../log-in/composables/useAuthUser";
 
 interface Props {
   data: Ranking[];
@@ -24,6 +26,7 @@ interface Props {
 
 const RankingCanva = (props: Props) => {
   const position = new Vector3(0, -3, 0);
+  const { userLooged } = useAuthUser();
 
   const renderPositions = () => {
     let ejeYVal = -1;
@@ -70,6 +73,24 @@ const RankingCanva = (props: Props) => {
     });
   };
 
+  const renderBtnQuiz = () => {
+    if (userLooged) return <ToQuizBtn />;
+    return (
+      <Texto3D
+        text="¡Debes iniciar sesión para realizar un quiz!"
+        color="#3F72AF"
+        position={new Vector3(0, 4.5, 0)}
+        bevelEnabled
+        bevelSize={0.1}
+        bevelThickness={0.02}
+        height={0.2}
+        letterSpacing={0.1}
+        size={1}
+        scale={0.3}
+      />
+    );
+  };
+
   return (
     <Suspense fallback={<h6>Cargando...</h6>}>
       <Canvas className="hover:cursor-move">
@@ -82,7 +103,7 @@ const RankingCanva = (props: Props) => {
           maxAzimuthAngle={Math.PI / 8}
           minAzimuthAngle={Math.PI / -8}
         />
-        <ToQuizBtn />
+        {renderBtnQuiz()}
         <Box3d
           color="#3F72AF"
           position={new Vector3(0, -10, 0)}
@@ -119,6 +140,44 @@ const RankingCanva = (props: Props) => {
         {renderPositions()}
 
         <RankingStaging />
+
+        <Texto3D
+          text="¡Ranking"
+          color="#3F72AF"
+          position={new Vector3(6, 1, 1)}
+          bevelEnabled
+          bevelSize={0.1}
+          bevelThickness={0.02}
+          height={0.2}
+          letterSpacing={0.1}
+          size={1}
+          scale={0.4}
+        />
+        <Texto3D
+          text="de"
+          color="#3F72AF"
+          position={new Vector3(6.1, 0.4, 1)}
+          bevelEnabled
+          bevelSize={0.1}
+          bevelThickness={0.02}
+          height={0.2}
+          letterSpacing={0.1}
+          size={1}
+          scale={0.4}
+        />
+
+        <Texto3D
+          text="posiciones!"
+          color="#3F72AF"
+          position={new Vector3(6.1, -0.3, 1)}
+          bevelEnabled
+          bevelSize={0.1}
+          bevelThickness={0.02}
+          height={0.2}
+          letterSpacing={0.1}
+          size={1}
+          scale={0.4}
+        />
       </Canvas>
     </Suspense>
   );
