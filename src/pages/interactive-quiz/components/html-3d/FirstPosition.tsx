@@ -25,15 +25,15 @@ const FirstPosition = (props: Ranking) => {
         <div className="flex gap-2">
           <div className="w-full flex flex-col gap-1 items-center">
             <div className="w-[35px] h-[35px] bg-green-500 rounded-full flex items-center justify-center text-white text-xl">
-              {props.calificacion}
+              {props.calificacion.toFixed(1)}
             </div>
             <div className="text-[10px] bg-white px-1 rounded text-gray-700 font-medium ">
               PUNTAJE
             </div>
           </div>
           <div className="w-full flex flex-col gap-1  items-center">
-            <div className="w-[35px] h-[35px] bg-violet-600 rounded-full flex items-center justify-center text-white text-[10px] ">
-              {props.tiempo}
+            <div className="w-[35px] h-[35px] bg-violet-600 rounded-full flex items-center justify-center text-white text-[14px] ">
+              {props.tiempo.toFixed(1)}
             </div>
             <div className="text-[10px] bg-white px-1 rounded text-gray-700 font-medium ">SEGUNDOS</div>
           </div>
