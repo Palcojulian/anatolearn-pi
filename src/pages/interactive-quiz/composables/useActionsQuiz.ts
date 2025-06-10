@@ -20,11 +20,11 @@ export const useQuiz = (user: User) => {
         setTiempoInicio,
         setTiempoFin,
     } = useStoreQuestions();
-    
+
     const saveAllAnswers = async (): Promise<void> => {
-        
+
         let tiempo = (tiempoFin.getTime() - tiempoInicio.getTime()) / 1000;
-        
+
         const puntosPorPregunta = 5 / Object.values(respuestas).length;
         let calificacion = Object.values(respuestas).filter(val => val).length * puntosPorPregunta;
         const isSuccess = await setInfoQuiz({ calificacion, respuestas, tiempo, user })
@@ -65,17 +65,26 @@ export const useQuiz = (user: User) => {
 export const useQuizsUser = (user: User) => {
     const [quizs, setQuizs] = useState<Quiz[]>([]);
     const [calificacion, setCalificacion] = useState<number>(0);
- 
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
-        if (!user) return;
+        if (!user) {
+            setQuizs([]);
+            setCalificacion(0);
+            setLoading(false);
+            return;
+        };
 
         const refDb = ref(database, `users/${user.uid}/intentos`);
+        setLoading(true);
 
         const unsubscribe = onValue(refDb, (snapshot) => {
             const data = snapshot.val();
 
             if (!data) {
                 setQuizs([]);
+                setCalificacion(0);
+                setLoading(false);
                 return;
             }
 
@@ -87,7 +96,7 @@ export const useQuizsUser = (user: User) => {
             const calificacion = (quizArray.map(quiz => quiz.calificacion).reduce((total, val) => total + val, 0)) / quizArray.length;
             setQuizs(quizArray);
             setCalificacion(calificacion);
-           
+            setLoading(false);
         });
 
         return () => unsubscribe();
@@ -96,31 +105,33 @@ export const useQuizsUser = (user: User) => {
     return {
         quizs,
         calificacion,
+        loading,
     };
 };
 
 export const useRanking = () => {
     const [ranking, setRanking] = useState<Ranking[]>([]);
-    
-    const orderRanking = (ranking: Ranking[]):Ranking[] => {
+    const [loading, setLoading] = useState(true);
+
+    const orderRanking = (ranking: Ranking[]): Ranking[] => {
         let orderData = [...ranking];
 
         for (let i = 0; i < orderData.length; i++) {
             for (let j = (i + 1); j < orderData.length; j++) {
-                if(orderData[i].calificacion == orderData[j].calificacion) {
-                    if(orderData[j].tiempo < orderData[i].tiempo) {
+                if (orderData[i].calificacion == orderData[j].calificacion) {
+                    if (orderData[j].tiempo < orderData[i].tiempo) {
                         const aux = orderData[i];
                         orderData[i] = orderData[j];
                         orderData[j] = aux;
                     }
-                }else if(orderData[j].calificacion > orderData[i].calificacion){
+                } else if (orderData[j].calificacion > orderData[i].calificacion) {
                     const aux = orderData[i];
                     orderData[i] = orderData[j];
-                    orderData[j] = aux;   
+                    orderData[j] = aux;
                 }
             }
         }
-        
+
         return orderData;
     }
 
@@ -130,8 +141,9 @@ export const useRanking = () => {
 
         const unsubscribe = onValue(refDb, (snapshot) => {
             const data = snapshot.val();
-            if(!data) {
+            if (!data) {
                 setRanking([]);
+                setLoading(false);
                 return;
             }
 
@@ -140,18 +152,19 @@ export const useRanking = () => {
             }))
 
             const positionsRanking = orderRanking(allRanking);
-
             setRanking(positionsRanking);
+            setLoading(false);
         })
 
         return () => unsubscribe();
 
-    },[]);
+    }, []);
 
     return {
+        loading,
         ranking,
     }
-} 
+}
 
 export const useProgressQuiz = () => {
     const { nQuestion, nextQuestion, restoreState } = useStoreProgressQuiz();
