@@ -1,0 +1,21 @@
+header {
+    padding: 8px 10px;
+    width: 100%;
+    box-shadow: 0px 3px 5px #ccc;
+}
+
+.nav {
+   display: flex;
+   align-items: center;
+   justify-content: start;
+   gap: 10px;
+}
+
+.nav img {
+    height: 80px;
+    width: 80px;
+    object-fit: contain;
+    border-radius: 100%;
+    background-color: #faf8f9;
+}
+
