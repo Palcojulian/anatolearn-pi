@@ -6,12 +6,13 @@ import RankingCanva from "./components/canvas/RankingCanva";
 
 const Ranking = () => {
   const { userLooged: user } = useAuthUser();
-  const { ranking } = useRanking();
-
-
-
+  const { ranking, loading } = useRanking();
+  
   return (
-    <RankingCanva data={ranking} />
+    <RankingCanva 
+      data={ranking} 
+      loading={loading} 
+    />
   );
 };
 
