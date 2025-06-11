@@ -10,19 +10,42 @@ import { Vector3 } from "three";
 
 import SintomaArrhytmiaModel from "../models-3d/SintomaArrhytmia";
 import Floor from "../../../../components/Floor";
-import Texto3D from "../../../../components/Texto3D";
 import useStoreSintomas from "../../arrhythmia/stores/useStoreSintomas";
+import Label3D from "../html-3d/Label3D";
 
 const SintomaArrhytmia = () => {
   const { isAlertText } = useStoreSintomas();
 
-  const position = new Vector3(0, -1.5, 0);
-  const positionText = new Vector3(0, 3, 0);
-  const positionTextAlert = new Vector3(0, 2.5, 0);
-  
   const map = useMemo(() => [
     {name: "activeAnimation", keys: ["KeyA"]},
   ],[]);
+
+  const renderMessages = () => {
+    if(isAlertText) {
+      return (
+        <>
+          <Label3D 
+            position={new Vector3(0,3,0)} 
+            text='¡Desmayo/Mareo!'
+            scale={0.6}
+          />
+          <Label3D 
+            position={new Vector3(0,2.5,0)} 
+            text='Presiona la tecla "A" para activar la animación' 
+            scale={0.6}
+          />
+        </>
+      )
+    }
+
+    return (
+      <Label3D 
+        position={new Vector3(0,2.6,0)} 
+        text='Pasa el mause/ratón sobre mi' 
+        scale={0.7}
+      />
+    )
+  }
 
   return (
     <Suspense fallback={<h5>Cargando...</h5>}>
@@ -53,42 +76,16 @@ const SintomaArrhytmia = () => {
           />
 
           <Sky />
+          {renderMessages()}
 
-          <Texto3D
-            text={isAlertText ? "Desmayo / mareo" : "Por favor"}
-            key={1}
-            position={positionText}
-            color="black"
-            bevelEnabled
-            bevelSize={0.001}
-            size={0.4}
-            height={0.01}
-            bevelThickness={0.05}
-            letterSpacing={0.01}
-          />
-          <Texto3D
-            text={
-              isAlertText
-                ? 'Presiona la tecla "A" para activar la animación'
-                : "¡Pasa el mause/ratón sobre mi!"
-            }
-            key={2}
-            position={positionTextAlert}
-            color="black"
-            bevelEnabled
-            bevelSize={0.001}
-            size={0.2}
-            height={0.01}
-            bevelThickness={0.05}
-            letterSpacing={0.01}
-          />
+
           <SintomaArrhytmiaModel
             scale={1.7}
             position={[0, -1.5, 0]}
             rotation={[0, Math.PI, 0]}
           />
           <Floor
-            position={position}
+            position={new Vector3(0, -1.5, 0)}
             color="gray"
             roughness={0.6}
             metalnesVal={0.5}
