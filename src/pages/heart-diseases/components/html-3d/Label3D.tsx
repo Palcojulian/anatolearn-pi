@@ -5,18 +5,19 @@ interface Props {
   position: Vector3;
   text: string;
   scale?: number;
+  classTxt?: string;
 }
-const Label3D = ({ position, scale = 1, text }: Props) => {
+const Label3D = ({ position, scale = 1, text, classTxt="" }: Props) => {
   return (
     <Html
-      occlude={false}
+      occlude={true}
       center
       transform
       position={position}
       distanceFactor={15}
       scale={scale}
     >
-        <h5>{text}</h5>
+        <h5 className={classTxt} >{text}</h5>
     </Html>
   );
 };
