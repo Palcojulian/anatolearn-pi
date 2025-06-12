@@ -5,6 +5,7 @@ import Tabs from "../../../components/Tabs";
 import IconArrowLeft from "../../../components/IconArrowLeft";
 import Arrhytmia from "../components/canvas/Arrhytmia";
 import SintomaArrhytmia from "../components/canvas/SintomaArrhytmia";
+import CanvaArrhytmiaTreatment from "../components/canvas/CanvaArrhytmiaTreatment";
 
 const Arrhythmia = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const Arrhythmia = () => {
     } else if (tabSelected == 2) {
       return <SintomaArrhytmia />;
     } else if (tabSelected == 3) {
-      return <div>Modelo en construcción...</div>;
+      return <CanvaArrhytmiaTreatment />;
     } else if (tabSelected == 4) {
       return <div>Modelo en construcción...</div>;
     } else {
@@ -44,7 +45,7 @@ const Arrhythmia = () => {
           </button>
         </div>
       </div>
-      <div className="col-span-1 flex flex-col justify-center  h-full">
+      <div className="col-span-1 flex flex-col justify-center items-center h-full">
         {renderModelo()}
       </div>
     </div>
