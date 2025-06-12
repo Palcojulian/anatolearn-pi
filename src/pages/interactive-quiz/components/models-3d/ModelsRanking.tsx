@@ -1,5 +1,5 @@
 import { Vector3 } from "three"
-import Box3d from "./Box3d"
+import Box3d from "../../../../components/Box3d"
 import BoxFirst from "./BoxFirst"
 import BoxSecond from "./BoxSecond"
 import BoxThird from "./BoxThird"

@@ -23,7 +23,7 @@ const Box3d = ({
 
 }: Props) => {
   return (
-    <mesh receiveShadow position={position} scale={scale}>
+    <mesh receiveShadow={true} position={position} scale={scale}>
       <boxGeometry args={[width, height, depth]} />
       <meshStandardMaterial
         roughness={roughness}
