@@ -6,6 +6,8 @@ import IconArrowLeft from "../../../components/IconArrowLeft";
 import Arrhytmia from "../components/canvas/Arrhytmia";
 import SintomaArrhytmia from "../components/canvas/SintomaArrhytmia";
 import CanvaArrhytmiaTreatment from "../components/canvas/CanvaArrhytmiaTreatment";
+import CanvaArrhytmiaPrevencion from "../components/canvas/CanvaArrhytmiaPrevencion";
+
 
 const Arrhythmia = () => {
   const navigate = useNavigate();
@@ -23,7 +25,7 @@ const Arrhythmia = () => {
     } else if (tabSelected == 3) {
       return <CanvaArrhytmiaTreatment />;
     } else if (tabSelected == 4) {
-      return <div>Modelo en construcción...</div>;
+      return <CanvaArrhytmiaPrevencion />;
     } else {
       return <h6>Seleccione una sección</h6>;
     }
