@@ -1,4 +1,4 @@
-import { Vector3 } from "three";
+import { Vector3, Euler } from "three";
 
 interface Props {
   color: string;
@@ -9,6 +9,7 @@ interface Props {
   width?: number;
   height?: number;
   depth?: number;
+  rotation?: Euler;
 }
 
 const Box3d = ({
@@ -20,10 +21,10 @@ const Box3d = ({
   width = 7,
   height = 20,
   depth = 1,
-
+  rotation = new Euler(0,0,0),
 }: Props) => {
   return (
-    <mesh receiveShadow={true} position={position} scale={scale}>
+    <mesh receiveShadow={true} position={position} scale={scale} rotation={rotation }>
       <boxGeometry args={[width, height, depth]} />
       <meshStandardMaterial
         roughness={roughness}

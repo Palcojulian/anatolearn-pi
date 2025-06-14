@@ -1,4 +1,4 @@
-import { useRef, useState, type JSX } from "react";
+import { useRef, type JSX } from "react";
 import { useGLTF, useKeyboardControls } from "@react-three/drei";
 import { Mesh, Group } from "three";
 import { useFrame } from "@react-three/fiber";
