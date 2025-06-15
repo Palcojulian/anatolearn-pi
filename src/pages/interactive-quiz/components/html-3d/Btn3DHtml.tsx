@@ -9,17 +9,26 @@ interface Props {
   width?: string;
 }
 
-const Btn3DHtml = ({action, label, position, scale = 1, width = "w-[140px]"}: Props) => {
+const Btn3DHtml = ({
+  action,
+  label,
+  position,
+  scale = 1,
+  width = "w-[140px]",
+}: Props) => {
   return (
-    <Html 
-      occlude={false} 
-      center 
-      transform 
-      position={position} 
+    <Html
+      occlude={false}
+      center
+      transform
+      position={position}
       distanceFactor={15}
       scale={scale}
     >
-      <button onClick={action} className={`btn-primary inline-block ${width} h-[50px] text-lg rounded-4xl`}>
+      <button
+        onClick={action}
+        className={`btn-primary inline-block ${width} min-h-[50px] text-lg rounded-4xl x-4 py-2 text-center whitespace-normal break-words leading-tight`}
+      >
         {label}
       </button>
     </Html>
