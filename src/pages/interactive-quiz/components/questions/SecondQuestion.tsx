@@ -15,15 +15,15 @@ const FirstQuestion = (user: User) => {
   const { setAnswer } = useQuiz(user);
 
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const correctAnswerKey = "A";
   const questionId = "pregunta_2";
+  const correctAnswerKey = `${questionId}_A`;
   const questionText = "¿Es reversible la enfermedad del corazón roto?";
 
   const options: Option[] = [
-    { key: "A", text: "Si" },
-    { key: "B", text: "Nunca" },
-    { key: "C", text: "Solo en mujeres" },
-    { key: "D", text: "No se sabe" },
+    { key: `${questionId}_A`, text: "Si" },
+    { key: `${questionId}_B`, text: "Nunca" },
+    { key: `${questionId}_C`, text: "Solo en mujeres" },
+    { key: `${questionId}_D`, text: "No se sabe" },
   ];
 
   const [isMobile, setIsMobile] = useState<boolean>(false);
@@ -70,7 +70,7 @@ const FirstQuestion = (user: User) => {
 
       {options.map((option, index) => (
         <Btn3DHtml
-          key={`${questionId}_${option.key}`}
+          key={option.key}
           position={buttonPositions[index]}
           label={option.text}
           action={() => setSelectedOption(option.key)}

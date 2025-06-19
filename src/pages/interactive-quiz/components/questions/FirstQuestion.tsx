@@ -15,15 +15,15 @@ const FirstQuestion = (user: User) => {
   const { setAnswer } = useQuiz(user);
 
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const correctAnswerKey = "C";
   const questionId = "pregunta_1";
+  const correctAnswerKey = `${questionId}_C`;
   const questionText = "¿Qué emoción causa la enfermedad del corazón roto?";
 
   const options: Option[] = [
-    { key: "A", text: "Felicidad" },
-    { key: "B", text: "Euforia" },
-    { key: "C", text: "Estrés emocional" },
-    { key: "D", text: "Nostalgia" },
+    { key: `${questionId}_A`, text: "Felicidad" },
+    { key: `${questionId}_B`, text: "Euforia" },
+    { key: `${questionId}_C`, text: "Estrés emocional" },
+    { key: `${questionId}_D`, text: "Nostalgia" },
   ];
 
   const [isMobile, setIsMobile] = useState<boolean>(false);
@@ -70,7 +70,7 @@ const FirstQuestion = (user: User) => {
 
       {options.map((option, index) => (
         <Btn3DHtml
-          key={`${questionId}_${option.key}`}
+          key={option.key}
           position={buttonPositions[index]}
           label={option.text}
           action={() => setSelectedOption(option.key)}

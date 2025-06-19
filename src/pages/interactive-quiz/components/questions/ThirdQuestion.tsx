@@ -15,15 +15,16 @@ const FirstQuestion = (user: User) => {
   const { setAnswer } = useQuiz(user);
 
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const correctAnswerKey = "B";
   const questionId = "pregunta_3";
+  const correctAnswerKey = `${questionId}_B`;
+
   const questionText = "¿Arritmia cardíaca puede causar mareo?";
 
   const options: Option[] = [
-    { key: "A", text: "Si" },
-    { key: "B", text: "No necesariamente" },
-    { key: "C", text: "Nunca" },
-    { key: "D", text: "No se sabe" },
+    { key: `${questionId}_A`, text: "Si" },
+    { key: `${questionId}_B`, text: "No necesariamente" },
+    { key: `${questionId}_C`, text: "Nunca" },
+    { key: `${questionId}_D`, text: "No se sabe" },
   ];
 
   const [isMobile, setIsMobile] = useState<boolean>(false);
@@ -70,7 +71,7 @@ const FirstQuestion = (user: User) => {
 
       {options.map((option, index) => (
         <Btn3DHtml
-          key={`${questionId}_${option.key}`}
+          key={option.key}
           position={buttonPositions[index]}
           label={option.text}
           action={() => setSelectedOption(option.key)}
