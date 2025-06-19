@@ -35,20 +35,21 @@ const RankingCanva = (props: Props) => {
     let ejeYVal = -1;
     return props.data.map((item, i) => {
       if (i == 0) {
-        return <FirstPosition {...item} />;
+        return <FirstPosition key={`position-${i}`} {...item} />;
       }
 
       if (i == 1) {
-        return <SecondPosition {...item} />;
+        return <SecondPosition key={`position-${i}`} {...item} />;
       }
 
       if (i == 2) {
-        return <ThirdPosition {...item} />;
+        return <ThirdPosition key={`position-${i}`} {...item} />;
       }
 
       if (i > 3) ejeYVal -= 0.9;
       return (
         <RowPosition
+          key={`row-${item.name_user}-${i}`}
           photoUrl={item.photo_user}
           calificacion={+item.calificacion.toFixed(1)}
           index={i + 1}
