@@ -2,11 +2,13 @@ import { Suspense } from "react";
 import { OrbitControls, Environment } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import TakotsuboWhatIs from "../models-3d/TakotsuboWhatIs";
+import Staging from "../../takotsubo/stagin/Stagin";
 
 const TakotsuboWhatIsCanvas = () => {
   return (
     <Suspense fallback={<h5>Cargando...</h5>}>
       <Canvas camera={{ position: [0, 0, 7] }} shadows>
+        <Staging />
         <ambientLight intensity={0.2} />
 
         <directionalLight
