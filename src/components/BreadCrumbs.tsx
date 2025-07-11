@@ -11,6 +11,8 @@ const pathNamesMap: Record<string, string> = {
     "quiz": "Quiz",
     "about-us": "Sobre Nosotros",
     "iniciar-sesion": "Iniciar sesión",
+    "mi-perfil" : "Mi perfil",
+    "ranking-quiz" : "Ranking"
 };
 
 const Breadcrumbs: React.FC = () => {

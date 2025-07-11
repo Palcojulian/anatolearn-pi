@@ -1,7 +1,7 @@
 const Prevention = () => {
   return (
     <div className="flex flex-col gap-2">
-      <p className="text-justify" >
+      <p className="text-start" >
         Adoptar un estilo de vida saludable puede ayudar a reducir el riesgo de
         desarrollar arritmias cardíacas o a controlar aquellas que ya existen. A
         continuación, se presentan algunas recomendaciones clave para mantener
@@ -21,12 +21,6 @@ const Prevention = () => {
             Realizar actividad física de forma constante mejora la circulación, fortalece el corazón y contribuye a mantener un peso corporal adecuado, factores esenciales para la salud cardíaca.
           </p>
         </li>
-        <li>
-          <p className="text-start">
-            <b>Evitar el consumo excesivo de alcohol y cafeína: </b>
-            El exceso de estas sustancias puede alterar el ritmo cardíaco y aumentar el riesgo de desarrollar arritmias.
-          </p>
-        </li>
 
         <li>
           <p className="text-start">
@@ -39,12 +33,6 @@ const Prevention = () => {
           <p className="text-start">
             <b>Controlar enfermedades crónicas como la hipertensión y la diabetes: </b>
             Mantener bajo control estas condiciones ayuda a reducir la presión sobre el corazón y previene complicaciones que pueden desencadenar arritmias.
-          </p>
-        </li>
-        <li>
-          <p className="text-start">
-            <b>Realizar chequeos médicos periódicos: </b>
-            Las revisiones regulares permiten detectar y tratar a tiempo cualquier problema cardíaco, incluso antes de que se presenten síntomas evidentes.
           </p>
         </li>
       </ul>

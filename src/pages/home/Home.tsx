@@ -15,7 +15,7 @@ return (
       </p>
         <button
             onClick={() => navigate('/enfermedades-corazon')} className="btn-primary">
-            Comienza a explorar las enfermedades
+            Explora las enfermedades
         </button>
     </div>
   </section>

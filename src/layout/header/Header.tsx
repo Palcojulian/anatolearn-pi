@@ -22,9 +22,9 @@ const Header = () => {
   },[]);
 
   return (
-    <header className="bg-primary flex items-center justify-between px-8 py-2"  >
+    <header className="bg-primary grid grid-cols-3 px-8 py-2"  >
       <img  src={logoHorizontal}  width={120}  onClick={() => navigate('/')} className="hover:cursor-pointer"  />
-      <nav className="flex items-center gap-2 ">
+      <nav className="flex items-center justify-center gap-2 ">
         <NavLink className={`${styleNavLink} ${paths[0] == undefined ? navSelected : ''}`}  to="/" end >
           Inicio
         </NavLink>

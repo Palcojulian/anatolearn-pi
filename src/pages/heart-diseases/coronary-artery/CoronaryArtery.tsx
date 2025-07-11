@@ -10,7 +10,7 @@ import ColonaryCase_TratamientoView from "../components/canvas/ColonaryCase_Trat
 
 const CoronaryArtery = () => {
   const navigate = useNavigate();
-  const [tabSelected, setIdTab] = useState(0);
+  const [tabSelected, setIdTab] = useState(1);
 
   const getIdTab = (id: number) => {
     setIdTab(id);

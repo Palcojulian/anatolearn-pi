@@ -10,7 +10,7 @@ import TakotsuboSymtomsCanvas from "../components/canvas/TakotsuboSymptomsCanvas
 
 const Takotsubo = () => {
   const navigate = useNavigate();
-  const [tabSelected, setIdTab] = useState(0);
+  const [tabSelected, setIdTab] = useState(1);
 
   const getIdTab = (id: number) => {
     setIdTab(id);

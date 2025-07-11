@@ -1,7 +1,7 @@
 const Symptoms = () => {
   return (
     <div className="flex flex-col gap-2">
-      <p className="text-justify">
+      <p className="text-start">
         A continuación, se describen algunos de los síntomas más comunes
         asociados a las arritmias, que pueden ayudar a identificar la necesidad
         de una evaluación médica.
