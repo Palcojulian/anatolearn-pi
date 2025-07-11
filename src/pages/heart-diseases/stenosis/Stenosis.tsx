@@ -8,7 +8,7 @@ import { tabsStenosis } from "../helpers/stenosisTabs";
 // import { OrbitControls, Environment } from "@react-three/drei";
 import StenosisH from "../components/canvas/Stenosis";
 import Sintomas from "../components/canvas/Sintomas";
-
+import Tratamiento from "../components/canvas/StenosisTratamiento";
 
 const Stenosis = () => {
   const navigate = useNavigate();
@@ -20,11 +20,23 @@ const Stenosis = () => {
 
   const renderModelo = () => {
     if (tabSelected == 1) {
-      return <div><StenosisH /></div>;    
+      return (
+        <div>
+          <StenosisH />
+        </div>
+      );
     } else if (tabSelected == 2) {
-      return <div style={{ width: '100%', height: '500px' }}><Sintomas /></div>;   
+      return (
+        <div style={{ width: "100%", height: "500px" }}>
+          <Sintomas />
+        </div>
+      );
     } else if (tabSelected == 3) {
-      return <div>Modelo en construcción...</div>;
+      return (
+        <div>
+          <Tratamiento />
+        </div>
+      );
     } else if (tabSelected == 4) {
       return <div>Modelo en construcción...</div>;
     } else {
@@ -35,18 +47,22 @@ const Stenosis = () => {
   return (
     <div className="grid grid-cols-2 w-[90%] ">
       <div className="col-span-1 gap-4 flex flex-col  justify-center">
-        <h2 className="text-start" >Stenosis</h2>
+        <h2 className="text-start">Stenosis</h2>
         <Tabs tabs={tabsStenosis} tabSelected={tabSelected} action={getIdTab} />
         <Outlet />
         <div className="flex mt-10 px-2">
-          <button onClick={() => navigate("/enfermedades-corazon")} className="btn-primary flex">
+          <button
+            onClick={() => navigate("/enfermedades-corazon")}
+            className="btn-primary flex"
+          >
             <IconArrowLeft />
             Volver
           </button>
         </div>
-
       </div>
-      <div className="col-span-1 flex flex-col justify-center  h-ful">{renderModelo()}</div>
+      <div className="col-span-1 flex flex-col justify-center  h-ful">
+        {renderModelo()}
+      </div>
     </div>
   );
 };
