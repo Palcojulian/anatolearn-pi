@@ -13,7 +13,7 @@ interface Props {
 const InfoUser = (props: Props) => {
 
   return (
-    <div className="w-full flex flex-col  gap-5 border border-gray-400 rounded-xl px-8 py-6 shadow-lg h-[450px]">
+    <div className="w-full flex flex-col justify-evenly gap-5 border border-gray-400 rounded-xl px-8 py-6 shadow-lg h-[450px]">
       <div className="flex flex-col items-center gap-2">
         <img
           src={`${props.user?.photoURL}`}
