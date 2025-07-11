@@ -1,13 +1,13 @@
 const Treatment = () => {
   return (
     <div className="flex flex-col text-start gap-2">
-      <p className="text-justify">
+      <p className="text-start">
         El tratamiento depende del tipo y la gravedad de la arritmia. En casos
         de bradicardia o bloqueos en la conducción eléctrica del corazón, se
         puede requerir la implantación de un marcapasos
       </p>
       <h6>¿Qué es un marcapasos?</h6>
-      <p className="text-justify"> 
+      <p className="text-start"> 
         Es un dispositivo electrónico que se implanta bajo la piel y envía
         impulsos eléctricos al corazón para mantener un ritmo adecuado
       </p>

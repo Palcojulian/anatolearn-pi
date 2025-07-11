@@ -1,7 +1,7 @@
 const WhatIs = () => {
   return (
     <div className="d-flex flex-col">
-      <p className="text-justify px-2">
+      <p className="text-start px-2">
         La arritmia cardíaca es una alteración en el ritmo normal del corazón,
         que puede presentarse como latidos demasiado rápidos (taquicardia),
         demasiado lentos (bradicardia) o irregulares. Estas irregularidades son
