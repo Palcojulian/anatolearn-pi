@@ -60,6 +60,7 @@ createRoot(document.getElementById("root")!).render(
         <Route index path="/" element={<Home />} />
 
         <Route path="enfermedades-corazon" element={<Diseases />} />
+
         <Route path="enfermedades-corazon/arritmia" element={<Arrhythmia />}>
           <Route index element={<Navigate to="que-es" replace />} />
           <Route path="que-es" element={<ArrhythmiaWhatIs />} />
@@ -69,6 +70,7 @@ createRoot(document.getElementById("root")!).render(
         </Route>
 
         <Route path="enfermedades-corazon/takotsubo" element={<Takotsubo />}>
+          <Route index element={<Navigate to="que-es" replace />} />
           <Route path="que-es" element={<TakotsuboWhatIs />} />
           <Route path="sintomas" element={<TakotsuboSymptoms />} />
           <Route path="tratamiento" element={<TakotsuboTreatment />} />
@@ -76,6 +78,7 @@ createRoot(document.getElementById("root")!).render(
         </Route>
 
         <Route path="enfermedades-corazon/stenosis" element={<Stenosis />}>
+          <Route index element={<Navigate to="que-es" replace />} />
           <Route path="que-es" element={<StenosisWhatIs />} />
           <Route path="sintomas" element={<StenosisSymptoms />} />
           <Route path="tratamiento" element={<StenosisTreatment />} />
@@ -86,6 +89,7 @@ createRoot(document.getElementById("root")!).render(
           path="enfermedades-corazon/coronary-artery"
           element={<CoronaryArtery />}
         >
+          <Route index element={<Navigate to="que-es" replace />} />
           <Route path="que-es" element={<CoronaryWhatIs />} />
           <Route path="sintomas" element={<CoronarySymptoms />} />
           <Route path="tratamiento" element={<CoronaryTreatment />} />
