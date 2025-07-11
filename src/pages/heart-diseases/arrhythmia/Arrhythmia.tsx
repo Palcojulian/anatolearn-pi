@@ -32,7 +32,7 @@ const Arrhythmia = () => {
   };
 
   return (
-    <div className="grid grid-cols-2 w-[90%]">
+    <div className="grid grid-cols-2 w-[90%] pb-3">
       <div className=" col-span-1 gap-4 flex flex-col  justify-center">
         <h2 className="text-start">Arritmia</h2>
         <Tabs tabs={tabsArritmia} tabSelected={tabSelected} action={getIdTab} />
