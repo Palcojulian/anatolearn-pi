@@ -6,6 +6,7 @@ import Texto3D from "../../../../components/Texto3D";
 import useStoreSintomas from "../../arrhythmia/stores/useStoreSintomas";
 import { useMemo } from "react";
 import { Vector3 } from "three";
+import InfoButton from "../../../../components/InfoButton";
 
 const SintomaStenosis = (props: JSX.IntrinsicElements["group"]) => {
   const { isAlertText } = useStoreSintomas();
@@ -160,26 +161,14 @@ const SintomaStenosis = (props: JSX.IntrinsicElements["group"]) => {
         </group>
       </group>
       {/* Controles */}
-      <Html position={[-2, 0, 2]} center>
-        <div
-          style={{
-            backgroundColor: "rgba(0,0,0,0.8)",
-            color: "white",
-            padding: "15px",
-            borderRadius: "8px",
-            fontSize: "12px",
-            maxWidth: "200px",
-            boxShadow: "0 4px 8px rgba(0,0,0,0.5)",
-          }}
-        >
-          <h3 style={{ margin: "0 0 10px 0", fontSize: "14px" }}>Controles:</h3>
-          <ul style={{ margin: 0, paddingLeft: "15px" }}>
-            <li>Tecla Espacio: Animacion mareo.</li>
-            <li>-------------</li>
-            <li>Doble Click Derecho al Mouse: Animación desmayo.</li>
-          </ul>
-        </div>
-      </Html>
+      <InfoButton position={[-2, 1, 2]} title="Información">
+        <h3 style={{ margin: "0 0 10px 0", fontSize: "14px" }}>Información:</h3>
+        <ul style={{ margin: 0, paddingLeft: "15px" }}>
+          <li>Tecla Espacio: Animación mareo.</li>
+          <li>--------------------------------------------</li>
+          <li>Doble Click Izquierdo al Mouse: Animación desmayo.</li>
+        </ul>
+      </InfoButton>
     </>
   );
 };

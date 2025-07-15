@@ -16,40 +16,38 @@ import Label3D from "../html-3d/Label3D";
 const SintomaArrhytmia = () => {
   const { isAlertText } = useStoreSintomas();
 
-  const map = useMemo(() => [
-    {name: "activeAnimation", keys: ["KeyA"]},
-  ],[]);
+  const map = useMemo(() => [{ name: "activeAnimation", keys: ["KeyA"] }], []);
 
   const renderMessages = () => {
-    if(isAlertText) {
+    if (isAlertText) {
       return (
         <>
-          <Label3D 
-            position={new Vector3(0,3,0)} 
-            text='¡Desmayo/Mareo!'
+          <Label3D
+            position={new Vector3(0, 3, 0)}
+            text="¡Desmayo/Mareo!"
             scale={0.6}
           />
-          <Label3D 
-            position={new Vector3(0,2.5,0)} 
-            text='Presiona la tecla "A" para activar la animación' 
+          <Label3D
+            position={new Vector3(0, 2.5, 0)}
+            text='Presiona la tecla "A" para activar la animación'
             scale={0.6}
           />
         </>
-      )
+      );
     }
 
     return (
-      <Label3D 
-        position={new Vector3(0,2.6,0)} 
-        text='Pasa el mause/ratón sobre mi' 
+      <Label3D
+        position={new Vector3(0, 2.6, 0)}
+        text="Pasa el mause/ratón sobre mi"
         scale={0.7}
       />
-    )
-  }
+    );
+  };
 
   return (
     <Suspense fallback={<h5>Cargando...</h5>}>
-      <KeyboardControls  map={map} >
+      <KeyboardControls map={map}>
         <Canvas
           style={{ height: "70vh", width: "100%" }}
           shadows={true}
@@ -77,7 +75,6 @@ const SintomaArrhytmia = () => {
 
           <Sky />
           {renderMessages()}
-
 
           <SintomaArrhytmiaModel
             scale={1.7}
