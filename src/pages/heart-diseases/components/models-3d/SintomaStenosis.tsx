@@ -161,12 +161,16 @@ const SintomaStenosis = (props: JSX.IntrinsicElements["group"]) => {
         </group>
       </group>
       {/* Controles */}
-      <InfoButton position={[-2, 1, 2]} title="Información">
+      <InfoButton position={[-2, 1, 3]} title="Información">
         <h3 style={{ margin: "0 0 10px 0", fontSize: "14px" }}>Información:</h3>
         <ul style={{ margin: 0, paddingLeft: "15px" }}>
-          <li>Tecla Espacio: Animación mareo.</li>
-          <li>--------------------------------------------</li>
-          <li>Doble Click Izquierdo al Mouse: Animación desmayo.</li>
+          <li>
+            <b>Tecla Espacio</b>: Animación mareo.
+          </li>
+          <li></li>
+          <li>
+            <b>Doble Click Izquierdo al Mouse</b>: Animación desmayo.
+          </li>
         </ul>
       </InfoButton>
     </>

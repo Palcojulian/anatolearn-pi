@@ -13,7 +13,7 @@ const InfoButton: React.FC<InfoButtonProps> = ({
   children,
 }) => {
   const [showInfo, setShowInfo] = useState<boolean>(false);
-
+  const [isHovered, setIsHovered] = useState(false);
   return (
     <Html position={position} center>
       <div
@@ -28,16 +28,19 @@ const InfoButton: React.FC<InfoButtonProps> = ({
       >
         <button
           onClick={() => setShowInfo(!showInfo)}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
           style={{
-            background: "#1e88e5",
+            background: isHovered ? "#ffffff" : "#3f72af",
             border: "1px solid #3F72AF",
-            borderRadius: "15px",
+            borderRadius: "6px",
             padding: "7px 12px",
-            color: "white",
+            color: isHovered ? "#3f72af" : "white",
             cursor: "pointer",
             fontSize: "13px",
             whiteSpace: "nowrap",
             display: "inline-block",
+            // #1e88e5
           }}
         >
           {showInfo ? "Ocultar" : "Mostrar"} {title}
