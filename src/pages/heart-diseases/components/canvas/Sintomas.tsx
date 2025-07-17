@@ -1,11 +1,5 @@
 import { Suspense } from "react";
-import {
-  OrbitControls,
-  Environment,
-  Sky,
-  Stars,
-  Sparkles,
-} from "@react-three/drei";
+import { OrbitControls, Sky } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import SintomaStenosis from "../models-3d/SintomaStenosis";
 import Floor from "../../../../components/Floor";
@@ -36,7 +30,6 @@ const Sintomas = () => {
           minPolarAngle={Math.PI / 2.2}
           maxPolarAngle={Math.PI / 2}
         />
-        {/* 🎯 Puesta en escena tipo ciudad */}
         <ambientLight intensity={3} />
 
         <Sky />
@@ -44,7 +37,7 @@ const Sintomas = () => {
         <Floor
           color="#3F72AF"
           position={position}
-          metalnesVal={1}
+          metalnesVal={0.5}
           roughness={0.7}
           scale={2.5}
         />

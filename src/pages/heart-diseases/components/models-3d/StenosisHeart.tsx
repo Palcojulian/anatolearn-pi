@@ -2,6 +2,7 @@ import { type JSX } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
+import InfoButton from "../../../../components/InfoButton";
 
 const StenosisHeart = (props: JSX.IntrinsicElements["group"]) => {
   const heartRef = useRef<THREE.Group>(null);
@@ -15,16 +16,35 @@ const StenosisHeart = (props: JSX.IntrinsicElements["group"]) => {
         child.receiveShadow = true;
       }
     });
-    
+
     if (actions?.Beating) {
       actions.Beating.reset().play();
     }
   }, [scene, actions]);
 
   return (
-    <group ref={heartRef} {...props} dispose={null}>
-      <primitive object={scene} />
-    </group>
+    <>
+      <group ref={heartRef} {...props} dispose={null}>
+        <primitive object={scene} />
+      </group>
+      <InfoButton position={[-0.8, 1, 3]} title="Información">
+        <h3 style={{ margin: "0 0 10px 0", fontSize: "14px" }}>Información:</h3>
+        <ul style={{ listStyle: "none" }}>
+          <li>
+            <strong>W/S o ↑/↓:</strong> Zoom
+          </li>
+          <li>
+            <strong>A/D o ←/→:</strong> Rotar Y
+          </li>
+          <li>
+            <strong>Q/E:</strong> Rotar X
+          </li>
+          <li>
+            <strong>R:</strong> Resetar posición
+          </li>
+        </ul>
+      </InfoButton>
+    </>
   );
 };
 

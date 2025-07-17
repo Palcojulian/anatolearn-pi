@@ -1,18 +1,98 @@
-import { Suspense } from "react";
-import {
-  OrbitControls,
-  Environment,
-  Sky,
-  Stars,
-  Sparkles,
-} from "@react-three/drei";
+import { Suspense, useState, useEffect } from "react";
+import { OrbitControls, Sky } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import TratamientoStenosis from "../models-3d/Stenosis_Tratamiento";
 import Floor from "../../../../components/Floor";
 import { Vector3 } from "three";
 
 const StenosisTratamiento = () => {
-  const position: Vector3 = new Vector3(0.2, -5, -7.5);
+  const position: Vector3 = new Vector3(0.2, -5, -8.5);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+  const [scale, setScale] = useState<number>(5);
+  const [rotation, setRotation] = useState<[number, number, number]>([0, 0, 0]);
+  const yOffset = -2 + (scale - 20) * 0.05;
+
+  useEffect(() => {
+    const keysPressed = new Set<string>();
+    let animationFrame: number;
+
+    const update = () => {
+      let changed = false;
+      let newScale = scale;
+      let newRotation = [...rotation] as [number, number, number];
+      const zoomSpeed = 0.07;
+      const rotationSpeed = 0.06;
+
+      if (keysPressed.has("KeyW") || keysPressed.has("ArrowUp")) {
+        newScale += zoomSpeed;
+        changed = true;
+      }
+      if (keysPressed.has("KeyS") || keysPressed.has("ArrowDown")) {
+        newScale -= zoomSpeed;
+        changed = true;
+      }
+      if (keysPressed.has("KeyA") || keysPressed.has("ArrowLeft")) {
+        newRotation[1] -= rotationSpeed;
+        changed = true;
+      }
+      if (keysPressed.has("KeyD") || keysPressed.has("ArrowRight")) {
+        newRotation[1] += rotationSpeed;
+        changed = true;
+      }
+      if (keysPressed.has("KeyQ")) {
+        newRotation[0] -= rotationSpeed;
+        changed = true;
+      }
+      if (keysPressed.has("KeyE")) {
+        newRotation[0] += rotationSpeed;
+        changed = true;
+      }
+      if (keysPressed.has("KeyR")) {
+        newScale = 5;
+        newRotation = [0, 0, 0];
+        changed = true;
+      }
+
+      // Limitar el zoom para evitar que el modelo se haga demasiado grande o pequeño
+      if (newScale < 4) newScale = 4;
+      if (newScale > 10) newScale = 10;
+
+      if (changed) {
+        setScale(newScale);
+        setRotation(newRotation);
+      }
+      animationFrame = requestAnimationFrame(update);
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      keysPressed.add(event.code);
+    };
+    const handleKeyUp = (event: KeyboardEvent) => {
+      keysPressed.delete(event.code);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+    animationFrame = requestAnimationFrame(update);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+      cancelAnimationFrame(animationFrame);
+    };
+  }, [scale, rotation]);
+
+  const handlePointerOver = () => {
+    setIsHovered(true);
+    document.body.style.cursor = "pointer";
+  };
+  const handlePointerOut = () => {
+    setIsHovered(false);
+    document.body.style.cursor = "default";
+  };
+  const handleClick = () => {
+    setIsClicked(!isClicked);
+    console.log("Modelo clickeado:", !isClicked);
+  };
 
   return (
     <Suspense fallback={<h5>Cargando...</h5>}>
@@ -23,8 +103,8 @@ const StenosisTratamiento = () => {
       >
         <ambientLight intensity={3} />
         <directionalLight
-          position={[5, 5, 10]}
-          intensity={7}
+          position={[2, 5, 10]}
+          intensity={4}
           castShadow={true}
         />
         {/* <OrbitControls enableZoom={false} enableRotate={true} autoRotate autoRotateSpeed={3} /> */}
@@ -36,14 +116,20 @@ const StenosisTratamiento = () => {
           minPolarAngle={Math.PI / 2.2}
           maxPolarAngle={Math.PI / 2}
         />
-        {/* 🎯 Puesta en escena tipo ciudad */}
-        <Environment preset="sunset" background />
-        <Sparkles count={40} scale={8} speed={0.3} />
-        <TratamientoStenosis position={[0, 1, -6]} scale={5} />
+
+        <Sky />
+        <TratamientoStenosis
+          position={[0, 1, -6]}
+          scale={isHovered ? scale * 1.1 : scale}
+          rotation={rotation}
+          onPointerOver={handlePointerOver}
+          onPointerOut={handlePointerOut}
+          onClick={handleClick}
+        />
         <Floor
           color="#3F72AF"
           position={position}
-          metalnesVal={1}
+          metalnesVal={0.5}
           roughness={0.7}
           scale={2.5}
         />
