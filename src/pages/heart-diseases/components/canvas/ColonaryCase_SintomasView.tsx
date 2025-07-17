@@ -1,12 +1,11 @@
 import { Suspense, useState, useEffect } from "react";
-import { OrbitControls, Environment, Html } from "@react-three/drei";
+import { OrbitControls, Environment, Html, Sparkles } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import ColonaryCase_Sintomas from "../models-3d/ColonaryCase_Sintomas";
 
-const ColonaryCaseSintomasController = () => {
+const ColonaryCaseSintomasController = ({ color, setColor }: { color: string, setColor: (c: string) => void }) => {
     const [isHovered, setIsHovered] = useState(false);
     const [isClicked, setIsClicked] = useState(false);
-    const [color, setColor] = useState<string>("#fff");
     const [scale, setScale] = useState<number>(1.5);
     const [rotation, setRotation] = useState<[number, number, number]>([0, 0, 0]);
 
@@ -114,13 +113,48 @@ const ColonaryCaseSintomasController = () => {
 
 const ColonaryCase_SintomasView = () => {
     const [showInstructions, setShowInstructions] = useState(false);
+    // Nuevo estado para el botón COLOR y el color global
+    const [colorButtonActive, setColorButtonActive] = useState(false);
+    const [color, setColor] = useState<string>("#fff");
+    // Nuevo estado para mostrar instrucciones de color
+    const [showColorInstructions, setShowColorInstructions] = useState(false);
+    const [sceneIndex, setSceneIndex] = useState(0); // 0: city, 1: sunset
 
     const toggleInstructions = () => {
         setShowInstructions(!showInstructions);
     };
+    // Nueva función para el botón COLOR
+    const handleColorButton = () => {
+        setColor(colorButtonActive ? "#fff" : "#43a047"); // Verde si activo, blanco si no
+        setColorButtonActive(!colorButtonActive);
+        setShowColorInstructions(!showColorInstructions);
+    };
+    const toggleScene = () => {
+        setSceneIndex((prev) => (prev === 0 ? 1 : 0));
+    };
 
     return (
         <div style={{ position: 'relative', width: '100%', height: '70vh' }}>
+            <button
+                onClick={toggleScene}
+                style={{
+                    position: 'absolute',
+                    right: '20px',
+                    bottom: '40px',
+                    zIndex: 1100,
+                    background: '#E0D2C3',
+                    color: '#fff',
+                    border: 'none',
+                    borderRadius: 8,
+                    padding: '10px 18px',
+                    fontWeight: 'bold',
+                    fontSize: 15,
+                    cursor: 'pointer',
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
+                }}
+            >
+                Cambiar escena
+            </button>
             <Suspense fallback={<h5>Cargando...</h5>}>
                 <Canvas camera={{ position: [0, 0, 6], fov: 45 }} shadows>
                     {/* Luz direccional con sombra dura */}
@@ -162,11 +196,56 @@ const ColonaryCase_SintomasView = () => {
                     />
                     <ambientLight intensity={0.3} />
                     <OrbitControls enableZoom={false} enableRotate={true} />
-                    <Environment preset="city" background={false} />
-                    <ColonaryCaseSintomasController />
+                    {/* Puesta en escena 1: city sin fondo */}
+                    {sceneIndex === 0 && (
+                        <>
+                            <Environment preset="city" background={false} />
+                            <Sparkles count={120} scale={8} size={2} color="#4fc3f7" speed={0.5} />
+                        </>
+                    )}
+                    {/* Puesta en escena 2: sunset sin fondo */}
+                    {sceneIndex === 1 && (
+                        <>
+                            <Environment preset="sunset" background={false} />
+                            <Sparkles count={120} scale={8} size={2} color="#ffe066" speed={0.5} />
+                        </>
+                    )}
+                    <ColonaryCaseSintomasController color={color} setColor={setColor} />
                 </Canvas>
             </Suspense>
 
+            {/* Botón COLOR fuera del canvas */}
+            <button 
+                onClick={handleColorButton}
+                style={{
+                    position: 'absolute',
+                    right: '20px',
+                    top: 'calc(50% - 80px)', // 80px arriba del centro
+                    transform: 'translateY(-50%)',
+                    backgroundColor: '#E0D2C3',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '50%',
+                    width: '60px',
+                    height: '60px',
+                    fontSize: '16px',
+                    fontWeight: 'bold',
+                    cursor: 'pointer',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+                    transition: 'all 0.3s ease',
+                    zIndex: 1000
+                }}
+                onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#D4C5B6';
+                    e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)';
+                }}
+                onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = '#E0D2C3';
+                    e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
+                }}
+            >
+                COLOR
+            </button>
             {/* Botón INFO fuera del canvas */}
             <button 
                 onClick={toggleInstructions}
@@ -215,9 +294,11 @@ const ColonaryCase_SintomasView = () => {
                     maxWidth: '300px',
                     boxShadow: '0 8px 16px rgba(0,0,0,0.5)',
                     border: '2px solid #E0D2C3',
-                    zIndex: 1000
+                    zIndex: 1000,
+                    fontFamily: 'inherit',
+                    textAlign: 'left',
                 }}>
-                    <h3 style={{ margin: '0 0 15px 0', fontSize: '16px', color: '#E0D2C3' }}>Instrucciones de Control:</h3>
+                    <h3 style={{ margin: '0 0 15px 0', fontSize: '16px', color: '#E0D2C3', fontWeight: 700 }}>Instrucciones de Control:</h3>
                     <ul style={{ margin: 0, paddingLeft: '20px', lineHeight: '1.6' }}>
                         <li><strong>W/S o ↑/↓:</strong> Zoom in/out</li>
                         <li><strong>A/D o ←/→:</strong> Rotar Y</li>
@@ -233,6 +314,47 @@ const ColonaryCase_SintomasView = () => {
                         fontSize: '12px'
                     }}>
                         <strong>💡 Tip:</strong> Usa el mouse para rotar la vista y explorar el modelo desde diferentes ángulos.
+                    </div>
+                </div>
+            )}
+            {/* Instrucciones COLOR */}
+            {showColorInstructions && (
+                <div style={{
+                    position: 'absolute',
+                    right: '100px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    backgroundColor: 'rgba(0,0,0,0.9)',
+                    color: 'white',
+                    padding: '20px',
+                    borderRadius: '12px',
+                    fontSize: '14px',
+                    maxWidth: '300px',
+                    boxShadow: '0 8px 16px rgba(0,0,0,0.5)',
+                    border: '2px solid #E0D2C3',
+                    zIndex: 1000,
+                    fontFamily: 'inherit',
+                    textAlign: 'left',
+                }}>
+                    <h3 style={{ margin: '0 0 15px 0', fontSize: '16px', color: '#E0D2C3', fontWeight: 700 }}>Instrucciones de Color:</h3>
+                    <div style={{marginBottom: '10px'}}>
+                        <span style={{ color: '#7ecfff', fontWeight: 700 }}>Al pasar el puntero por encima</span>
+                        <span style={{ color: '#fff', fontWeight: 400 }}> : Cambia el color del modelo a azul claro.</span>
+                    </div>
+                    <div style={{marginBottom: '16px'}}>
+                        <span style={{ color: '#7ecfff', fontWeight: 700 }}>Al hacer clic</span>
+                        <span style={{ color: '#fff', fontWeight: 400 }}> : Cambia el color del modelo a amarillo.</span>
+                    </div>
+                    <h4 style={{ margin: '0 0 8px 0', fontSize: '15px', color: '#E0D2C3', fontWeight: 700 }}>2 eventos de teclado 3D:</h4>
+                    <div style={{marginBottom: '6px'}}>
+                        <span style={{ color: '#fff', fontWeight: 400 }}>Tecla </span>
+                        <span style={{ background:'#222', color:'#fff', padding:'2px 10px', borderRadius:'6px', fontWeight:700, marginRight:4, fontSize:'1em', display:'inline-block' }}>M</span>
+                        <span style={{ color: '#fff', fontWeight: 400 }}>: Cambia el color del modelo a rojo.</span>
+                    </div>
+                    <div>
+                        <span style={{ color: '#fff', fontWeight: 400 }}>Tecla </span>
+                        <span style={{ background:'#222', color:'#fff', padding:'2px 10px', borderRadius:'6px', fontWeight:700, marginRight:4, fontSize:'1em', display:'inline-block' }}>X</span>
+                        <span style={{ color: '#fff', fontWeight: 400 }}>: Cambia el color del modelo a blanco.</span>
                     </div>
                 </div>
             )}
