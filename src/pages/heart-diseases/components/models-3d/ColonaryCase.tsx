@@ -9,10 +9,16 @@ const ColonaryCase = (props: JSX.IntrinsicElements["group"]) => {
   const { actions } = useAnimations(animations, heartRef);
 
   useEffect(() => {
+    scene.traverse((child) => {
+      if ((child as THREE.Mesh).isMesh) {
+        child.castShadow = true;
+        child.receiveShadow = true;
+      }
+    });
     if (actions?.Beating) {
       actions.Beating.play();
     }
-  }, [actions]);
+  }, [scene, actions]);
 
   return (
     <group ref={heartRef} {...props} dispose={null}>
