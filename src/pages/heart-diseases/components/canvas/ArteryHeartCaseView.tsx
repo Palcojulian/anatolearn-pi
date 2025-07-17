@@ -8,7 +8,8 @@ const ModelController = () => {
     const [isClicked, setIsClicked] = useState(false);
     const [scale, setScale] = useState<number>(1.5);
     const [rotation, setRotation] = useState<[number, number, number]>([0, 0, 0]);
-    
+    const [color, setColor] = useState<string>("#fff"); // Estado para el color
+
     useEffect(() => {
         const keysPressed = new Set<string>();
         let animationFrame: number;
@@ -19,7 +20,7 @@ const ModelController = () => {
             let newRotation = [...rotation] as [number, number, number];
             const zoomSpeed = 0.05;
             const rotationSpeed = 0.02;
-            
+
             if (keysPressed.has('KeyW') || keysPressed.has('ArrowUp')) {
                 newScale += zoomSpeed;
                 changed = true;
@@ -49,11 +50,20 @@ const ModelController = () => {
                 newRotation = [0, 0, 0];
                 changed = true;
             }
-            
+            // Evento de teclado: Cambiar color con 'M'
+            if (keysPressed.has('KeyM')) {
+                setColor('#ff5252'); // Rojo
+                console.log('Tecla M presionada: color rojo');
+            }
+            // Evento de teclado: Cambiar color con 'X'
+            if (keysPressed.has('KeyX')) {
+                setColor('#fff'); // Blanco
+                console.log('Tecla X presionada: color blanco');
+            }
             // Limitar el zoom para evitar que el modelo se haga demasiado grande o pequeño
             if (newScale < 0.5) newScale = 0.5;
             if (newScale > 3.0) newScale = 3.0;
-            
+
             if (changed) {
                 setScale(newScale);
                 setRotation(newRotation);
@@ -77,17 +87,24 @@ const ModelController = () => {
         };
     }, [scale, rotation]);
 
+    // Evento de mouse: onPointerEnter
     const handlePointerOver = () => {
         setIsHovered(true);
+        setColor('#4fc3f7'); // Azul claro al pasar el mouse
         document.body.style.cursor = 'pointer';
+        console.log('Mouse sobre el modelo (onPointerEnter)');
     };
+    // Evento de mouse: onPointerOut
     const handlePointerOut = () => {
         setIsHovered(false);
+        setColor('#fff'); // Vuelve al color original
         document.body.style.cursor = 'default';
     };
+    // Evento de mouse: onClick
     const handleClick = () => {
         setIsClicked(!isClicked);
-        console.log('Modelo clickeado:', !isClicked);
+        setColor('#ffd600'); // Amarillo al hacer click
+        console.log('Click en el modelo (onClick)');
     };
 
     return (
@@ -101,6 +118,7 @@ const ModelController = () => {
                 onPointerOver={handlePointerOver}
                 onPointerOut={handlePointerOut}
                 onClick={handleClick}
+                color={color}
             />
         </>
     );

@@ -1,7 +1,116 @@
-import { Suspense, useState } from "react";
+import { Suspense, useState, useRef, useEffect } from "react";
 import { OrbitControls, Environment } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import ColonaryCase from "../models-3d/ColonaryCase";
+
+const ColonaryCaseController = () => {
+    const [isHovered, setIsHovered] = useState(false);
+    const [isClicked, setIsClicked] = useState(false);
+    const [color, setColor] = useState<string>("#fff");
+    const [scale, setScale] = useState<number>(1.5);
+    const [rotation, setRotation] = useState<[number, number, number]>([0, 0, 0]);
+
+    useEffect(() => {
+        const keysPressed = new Set<string>();
+        let animationFrame: number;
+
+        const update = () => {
+            let changed = false;
+            let newScale = scale;
+            let newRotation = [...rotation] as [number, number, number];
+            const zoomSpeed = 0.05;
+            const rotationSpeed = 0.02;
+
+            if (keysPressed.has('KeyW') || keysPressed.has('ArrowUp')) {
+                newScale += zoomSpeed;
+                changed = true;
+            }
+            if (keysPressed.has('KeyS') || keysPressed.has('ArrowDown')) {
+                newScale -= zoomSpeed;
+                changed = true;
+            }
+            if (keysPressed.has('KeyA') || keysPressed.has('ArrowLeft')) {
+                newRotation[1] -= rotationSpeed;
+                changed = true;
+            }
+            if (keysPressed.has('KeyD') || keysPressed.has('ArrowRight')) {
+                newRotation[1] += rotationSpeed;
+                changed = true;
+            }
+            if (keysPressed.has('KeyQ')) {
+                newRotation[0] -= rotationSpeed;
+                changed = true;
+            }
+            if (keysPressed.has('KeyE')) {
+                newRotation[0] += rotationSpeed;
+                changed = true;
+            }
+            if (keysPressed.has('KeyR')) {
+                newScale = 1.5;
+                newRotation = [0, 0, 0];
+                changed = true;
+            }
+            // Evento de teclado: Cambiar color con 'M'
+            if (keysPressed.has('KeyM')) {
+                setColor('#ff5252'); // Rojo
+            }
+            // Evento de teclado: Cambiar color con 'X'
+            if (keysPressed.has('KeyX')) {
+                setColor('#fff'); // Blanco
+            }
+            if (changed) {
+                setScale(newScale);
+                setRotation(newRotation);
+            }
+            animationFrame = requestAnimationFrame(update);
+        };
+
+        const handleKeyDown = (event: KeyboardEvent) => {
+            keysPressed.add(event.code);
+        };
+        const handleKeyUp = (event: KeyboardEvent) => {
+            keysPressed.delete(event.code);
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        window.addEventListener('keyup', handleKeyUp);
+        animationFrame = requestAnimationFrame(update);
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+            window.removeEventListener('keyup', handleKeyUp);
+            cancelAnimationFrame(animationFrame);
+        };
+    }, [scale, rotation]);
+
+    // Evento de mouse: onPointerEnter
+    const handlePointerOver = () => {
+        setIsHovered(true);
+        setColor('#4fc3f7'); // Azul claro al pasar el mouse
+        document.body.style.cursor = 'pointer';
+    };
+    // Evento de mouse: onPointerOut
+    const handlePointerOut = () => {
+        setIsHovered(false);
+        setColor('#fff'); // Vuelve al color original
+        document.body.style.cursor = 'default';
+    };
+    // Evento de mouse: onClick
+    const handleClick = () => {
+        setIsClicked(!isClicked);
+        setColor('#ffd600'); // Amarillo al hacer click
+    };
+
+    return (
+        <ColonaryCase
+            scale={isHovered ? scale * 1.1 : scale}
+            position={[0, -1.5, 0]}
+            rotation={rotation}
+            onPointerOver={handlePointerOver}
+            onPointerOut={handlePointerOut}
+            onClick={handleClick}
+            color={color}
+        />
+    );
+};
 
 const ColonaryCaseView = () => {
     const [showInstructions, setShowInstructions] = useState(false);
@@ -54,7 +163,7 @@ const ColonaryCaseView = () => {
                     <ambientLight intensity={0.3} />
                     <OrbitControls enableZoom={false} enableRotate={true} />
                     <Environment preset="city" background={false} />
-                    <ColonaryCase scale={1.5} position={[0, -1.5, 0]} />
+                    <ColonaryCaseController />
                 </Canvas>
             </Suspense>
 
