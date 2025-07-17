@@ -1,5 +1,5 @@
 import { Suspense, useState, useEffect } from "react";
-import { OrbitControls, Environment, Html, Sparkles } from "@react-three/drei";
+import { OrbitControls, Environment, Html, Sparkles, Text } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import ColonaryCase_Sintomas from "../models-3d/ColonaryCase_Sintomas";
 
@@ -135,28 +135,23 @@ const ColonaryCase_SintomasView = () => {
 
     return (
         <div style={{ position: 'relative', width: '100%', height: '70vh' }}>
-            <button
-                onClick={toggleScene}
-                style={{
-                    position: 'absolute',
-                    right: '20px',
-                    bottom: '40px',
-                    zIndex: 1100,
-                    background: '#E0D2C3',
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: 8,
-                    padding: '10px 18px',
-                    fontWeight: 'bold',
-                    fontSize: 15,
-                    cursor: 'pointer',
-                    boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
-                }}
-            >
-                Cambiar escena
-            </button>
             <Suspense fallback={<h5>Cargando...</h5>}>
                 <Canvas camera={{ position: [0, 0, 6], fov: 45 }} shadows>
+                    {/* Texto 3D para cambiar de escena en la parte superior derecha, tamaño adecuado y distancia proporcional */}
+                    <Text
+                        position={[2.1, 1.6, 0]}
+                        fontSize={0.18}
+                        color="#E0D2C3"
+                        anchorX="center"
+                        anchorY="middle"
+                        outlineColor="#000"
+                        outlineWidth={0.01}
+                        onClick={toggleScene}
+                        onPointerOver={(e) => { e.stopPropagation(); document.body.style.cursor = 'pointer'; }}
+                        onPointerOut={(e) => { e.stopPropagation(); document.body.style.cursor = 'default'; }}
+                    >
+                        Cambiar escena
+                    </Text>
                     {/* Luz direccional con sombra dura */}
                     <directionalLight 
                         position={[5, 8, 5]} 
@@ -211,6 +206,11 @@ const ColonaryCase_SintomasView = () => {
                         </>
                     )}
                     <ColonaryCaseSintomasController color={color} setColor={setColor} />
+                    {/* Base circular vertical detrás del modelo, más baja y centrada */}
+                    <mesh position={[0, -2, -0.7]} receiveShadow>
+                        <cylinderGeometry args={[1.7, 1.7, 0.12, 64]} />
+                        <meshStandardMaterial color="#E0D2C3" metalness={0.3} roughness={0.7} />
+                    </mesh>
                 </Canvas>
             </Suspense>
 
@@ -233,7 +233,12 @@ const ColonaryCase_SintomasView = () => {
                     cursor: 'pointer',
                     boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
                     transition: 'all 0.3s ease',
-                    zIndex: 1000
+                    zIndex: 1000,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    textAlign: 'center',
+                    padding: 0
                 }}
                 onMouseEnter={(e) => {
                     e.currentTarget.style.backgroundColor = '#D4C5B6';
@@ -244,7 +249,7 @@ const ColonaryCase_SintomasView = () => {
                     e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
                 }}
             >
-                COLOR
+                <span style={{display: 'block', width: '100%', fontWeight: 'bold', fontSize: '16px', letterSpacing: '1px'}}>COLOR</span>
             </button>
             {/* Botón INFO fuera del canvas */}
             <button 
@@ -265,7 +270,12 @@ const ColonaryCase_SintomasView = () => {
                     cursor: 'pointer',
                     boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
                     transition: 'all 0.3s ease',
-                    zIndex: 1000
+                    zIndex: 1000,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    textAlign: 'center',
+                    padding: 0
                 }}
                 onMouseEnter={(e) => {
                     e.currentTarget.style.backgroundColor = '#D4C5B6';
@@ -276,7 +286,7 @@ const ColonaryCase_SintomasView = () => {
                     e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
                 }}
             >
-                INFO
+                <span style={{display: 'block', width: '100%', fontWeight: 'bold', fontSize: '16px', letterSpacing: '1px'}}>INFO</span>
             </button>
 
             {/* Instrucciones */}
