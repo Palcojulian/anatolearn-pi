@@ -1,11 +1,5 @@
 import { Suspense } from "react";
-import {
-  OrbitControls,
-  Environment,
-  Sky,
-  Stars,
-  Sparkles,
-} from "@react-three/drei";
+import { OrbitControls, Sky } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import SintomaStenosis from "../models-3d/SintomaStenosis";
 import Floor from "../../../../components/Floor";
@@ -18,7 +12,7 @@ const Sintomas = () => {
     <Suspense fallback={<h5>Cargando...</h5>}>
       <Canvas
         camera={{ position: [0, 0, 7] }}
-        style={{ height: "68vh", width: "100%" }}
+        style={{ height: "67vh", width: "100%" }}
         shadows={true}
       >
         <ambientLight intensity={3} />
@@ -36,14 +30,14 @@ const Sintomas = () => {
           minPolarAngle={Math.PI / 2.2}
           maxPolarAngle={Math.PI / 2}
         />
-        {/* 🎯 Puesta en escena tipo ciudad */}
-        <Environment preset="city" background />
-        <Sparkles count={40} scale={8} speed={0.3} />
+        <ambientLight intensity={3} />
+
+        <Sky />
         <SintomaStenosis position={[0, -4.5, -3.5]} scale={5} />
         <Floor
           color="#3F72AF"
           position={position}
-          metalnesVal={1}
+          metalnesVal={0.5}
           roughness={0.7}
           scale={2.5}
         />
