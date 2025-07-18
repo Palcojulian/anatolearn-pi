@@ -1,7 +1,48 @@
-import { Suspense } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { OrbitControls, Environment } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import TakotsuboSymtoms from "../models-3d/TakotsuboSymtoms";
+import * as THREE from "three";
+
+const InteractiveModel = () => {
+  const modelRef = useRef<THREE.Group>(null);
+  const { camera } = useThree();
+  const [scale, setScale] = useState(2);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "w") {
+        setScale((prev) => Math.min(prev + 0.1, 5));
+      } else if (e.key === "s") {
+        setScale((prev) => Math.max(prev - 0.1, 0.5));
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  // Reset scale on right click
+  useEffect(() => {
+    const handleMouseDown = (e: MouseEvent) => {
+      if (e.button === 2) {
+        setScale(2);
+      }
+    };
+
+    window.addEventListener("mousedown", handleMouseDown);
+    return () => window.removeEventListener("mousedown", handleMouseDown);
+  }, []);
+
+  // Apply scale
+  useFrame(() => {
+    if (modelRef.current) {
+      modelRef.current.scale.set(scale, scale, scale);
+    }
+  });
+
+  return <TakotsuboSymtoms ref={modelRef} position={[0, 0, -0.5]} />;
+};
 
 const TakotsuboSymtomsCanvas = () => {
   return (
@@ -23,12 +64,12 @@ const TakotsuboSymtomsCanvas = () => {
           shadow-camera-bottom={-10}
         />
 
-        <mesh receiveShadow position={[0, -2.05, 0]}>
+        {/* <mesh receiveShadow position={[0, -2.05, 0]}>
           <cylinderGeometry args={[2, 2, 0.2, 32]} />
           <meshStandardMaterial color="#dddddd" />
-        </mesh>
+        </mesh> */}
 
-        <TakotsuboSymtoms position={[0, 0, -0.5]} scale={2} />
+        <InteractiveModel />
 
         <OrbitControls enableZoom={false} enableRotate={true} />
         <Environment preset="city" background={false} />
