@@ -17,6 +17,8 @@ const CanvaArrhytmiaPrevencion = () => {
         <OrbitControls
           enableZoom={false}
           enableRotate={true}
+          minPolarAngle={Math.PI / 2}
+           maxPolarAngle={Math.PI / 2}
         />
         <AllModelsPrevencionArrhytmia />
         <Sparkles
@@ -28,12 +30,7 @@ const CanvaArrhytmiaPrevencion = () => {
           noise={1}
         />
 
-        <directionalLight
-          color={"white"}
-          position={[0, 5, 4]}
-          intensity={5}
-          castShadow
-        />
+
         <pointLight color={"white"} position={[0, 1, 1]} intensity={10} />
       </Canvas>
     </Suspense>

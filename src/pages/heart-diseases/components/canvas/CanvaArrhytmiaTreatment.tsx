@@ -23,8 +23,9 @@ const CanvaArrhytmiaTreatment = () => {
       <KeyboardControls map={map}>
         <Canvas
           camera={{ position: [0, 0, 5] }}
-          style={{ height: "70vh", width: "70%", borderRadius: "80px" }}
+          style={{ height: "70vh", width: "70%" }}
           shadows={true}
+          className="mask-radial-[60%_60%] mask-radial-from-70% hover:cursor-pointer"
         >
           <OrbitControls
             enableZoom={false}
@@ -50,11 +51,11 @@ const CanvaArrhytmiaTreatment = () => {
           <pointLight color={"white"} position={[3, 0, -3]} intensity={5} />
           <pointLight color={"white"} position={[-3, 0, -3]} intensity={5} />
 
-          <Sky sunPosition={[0, 0, 0]} />
+          <Sky  />
           <Stars count={nStars} />
           <Box3d
-            color="#E0D2C3"
-            metalnesVal={0.7}
+            color="#3F72AF"
+            metalnesVal={0.4}
             roughness={0.1}
             scale={1}
             height={5}
@@ -65,8 +66,8 @@ const CanvaArrhytmiaTreatment = () => {
 
           <Texto3D
             text="Presione la tecla 'ESPACIO'" 
-            color="#E0D2C3"
-            position={new Vector3(0, -2.5, 0)}
+            color="#3F72AF"
+             position={new Vector3(0, 3, 0)}
             bevelEnabled
             bevelSize={0.1}
             bevelThickness={0.02}
@@ -79,7 +80,7 @@ const CanvaArrhytmiaTreatment = () => {
             position={new Vector3(-2.5,0,0)}
             children={<IconArrowLeft />}
             isTransform={false}
-            classBtn="bg-[#E0D2C3] rounded-full hover:cursor-pointer"
+            classBtn="bg-[#3F72AF] rounded-full hover:cursor-pointer"
             scale={1}
             action={setLeftDir}
           />
@@ -88,13 +89,14 @@ const CanvaArrhytmiaTreatment = () => {
             position={new Vector3(2.5,0,0)}
             children={<ArrowRight />}
             isTransform={false}
-            classBtn="bg-[#E0D2C3] rounded-full hover:cursor-pointer"
+            classBtn="bg-[#3F72AF] rounded-full hover:cursor-pointer"
             scale={1}
             action={setRightDir}
           />
-          <Text2D 
-              position={new Vector3(0, 3, 0)}
-              color="#E0D2C3"
+          <Text2D
+          position={new Vector3(0, -2.5, 0)} 
+             
+              color="#3F72AF"
               fontSize={0.4}
               text="MARCAPASOS"
           />
