@@ -34,7 +34,12 @@ const AllModelsPrevencionArrhytmia = () => {
 
   useFrame(() => {
     if (!groupRef.current) return;
-    groupRef.current.rotation.y += 1 * 0.001;
+    
+    if(isPlayVideo) {
+      groupRef.current.rotation.y = 0;
+    }else {
+      groupRef.current.rotation.y += 1 * 0.001;
+    }
   });
   return (
     <group ref={groupRef}>
@@ -51,7 +56,7 @@ const AllModelsPrevencionArrhytmia = () => {
         roughness={0.7}
         scale={0.6}
       />
-     <Texto3D
+      <Texto3D
         text="PREVENCIÓN"
         color="#3F72AF"
         position={new Vector3(0, 1.8, 0)}
@@ -63,7 +68,13 @@ const AllModelsPrevencionArrhytmia = () => {
         size={1}
         scale={scaleText3d}
       />
-      <ActionsVideoArrhytmia position={new Vector3(0, -0.4, 1.6)} />
+      <directionalLight
+        color={"white"}
+        position={[0, 5, 4]}
+        intensity={5}
+        castShadow
+      />
+      <ActionsVideoArrhytmia position={new Vector3(0, -0.9, 1.6)} />
     </group>
   );
 };
