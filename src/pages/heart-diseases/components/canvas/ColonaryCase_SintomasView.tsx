@@ -1,5 +1,5 @@
 import { Suspense, useState, useEffect } from "react";
-import { OrbitControls, Environment, Html, Sparkles, Text } from "@react-three/drei";
+import { OrbitControls, Environment, Html, Sparkles, Text, Stars } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import ColonaryCase_Sintomas from "../models-3d/ColonaryCase_Sintomas";
 
@@ -18,52 +18,31 @@ const ColonaryCaseSintomasController = ({ color, setColor }: { color: string, se
             let newScale = scale;
             let newRotation = [...rotation] as [number, number, number];
             const zoomSpeed = 0.05;
-            const rotationSpeed = 0.02;
 
-            if (keysPressed.has('KeyW') || keysPressed.has('ArrowUp')) {
+            // Evento de teclado: W (zoom in)
+            if (keysPressed.has('KeyW')) {
                 newScale += zoomSpeed;
                 changed = true;
             }
-            if (keysPressed.has('KeyS') || keysPressed.has('ArrowDown')) {
-                newScale -= zoomSpeed;
-                changed = true;
+            // Evento de teclado: M (color verde)
+            if (keysPressed.has('KeyM')) {
+                setColor('#43a047');
             }
-            if (keysPressed.has('KeyA') || keysPressed.has('ArrowLeft')) {
-                newRotation[1] -= rotationSpeed;
-                changed = true;
-            }
-            if (keysPressed.has('KeyD') || keysPressed.has('ArrowRight')) {
-                newRotation[1] += rotationSpeed;
-                changed = true;
-            }
-            if (keysPressed.has('KeyQ')) {
-                newRotation[0] -= rotationSpeed;
-                changed = true;
-            }
-            if (keysPressed.has('KeyE')) {
-                newRotation[0] += rotationSpeed;
-                changed = true;
-            }
+            // Evento de teclado: R (reset)
             if (keysPressed.has('KeyR')) {
                 newScale = 1.5;
                 newRotation = [0, 0, 0];
                 changed = true;
             }
-            // Evento de teclado: Cambiar color con 'M'
-            if (keysPressed.has('KeyM')) {
-                setColor('#ff5252'); // Rojo
-            }
-            // Evento de teclado: Cambiar color con 'X'
-            if (keysPressed.has('KeyX')) {
-                setColor('#fff'); // Blanco
-            }
+            // Limitar el zoom
+            if (newScale < 0.5) newScale = 0.5;
+            if (newScale > 3.0) newScale = 3.0;
             if (changed) {
                 setScale(newScale);
                 setRotation(newRotation);
             }
             animationFrame = requestAnimationFrame(update);
         };
-
         const handleKeyDown = (event: KeyboardEvent) => {
             keysPressed.add(event.code);
         };
@@ -80,7 +59,7 @@ const ColonaryCaseSintomasController = ({ color, setColor }: { color: string, se
         };
     }, [scale, rotation]);
 
-    // Evento de mouse: onPointerEnter
+    // Evento de mouse: onPointerOver
     const handlePointerOver = () => {
         setIsHovered(true);
         setColor('#4fc3f7'); // Azul claro al pasar el mouse
@@ -118,7 +97,7 @@ const ColonaryCase_SintomasView = () => {
     const [color, setColor] = useState<string>("#fff");
     // Nuevo estado para mostrar instrucciones de color
     const [showColorInstructions, setShowColorInstructions] = useState(false);
-    const [sceneIndex, setSceneIndex] = useState(0); // 0: city, 1: sunset
+    const [sceneIndex, setSceneIndex] = useState(0); // 0: city, 1: sunset, 2: noche rosada
 
     const toggleInstructions = () => {
         setShowInstructions(!showInstructions);
@@ -130,7 +109,7 @@ const ColonaryCase_SintomasView = () => {
         setShowColorInstructions(!showColorInstructions);
     };
     const toggleScene = () => {
-        setSceneIndex((prev) => (prev === 0 ? 1 : 0));
+        setSceneIndex((prev) => (prev === 2 ? 0 : prev + 1));
     };
 
     return (
@@ -152,13 +131,14 @@ const ColonaryCase_SintomasView = () => {
                     >
                         Cambiar escena
                     </Text>
-                    {/* Luz direccional con sombra dura */}
+                    {/* 1. Luz direccional (sombra dura) */}
                     <directionalLight 
                         position={[5, 8, 5]} 
-                        intensity={2.5} 
+                        intensity={1.8} 
+                        color="#ffffff"
                         castShadow
-                        shadow-mapSize-width={2048}
-                        shadow-mapSize-height={2048}
+                        shadow-mapSize-width={1024}
+                        shadow-mapSize-height={1024}
                         shadow-bias={-0.0005}
                         shadow-camera-near={1}
                         shadow-camera-far={30}
@@ -167,21 +147,23 @@ const ColonaryCase_SintomasView = () => {
                         shadow-camera-top={10}
                         shadow-camera-bottom={-10}
                     />
-                    {/* Luz puntual con sombra dura */}
+                    {/* 2. Luz puntual (sombra suave) */}
                     <pointLight 
                         position={[-6, 6, 6]} 
-                        intensity={1.5} 
+                        intensity={1.2} 
+                        color="#ffb300"
                         castShadow
-                        shadow-mapSize-width={1024}
-                        shadow-mapSize-height={1024}
+                        shadow-mapSize-width={2048} // mayor tamaño para suavizar
+                        shadow-mapSize-height={2048}
                         shadow-bias={-0.001}
                     />
-                    {/* Luz tipo spot con sombra dura */}
+                    {/* 3. Luz tipo spot (sombra suave) */}
                     <spotLight
                         position={[0, 10, 0]}
                         angle={0.35}
-                        penumbra={0.1}
-                        intensity={2}
+                        penumbra={0.5}
+                        intensity={1.5}
+                        color="#00bcd4"
                         castShadow
                         shadow-mapSize-width={2048}
                         shadow-mapSize-height={2048}
@@ -189,7 +171,15 @@ const ColonaryCase_SintomasView = () => {
                         shadow-camera-near={1}
                         shadow-camera-far={30}
                     />
-                    <ambientLight intensity={0.3} />
+                    {/* 4. Luz hemisphere (sin sombra, solo ambiente) */}
+                    <hemisphereLight
+                        color="#e0d2c3"
+                        groundColor="#b39ddb"
+                        intensity={0.7}
+                        position={[0, 10, 0]}
+                    />
+                    {/* Luz ambiental extra para relleno */}
+                    <ambientLight intensity={0.15} />
                     <OrbitControls enableZoom={false} enableRotate={true} />
                     {/* Puesta en escena 1: city sin fondo */}
                     {sceneIndex === 0 && (
@@ -203,6 +193,13 @@ const ColonaryCase_SintomasView = () => {
                         <>
                             <Environment preset="sunset" background={false} />
                             <Sparkles count={120} scale={8} size={2} color="#ffe066" speed={0.5} />
+                        </>
+                    )}
+                    {/* Puesta en escena 3: noche rosada */}
+                    {sceneIndex === 2 && (
+                        <>
+                            <Stars radius={180} depth={120} count={1200} factor={8} saturation={1} fade speed={2} />
+                            <Sparkles count={300} scale={15} size={4} color="#e040fb" speed={1.5} />
                         </>
                     )}
                     <ColonaryCaseSintomasController color={color} setColor={setColor} />
@@ -359,12 +356,12 @@ const ColonaryCase_SintomasView = () => {
                     <div style={{marginBottom: '6px'}}>
                         <span style={{ color: '#fff', fontWeight: 400 }}>Tecla </span>
                         <span style={{ background:'#222', color:'#fff', padding:'2px 10px', borderRadius:'6px', fontWeight:700, marginRight:4, fontSize:'1em', display:'inline-block' }}>M</span>
-                        <span style={{ color: '#fff', fontWeight: 400 }}>: Cambia el color del modelo a rojo.</span>
+                        <span style={{ color: '#fff', fontWeight: 400 }}>: Cambia el color del modelo a verde.</span>
                     </div>
                     <div>
                         <span style={{ color: '#fff', fontWeight: 400 }}>Tecla </span>
-                        <span style={{ background:'#222', color:'#fff', padding:'2px 10px', borderRadius:'6px', fontWeight:700, marginRight:4, fontSize:'1em', display:'inline-block' }}>X</span>
-                        <span style={{ color: '#fff', fontWeight: 400 }}>: Cambia el color del modelo a blanco.</span>
+                        <span style={{ background:'#222', color:'#fff', padding:'2px 10px', borderRadius:'6px', fontWeight:700, marginRight:4, fontSize:'1em', display:'inline-block' }}>R</span>
+                        <span style={{ color: '#fff', fontWeight: 400 }}>: Resetea la posición y escala del modelo.</span>
                     </div>
                 </div>
             )}

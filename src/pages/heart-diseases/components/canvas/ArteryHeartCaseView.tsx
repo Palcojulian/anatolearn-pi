@@ -1,5 +1,6 @@
 import { Suspense, useState, useEffect } from "react";
 import { OrbitControls, Environment } from "@react-three/drei";
+import { Stars } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import ArteryHeartCase from "../models-3d/ArteryHeartCase";
 import { Sparkles } from "@react-three/drei";
@@ -23,56 +24,30 @@ const ModelController = () => {
             const zoomSpeed = 0.05;
             const rotationSpeed = 0.02;
 
-            if (keysPressed.has('KeyW') || keysPressed.has('ArrowUp')) {
+            // Evento de teclado: W (zoom in)
+            if (keysPressed.has('KeyW')) {
                 newScale += zoomSpeed;
                 changed = true;
             }
-            if (keysPressed.has('KeyS') || keysPressed.has('ArrowDown')) {
-                newScale -= zoomSpeed;
-                changed = true;
+            // Evento de teclado: M (color rojo)
+            if (keysPressed.has('KeyM')) {
+                setColor('#ff5252');
             }
-            if (keysPressed.has('KeyA') || keysPressed.has('ArrowLeft')) {
-                newRotation[1] -= rotationSpeed;
-                changed = true;
-            }
-            if (keysPressed.has('KeyD') || keysPressed.has('ArrowRight')) {
-                newRotation[1] += rotationSpeed;
-                changed = true;
-            }
-            if (keysPressed.has('KeyQ')) {
-                newRotation[0] -= rotationSpeed;
-                changed = true;
-            }
-            if (keysPressed.has('KeyE')) {
-                newRotation[0] += rotationSpeed;
-                changed = true;
-            }
+            // Evento de teclado: R (reset)
             if (keysPressed.has('KeyR')) {
                 newScale = 1.5;
                 newRotation = [0, 0, 0];
                 changed = true;
             }
-            // Evento de teclado: Cambiar color con 'M'
-            if (keysPressed.has('KeyM')) {
-                setColor('#ff5252'); // Rojo
-                console.log('Tecla M presionada: color rojo');
-            }
-            // Evento de teclado: Cambiar color con 'X'
-            if (keysPressed.has('KeyX')) {
-                setColor('#fff'); // Blanco
-                console.log('Tecla X presionada: color blanco');
-            }
-            // Limitar el zoom para evitar que el modelo se haga demasiado grande o pequeño
+            // Limitar el zoom
             if (newScale < 0.5) newScale = 0.5;
             if (newScale > 3.0) newScale = 3.0;
-
             if (changed) {
                 setScale(newScale);
                 setRotation(newRotation);
             }
             animationFrame = requestAnimationFrame(update);
         };
-
         const handleKeyDown = (event: KeyboardEvent) => {
             keysPressed.add(event.code);
         };
@@ -89,12 +64,11 @@ const ModelController = () => {
         };
     }, [scale, rotation]);
 
-    // Evento de mouse: onPointerEnter
+    // Evento de mouse: onPointerOver
     const handlePointerOver = () => {
         setIsHovered(true);
         setColor('#4fc3f7'); // Azul claro al pasar el mouse
         document.body.style.cursor = 'pointer';
-        console.log('Mouse sobre el modelo (onPointerEnter)');
     };
     // Evento de mouse: onPointerOut
     const handlePointerOut = () => {
@@ -106,7 +80,6 @@ const ModelController = () => {
     const handleClick = () => {
         setIsClicked(!isClicked);
         setColor('#ffd600'); // Amarillo al hacer click
-        console.log('Click en el modelo (onClick)');
     };
 
     return (
@@ -130,7 +103,7 @@ const ArteryHeartCaseView = () => {
     const [showInstructions, setShowInstructions] = useState(false);
     const [showColorInstructions, setShowColorInstructions] = useState(false);
     const [colorButtonActive, setColorButtonActive] = useState(false);
-    const [sceneIndex, setSceneIndex] = useState(0); // 0: city, 1: sunset
+    const [sceneIndex, setSceneIndex] = useState(0); // 0: city, 1: sunset, 2: noche rosada
 
     const toggleInstructions = () => {
         setShowInstructions(!showInstructions);
@@ -140,7 +113,7 @@ const ArteryHeartCaseView = () => {
         setShowColorInstructions(!showColorInstructions);
     };
     const toggleScene = () => {
-        setSceneIndex((prev) => (prev === 0 ? 1 : 0));
+        setSceneIndex((prev) => (prev === 2 ? 0 : prev + 1));
     };
 
     return (
@@ -149,27 +122,6 @@ const ArteryHeartCaseView = () => {
                     camera={{ position: [0, 0, 6], fov: 45 }} 
                     shadows
                 >
-                    <ambientLight intensity={0.5} />
-                    <directionalLight 
-                        position={[5, 5, 5]} 
-                        intensity={1.5} 
-                        castShadow
-                        shadow-mapSize-width={2048}
-                        shadow-mapSize-height={2048}
-                        shadow-camera-far={50}
-                        shadow-camera-left={-10}
-                        shadow-camera-right={10}
-                        shadow-camera-top={10}
-                        shadow-camera-bottom={-10}
-                    />
-                    <pointLight 
-                        position={[-5, 5, 5]} 
-                        intensity={0.8} 
-                        castShadow
-                        shadow-mapSize-width={1024}
-                        shadow-mapSize-height={1024}
-                    />
-                    <OrbitControls enableZoom={false} enableRotate={true} />
                     {/* Texto 3D para cambiar de escena en la parte superior derecha, alineado con los otros botones */}
                     <Text
                         position={[2.1, 1.6, 0]}
@@ -185,6 +137,56 @@ const ArteryHeartCaseView = () => {
                     >
                         Cambiar escena
                     </Text>
+                    {/* 1. Luz direccional (sombra dura) */}
+                    <directionalLight 
+                        position={[5, 8, 5]} 
+                        intensity={1.8} 
+                        color="#ffffff"
+                        castShadow
+                        shadow-mapSize-width={1024}
+                        shadow-mapSize-height={1024}
+                        shadow-bias={-0.0005}
+                        shadow-camera-near={1}
+                        shadow-camera-far={30}
+                        shadow-camera-left={-10}
+                        shadow-camera-right={10}
+                        shadow-camera-top={10}
+                        shadow-camera-bottom={-10}
+                    />
+                    {/* 2. Luz puntual (sombra suave) */}
+                    <pointLight 
+                        position={[-6, 6, 6]} 
+                        intensity={1.2} 
+                        color="#ffb300"
+                        castShadow
+                        shadow-mapSize-width={2048} // mayor tamaño para suavizar
+                        shadow-mapSize-height={2048}
+                        shadow-bias={-0.001}
+                    />
+                    {/* 3. Luz tipo spot (sombra suave) */}
+                    <spotLight
+                        position={[0, 10, 0]}
+                        angle={0.35}
+                        penumbra={0.5}
+                        intensity={1.5}
+                        color="#00bcd4"
+                        castShadow
+                        shadow-mapSize-width={2048}
+                        shadow-mapSize-height={2048}
+                        shadow-bias={-0.0005}
+                        shadow-camera-near={1}
+                        shadow-camera-far={30}
+                    />
+                    {/* 4. Luz hemisphere (sin sombra, solo ambiente) */}
+                    <hemisphereLight
+                        color="#e0d2c3"
+                        groundColor="#b39ddb"
+                        intensity={0.7}
+                        position={[0, 10, 0]}
+                    />
+                    {/* Luz ambiental extra para relleno */}
+                    <ambientLight intensity={0.15} />
+                    <OrbitControls enableZoom={false} enableRotate={true} />
                     {/* Puesta en escena 1: city sin fondo */}
                     {sceneIndex === 0 && (
                         <>
@@ -197,6 +199,13 @@ const ArteryHeartCaseView = () => {
                         <>
                             <Environment preset="sunset" background={false} />
                             <Sparkles count={120} scale={8} size={2} color="#ffe066" speed={0.5} />
+                        </>
+                    )}
+                    {/* Puesta en escena 3: noche rosada */}
+                    {sceneIndex === 2 && (
+                        <>
+                            <Stars radius={180} depth={120} count={1200} factor={8} saturation={1} fade speed={2} />
+                            <Sparkles count={300} scale={15} size={4} color="#e040fb" speed={1.5} />
                         </>
                     )}
                     <ModelController />
