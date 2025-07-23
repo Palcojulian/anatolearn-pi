@@ -36,7 +36,7 @@ const CoronaryArtery = () => {
         <h2 className="text-start">Obtrucción de Arteria Coronaria</h2>
         <Tabs tabs={tabsCoronary} tabSelected={tabSelected} action={getIdTab} />
         <Outlet />
-        <div className="flex mt-10 px-2">
+        <div className="flex mt-2 px-2">
           <button onClick={() => navigate("/enfermedades-corazon")} className="btn-primary flex">
             <IconArrowLeft />
             Volver
