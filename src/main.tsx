@@ -43,6 +43,7 @@ import CoronaryWhatIs from "./pages/heart-diseases/coronary-artery/sections/What
 import CoronarySymptoms from "./pages/heart-diseases/coronary-artery/sections/Symptoms.tsx";
 import CoronaryTreatment from "./pages/heart-diseases/coronary-artery/sections/Treatment.tsx";
 import CoronaryPrevention from "./pages/heart-diseases/coronary-artery/sections/Prevention.tsx";
+import CoronaryVideo from "./pages/heart-diseases/coronary-artery/sections/Video.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
@@ -94,6 +95,7 @@ createRoot(document.getElementById("root")!).render(
           <Route path="sintomas" element={<CoronarySymptoms />} />
           <Route path="tratamiento" element={<CoronaryTreatment />} />
           <Route path="prevencion" element={<CoronaryPrevention />} />
+          <Route path="video" element={<CoronaryVideo />} />
         </Route>
 
         <Route path="ranking-quiz" element={<Ranking />} />
