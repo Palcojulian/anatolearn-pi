@@ -5,11 +5,12 @@ import { Canvas } from "@react-three/fiber";
 import ArteryHeartCase from "../models-3d/ArteryHeartCase";
 import { Sparkles } from "@react-three/drei";
 import { Text } from "@react-three/drei";
+import { Html } from "@react-three/drei";
 
 const ModelController = () => {
     const [isHovered, setIsHovered] = useState(false);
     const [isClicked, setIsClicked] = useState(false);
-    const [scale, setScale] = useState<number>(1.5);
+    const [scale, setScale] = useState<number>(1.2); // Escala reducida
     const [rotation, setRotation] = useState<[number, number, number]>([0, 0, 0]);
     const [color, setColor] = useState<string>("#fff"); // Estado para el color
 
@@ -86,7 +87,7 @@ const ModelController = () => {
         <>
             <ArteryHeartCase
                 scale={isHovered ? scale * 1.1 : scale}
-                position={[0, -1.5, 0]}
+                position={[0, -0.7, 0]} // Subo el modelo
                 rotation={rotation}
                 castShadow
                 receiveShadow
@@ -117,11 +118,24 @@ const ArteryHeartCaseView = () => {
     };
 
     return (
-        <div style={{ position: 'relative', width: '100%', height: '70vh' }}>
+        <div style={{ position: 'relative', width: '100%', height: '80vh' }}>
+            {/* Aumento el alto */}
             <Canvas 
-                    camera={{ position: [0, 0, 6], fov: 45 }} 
-                    shadows
-                >
+                camera={{ position: [0, 0, 7], fov: 48 }}
+                shadows
+            >
+                    {/* Título 3D fijo en la parte superior izquierda */}
+                    <Html position={[-2.8, 2.2, 0]} style={{ pointerEvents: 'none' }}>
+                        <h2 style={{
+                            color: '#1976d2', // Azul de la página
+                            fontWeight: 800,
+                            fontSize: '1.1em', // Igual que Cambiar escena
+                            margin: 0,
+                            textShadow: '0 2px 8px rgba(0,0,0,0.18)'
+                        }}>
+                            Modelo 1
+                        </h2>
+                    </Html>
                     {/* Texto 3D para cambiar de escena en la parte superior derecha, alineado con los otros botones */}
                     <Text
                         position={[2.1, 1.6, 0]}
@@ -210,7 +224,7 @@ const ArteryHeartCaseView = () => {
                     )}
                     <ModelController />
                     {/* Base circular vertical detrás del modelo, ahora más cerca */}
-                    <mesh position={[0, -1.5, -0.7]} receiveShadow>
+                    <mesh position={[0, -0.7, -0.7]} receiveShadow>
                         <cylinderGeometry args={[1.7, 1.7, 0.12, 64]} />
                         <meshStandardMaterial color="#E0D2C3" metalness={0.3} roughness={0.7} />
                     </mesh>

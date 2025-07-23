@@ -18,6 +18,11 @@ export const tabsCoronary = [
       id: 4,
       path: "/enfermedades-corazon/coronary-artery/prevencion",
       label: "Prevención"
+    },
+    {
+      id: 5,
+      path: "/enfermedades-corazon/coronary-artery/video",
+      label: "Video 3D"
     }
   ];
   

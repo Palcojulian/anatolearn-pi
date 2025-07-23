@@ -6,7 +6,7 @@ import ColonaryCase_Sintomas from "../models-3d/ColonaryCase_Sintomas";
 const ColonaryCaseSintomasController = ({ color, setColor }: { color: string, setColor: (c: string) => void }) => {
     const [isHovered, setIsHovered] = useState(false);
     const [isClicked, setIsClicked] = useState(false);
-    const [scale, setScale] = useState<number>(1.5);
+    const [scale, setScale] = useState<number>(1.2); // Escala reducida
     const [rotation, setRotation] = useState<[number, number, number]>([0, 0, 0]);
 
     useEffect(() => {
@@ -80,7 +80,7 @@ const ColonaryCaseSintomasController = ({ color, setColor }: { color: string, se
     return (
         <ColonaryCase_Sintomas
             scale={isHovered ? scale * 1.1 : scale}
-            position={[0, -1.5, 0]}
+            position={[0, -0.7, 0]} // Subo el modelo
             rotation={rotation}
             onPointerOver={handlePointerOver}
             onPointerOut={handlePointerOut}
@@ -113,9 +113,21 @@ const ColonaryCase_SintomasView = () => {
     };
 
     return (
-        <div style={{ position: 'relative', width: '100%', height: '70vh' }}>
+        <div style={{ position: 'relative', width: '100%', height: '80vh' }}>
             <Suspense fallback={<h5>Cargando...</h5>}>
-                <Canvas camera={{ position: [0, 0, 6], fov: 45 }} shadows>
+                <Canvas camera={{ position: [0, 0, 7], fov: 48 }} shadows>
+                    {/* Título 3D fijo en la parte superior izquierda */}
+                    <Html position={[-2.8, 2.2, 0]} style={{ pointerEvents: 'none' }}>
+                        <h2 style={{
+                            color: '#1976d2', // Azul de la página
+                            fontWeight: 800,
+                            fontSize: '1.1em', // Igual que Cambiar escena
+                            margin: 0,
+                            textShadow: '0 2px 8px rgba(0,0,0,0.18)'
+                        }}>
+                            Modelo 2
+                        </h2>
+                    </Html>
                     {/* Texto 3D para cambiar de escena en la parte superior derecha, tamaño adecuado y distancia proporcional */}
                     <Text
                         position={[2.1, 1.6, 0]}
@@ -204,7 +216,7 @@ const ColonaryCase_SintomasView = () => {
                     )}
                     <ColonaryCaseSintomasController color={color} setColor={setColor} />
                     {/* Base circular vertical detrás del modelo, más baja y centrada */}
-                    <mesh position={[0, -2, -0.7]} receiveShadow>
+                    <mesh position={[0, -0.7, -0.7]} receiveShadow>
                         <cylinderGeometry args={[1.7, 1.7, 0.12, 64]} />
                         <meshStandardMaterial color="#E0D2C3" metalness={0.3} roughness={0.7} />
                     </mesh>
