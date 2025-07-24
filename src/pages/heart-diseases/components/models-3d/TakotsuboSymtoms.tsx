@@ -37,7 +37,7 @@ const TakotsuboSymtoms = (props: JSX.IntrinsicElements["group"]) => {
           material={materials.SickHeartMaterial}
         />
       </group>
-      <InfoButton position={[-0.8, 1, 3]} title="Información">
+      <InfoButton position={[0, 2.5, 0]} title="Información">
         <h3 style={{ margin: "0 0 10px 0", fontSize: "14px" }}>Información:</h3>
         <ul style={{ listStyle: "none" }}>
           <li>

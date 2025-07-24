@@ -2,11 +2,20 @@ import { Suspense } from "react";
 import { OrbitControls, Environment, Sky } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import TakotsuboWhatIs from "../models-3d/TakotsuboWhatIs";
+import Texto3D from "../../../../components/Texto3D";
 import Staging from "../../takotsubo/stagin/Stagin";
+import { Vector3 } from "three";
 
 const TakotsuboWhatIsCanvas = () => {
   return (
-    <div style={{ maxWidth: "500px", marginLeft: "2rem", marginRight: "auto" }}>
+    <div
+      style={{
+        maxHeight: "70vh",
+        aspectRatio: "1 / 1",
+        marginLeft: "2rem",
+        marginRight: "auto",
+      }}
+    >
       <Suspense fallback={<h5>Cargando...</h5>}>
         <Canvas
           camera={{ position: [0, 0, 7] }}
@@ -37,6 +46,19 @@ const TakotsuboWhatIsCanvas = () => {
           </mesh>
 
           <TakotsuboWhatIs position={[0, 0, -0.5]} scale={2} />
+
+          <Texto3D
+            text="Presiona R para girar"
+            color="#3F72AF"
+            position={new Vector3(0, 3, 0)}
+            bevelEnabled
+            bevelSize={0.1}
+            bevelThickness={0.02}
+            height={0.2}
+            letterSpacing={0.15}
+            size={1}
+            scale={0.2}
+          />
 
           <OrbitControls enableZoom={false} enableRotate={true} />
           <Environment preset="city" background={false} />

@@ -15,7 +15,7 @@ const InfoButton: React.FC<InfoButtonProps> = ({
   const [showInfo, setShowInfo] = useState<boolean>(false);
   const [isHovered, setIsHovered] = useState(false);
   return (
-    <Html position={position} center>
+    <Html position={position} center transform={false}>
       <div
         style={{
           color: "white",

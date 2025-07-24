@@ -52,12 +52,6 @@ const TakotsuboWhatIs = (props: JSX.IntrinsicElements["group"]) => {
         onPointerEnter={() => setHovered(true)}
         onPointerLeave={() => setHovered(false)}
       />
-      <Label3D
-        position={new THREE.Vector3(0, 1.5, 0)}
-        text="Presiona R para rotar"
-        classTxt="text-purple-700 text-sm font-bold"
-        scale={0.5}
-      />
     </group>
   );
 };

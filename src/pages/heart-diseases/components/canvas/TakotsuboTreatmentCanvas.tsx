@@ -2,10 +2,19 @@ import { Suspense } from "react";
 import { OrbitControls, Environment, Sky } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import TakotsuboTreatment from "../models-3d/TakotsuboTreatment";
+import Texto3D from "../../../../components/Texto3D";
+import { Vector3 } from "three";
 
 const TakotsuboTreatmentCanvas = () => {
   return (
-    <div style={{ maxWidth: "500px", marginLeft: "2rem", marginRight: "auto" }}>
+    <div
+      style={{
+        maxHeight: "70vh",
+        aspectRatio: "1 / 1",
+        marginLeft: "2rem",
+        marginRight: "auto",
+      }}
+    >
       <Suspense fallback={<h5>Cargando...</h5>}>
         <Canvas
           camera={{ position: [0, 0, 7] }}
@@ -55,6 +64,19 @@ const TakotsuboTreatmentCanvas = () => {
             position={[0, 0, -0.5]}
             rotation={[-Math.PI / 2, 0, -Math.PI / 2]}
             scale={1}
+          />
+
+          <Texto3D
+            text="Haz click sobre el modelo"
+            color="#3F72AF"
+            position={new Vector3(0, 3, 0)}
+            bevelEnabled
+            bevelSize={0.1}
+            bevelThickness={0.02}
+            height={0.2}
+            letterSpacing={0.15}
+            size={1}
+            scale={0.2}
           />
 
           <OrbitControls enableZoom={false} enableRotate={true} />
