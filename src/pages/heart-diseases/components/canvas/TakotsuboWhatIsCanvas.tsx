@@ -50,13 +50,13 @@ const TakotsuboWhatIsCanvas = () => {
           <Texto3D
             text="Presiona R para girar"
             color="#3F72AF"
-            position={new Vector3(0, 3, 0)}
+            position={new Vector3(-1, 3, 0)}
             bevelEnabled
             bevelSize={0.1}
             bevelThickness={0.02}
             height={0.2}
             letterSpacing={0.15}
-            size={1}
+            size={2}
             scale={0.2}
           />
 
