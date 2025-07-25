@@ -1,27 +1,18 @@
-import { useCallback, type JSX } from "react";
-import { useGLTF, useAnimations, Html } from "@react-three/drei";
-import { useRef, useEffect, useState } from "react";
+import { type JSX } from "react";
+import { useGLTF, useAnimations } from "@react-three/drei";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
-import Texto3D from "../../../../components/Texto3D";
-import useStoreSintomas from "../../arrhythmia/stores/useStoreSintomas";
-import { useMemo } from "react";
-import { Vector3 } from "three";
 import InfoButton from "../../../../components/InfoButton";
 
-const SintomaStenosis = (props: JSX.IntrinsicElements["group"]) => {
-  const { isAlertText } = useStoreSintomas();
-  const positionText = new Vector3(-0.5, 1.4, 0);
-  const positionTextAlert = new Vector3(0, 2.5, 1);
+const Stenosis_Prevencion = (props: JSX.IntrinsicElements["group"]) => {
   const group = useRef<THREE.Group>(null);
-  const { nodes, materials, animations } = useGLTF("/models-3d/Student.glb");
-  const { actions } = useAnimations(animations, group);
+  const { nodes, scene, materials, animations } = useGLTF(
+    "/models-3d/AvatarJumping.glb"
+  );
   const [currentAction, setCurrentAction] = useState<string | null>(null);
-  // const [currentAction, setCurrentAction] = useState("Sick");
-  const handleStudent = () => {
-    if (currentAction !== "Dead") {
-      setCurrentAction("Dead");
-    }
-  };
+
+  const { actions } = useAnimations(animations, group);
+
   useEffect(() => {
     if (!currentAction || !actions) return;
 
@@ -38,31 +29,29 @@ const SintomaStenosis = (props: JSX.IntrinsicElements["group"]) => {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.code === "Space") {
-        setCurrentAction("Sick");
+      if (e.code === "KeyE") {
+        setCurrentAction("Armature.001|mixamo.com|Layer0");
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
+
+  useEffect(() => {
+    if (actions) {
+      console.log("Animaciones disponibles:", Object.keys(actions));
+    }
+  }, [actions]);
 
   return (
     <>
-      {/* Iluminación */}
-      <ambientLight intensity={-3.5} />
-
-      <group
-        ref={group}
-        {...props}
-        dispose={null}
-        onDoubleClick={handleStudent}
-      >
+      <group ref={group} {...props} dispose={null}>
         <group name="Scene">
           <group name="Armature">
             <skinnedMesh
-              castShadow
-              receiveShadow
               name="EyeLeft"
               geometry={(nodes.EyeLeft as THREE.SkinnedMesh).geometry}
               material={materials.Wolf3D_Eye}
@@ -75,8 +64,6 @@ const SintomaStenosis = (props: JSX.IntrinsicElements["group"]) => {
               }
             />
             <skinnedMesh
-              castShadow
-              receiveShadow
               name="EyeRight"
               geometry={(nodes.EyeRight as THREE.SkinnedMesh).geometry}
               material={materials.Wolf3D_Eye}
@@ -89,16 +76,12 @@ const SintomaStenosis = (props: JSX.IntrinsicElements["group"]) => {
               }
             />
             <skinnedMesh
-              castShadow
-              receiveShadow
               name="Wolf3D_Body"
               geometry={(nodes.Wolf3D_Body as THREE.SkinnedMesh).geometry}
               material={materials.Wolf3D_Body}
               skeleton={(nodes.Wolf3D_Body as THREE.SkinnedMesh).skeleton}
             />
             <skinnedMesh
-              castShadow
-              receiveShadow
               name="Wolf3D_Head"
               geometry={(nodes.Wolf3D_Head as THREE.SkinnedMesh).geometry}
               material={materials.Wolf3D_Skin}
@@ -160,22 +143,9 @@ const SintomaStenosis = (props: JSX.IntrinsicElements["group"]) => {
           </group>
         </group>
       </group>
-      {/* Controles */}
-      <InfoButton position={[-4, 3, 0]} title="Información">
-        <h3 style={{ margin: "0 0 10px 0", fontSize: "14px" }}>Información:</h3>
-        <ul style={{ margin: 0, paddingLeft: "15px" }}>
-          <li>
-            <b>Tecla Espacio</b>: Animación mareo.
-          </li>
-          <li></li>
-          <li>
-            <b>Doble Click Izquierdo al Mouse</b>: Animación desmayo.
-          </li>
-        </ul>
-      </InfoButton>
     </>
   );
 };
 
-export default SintomaStenosis;
-useGLTF.preload("/models-3d/Student.glb");
+export default Stenosis_Prevencion;
+useGLTF.preload("/models-3d/AvatarJumping.glb");
