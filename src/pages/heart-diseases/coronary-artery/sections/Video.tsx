@@ -5,8 +5,9 @@ import { OrbitControls, Environment, useVideoTexture } from "@react-three/drei";
 const BEIGE = '#E0D2C3';
 const BTN_BLUE = '#3F72AF';
 const BTN_BLUE_HOVER = '#2c4e7a';
+const DARK_GRAY = '#444950';
 
-const VideoPlane = ({ isPlaying, isMuted }: { isPlaying: boolean; isMuted: boolean }) => {
+const VideoBox = ({ isPlaying, isMuted }: { isPlaying: boolean; isMuted: boolean }) => {
   const videoUrl = "/videos/Angioplastia de arteria coronaria (Vía radial).mp4";
   const texture = useVideoTexture(videoUrl, {
     muted: isMuted,
@@ -15,7 +16,7 @@ const VideoPlane = ({ isPlaying, isMuted }: { isPlaying: boolean; isMuted: boole
     start: false,
     crossOrigin: "anonymous",
   });
-  const planeRef = useRef<any>(null);
+  const boxRef = useRef<any>(null);
 
   useEffect(() => {
     if (isPlaying) {
@@ -27,16 +28,36 @@ const VideoPlane = ({ isPlaying, isMuted }: { isPlaying: boolean; isMuted: boole
   }, [isPlaying, isMuted, texture]);
 
   useFrame(() => {
-    if (planeRef.current) {
-      planeRef.current.rotation.y = 0;
+    if (boxRef.current) {
+      boxRef.current.rotation.y = 0;
     }
   });
 
-  // El plano ocupa casi todo el canvas (dejando un marco beige más delgado)
+  // Tamaño de la caja igual al plano anterior, pero con grosor
+  const width = 28;
+  const height = 16;
+  const depth = 0.5; // Grosor visible
+
+  // Materiales: video en la cara frontal, gris oscuro en el resto
+  const materials = [
+    // right
+    <meshBasicMaterial attach="material-0" color={DARK_GRAY} key="right" />,
+    // left
+    <meshBasicMaterial attach="material-1" color={DARK_GRAY} key="left" />,
+    // top
+    <meshBasicMaterial attach="material-2" color={DARK_GRAY} key="top" />,
+    // bottom
+    <meshBasicMaterial attach="material-3" color={DARK_GRAY} key="bottom" />,
+    // front (video)
+    <meshBasicMaterial attach="material-4" map={texture} toneMapped={false} key="front" />,
+    // back
+    <meshBasicMaterial attach="material-5" color={DARK_GRAY} key="back" />,
+  ];
+
   return (
-    <mesh position={[0, 0, 0]} ref={planeRef}>
-      <planeGeometry args={[22, 12.375]} />
-      <meshBasicMaterial map={texture} toneMapped={false} />
+    <mesh position={[0, 0, 0]} ref={boxRef}>
+      <boxGeometry args={[width, height, depth]} />
+      {materials}
     </mesh>
   );
 };
@@ -46,7 +67,7 @@ const Video = () => {
   const [isMuted, setIsMuted] = useState(false);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen w-full px-2">
+    <div className="flex flex-col items-center justify-start min-h-0 w-full px-2" style={{ paddingTop: 24 }}>
       <div
         className="w-full flex flex-col items-center mx-auto"
         style={{
@@ -57,9 +78,10 @@ const Video = () => {
         <div
           style={{
             width: '100%',
-            maxWidth: 900,
-            minWidth: 320,
+            maxWidth: 1200,
+            minWidth: 400,
             aspectRatio: '16/9',
+            height: 600,
             background: BEIGE,
             borderRadius: 18,
             boxShadow: '0 8px 32px rgba(0,0,0,0.25)',
@@ -67,6 +89,7 @@ const Video = () => {
             alignItems: 'center',
             justifyContent: 'center',
             overflow: 'hidden',
+            marginTop: 0, // Quitar margen superior
           }}
         >
           <Suspense fallback={<div style={{ color: '#fff', textAlign: 'center', width: '100%' }}>Cargando video 3D...</div>}>
@@ -78,7 +101,7 @@ const Video = () => {
               <ambientLight intensity={0.7} />
               <Environment preset="city" background={false} />
               <OrbitControls enableZoom={false} enableRotate={true} />
-              <VideoPlane isPlaying={isPlaying} isMuted={isMuted} />
+              <VideoBox isPlaying={isPlaying} isMuted={isMuted} />
             </Canvas>
           </Suspense>
         </div>
