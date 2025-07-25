@@ -21,7 +21,7 @@ const Stenosis_Tratamiento = (props: JSX.IntrinsicElements["group"]) => {
       <group ref={group} {...props} dispose={null}>
         <primitive object={scene} />
       </group>
-      <InfoButton position={[-2, 1, 3]} title="Información">
+      <InfoButton position={[-4, 3, 0]} title="Información">
         <h3 style={{ margin: "0 0 10px 0", fontSize: "14px" }}>Información:</h3>
         <ul style={{ listStyle: "none" }}>
           <li>

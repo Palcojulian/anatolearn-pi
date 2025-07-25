@@ -1,5 +1,5 @@
 import { Suspense, useState, useEffect } from "react";
-import { OrbitControls, Environment, Sky } from "@react-three/drei";
+import { OrbitControls, Environment, Sky, Html } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import StenosisHeart from "../models-3d/StenosisHeart";
 import Floor from "../../../../components/Floor";
@@ -99,7 +99,23 @@ const Stenosis = () => {
         camera={{ position: [2, 0, 6] }}
         style={{ height: "70vh", width: "100%" }}
         shadows={true}
+        //className=" mask-radial-[40%_50%] mask-radial-from-70% hover:cursor-pointer"
       >
+        <Html position={[1, 5, -2]} style={{ pointerEvents: "none" }}>
+          <h2
+            style={{
+              color: "#3F72AF",
+              fontWeight: 800,
+              fontSize: "1.1em",
+              margin: 0,
+              textShadow: "0 2px 8px rgba(0,0,0,0.18)",
+              maxWidth: "750px",
+              whiteSpace: "nowrap",
+            }}
+          >
+            "Estructura interna del corazón"
+          </h2>
+        </Html>
         <directionalLight
           position={[0, 5, 5]}
           intensity={6}

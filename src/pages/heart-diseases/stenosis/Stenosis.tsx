@@ -9,6 +9,7 @@ import { tabsStenosis } from "../helpers/stenosisTabs";
 import StenosisH from "../components/canvas/Stenosis";
 import Sintomas from "../components/canvas/Sintomas";
 import Tratamiento from "../components/canvas/StenosisTratamiento";
+import Prevencion from "../components/canvas/StenosisPrevencion";
 
 const Stenosis = () => {
   const navigate = useNavigate();
@@ -38,7 +39,11 @@ const Stenosis = () => {
         </div>
       );
     } else if (tabSelected == 4) {
-      return <div>Modelo en construcción...</div>;
+      return (
+        <div>
+          <Prevencion />
+        </div>
+      );
     } else {
       return <h6>Seleccione una sección</h6>;
     }
