@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from "react-router";
+import { useNavigate, useLocation, Link } from "react-router";
 import logo from "../../../public/img/logo_blanco.png";
 
 
@@ -24,7 +24,16 @@ const Footer = () => {
   return (
     <footer className="flex flex-col bg-primary items-center py-3">
       {showLogo()}
-      <span className="text-xs text-white">Copyright © 2025 Anatolearn</span>
+      <div className="flex items-center gap-4 mt-2">
+        <span className="text-xs text-white">Copyright © 2025 Anatolearn</span>
+        <span className="text-xs text-white">|</span>
+        <Link 
+          to="/sitemap" 
+          className="text-xs text-white hover:text-gray-200 hover:underline transition-colors duration-200"
+        >
+          Mapa del Sitio
+        </Link>
+      </div>
     </footer>
   );
 };

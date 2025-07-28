@@ -2,6 +2,7 @@ import type { JSX } from "react";
 import Footer from "./footer/Footer";
 import Header from "./header/Header";
 import Breadcrumbs from "../components/BreadCrumbs";
+import FloatingSitemapButton from "../components/FloatingSitemapButton";
 
 interface Children {
   children: JSX.Element;
@@ -16,6 +17,7 @@ const Layout = ({ children }: Children) => {
         {children}
       </main>
       <Footer />
+      <FloatingSitemapButton />
     </div>
   );
 };

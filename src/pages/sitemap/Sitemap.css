@@ -1,0 +1,55 @@
+.sitemap-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.sitemap-card {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.sitemap-link {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.sitemap-link:hover {
+  transform: translateX(5px);
+}
+
+.sitemap-link::before {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 2px;
+  background: #3F72AF;
+  transition: width 0.3s ease;
+}
+
+.sitemap-link:hover::before {
+  width: 8px;
+}
+
+.sitemap-section {
+  border-left: 3px solid #3F72AF;
+  padding-left: 1rem;
+  margin-left: 0.5rem;
+}
+
+.sitemap-help-box {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.sitemap-help-box h3 {
+  color: white;
+}
+
+.sitemap-help-box p,
+.sitemap-help-box li {
+  color: rgba(255, 255, 255, 0.9);
+} 
