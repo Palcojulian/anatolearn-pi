@@ -10,6 +10,7 @@ const pathNamesMap: Record<string, string> = {
     "prevencion": "Prevención",
     "quiz": "Quiz",
     "about-us": "Sobre Nosotros",
+    "sitemap": "Mapa del Sitio",
     "iniciar-sesion": "Iniciar sesión",
     "mi-perfil" : "Mi perfil",
     "ranking-quiz" : "Ranking"

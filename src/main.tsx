@@ -6,6 +6,7 @@ import Layout from "./layout/Layout.tsx";
 import Home from "./pages/home/Home.tsx";
 import Diseases from "./pages/heart-diseases/Diseases.tsx";
 import AboutUs from "./pages/about-us/AboutUs.tsx";
+import Sitemap from "./pages/sitemap/Sitemap.tsx";
 import NotFound from "./pages/not-found/NotFound.tsx";
 import LogIn from "./pages/log-in/LogIn.tsx";
 import ProfileUser from "./pages/profile-user/ProfileUser.tsx";
@@ -100,6 +101,7 @@ createRoot(document.getElementById("root")!).render(
 
         <Route path="ranking-quiz" element={<Ranking />} />
         <Route path="about-us" element={<AboutUs />} />
+        <Route path="sitemap" element={<Sitemap />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>
