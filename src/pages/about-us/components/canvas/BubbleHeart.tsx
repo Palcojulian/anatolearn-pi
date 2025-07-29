@@ -28,7 +28,7 @@ const BubbleHeart = () => {
           castShadow={true}
         />
 
-        <HeartInBubble scale={0.9} />
+        <HeartInBubble modelProps={{scale: 0.9}} />
 
         <Sky />
        
