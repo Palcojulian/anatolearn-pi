@@ -7,8 +7,6 @@ import FirstQuestion from "../questions/FirstQuestion";
 import SecondQuestion from "../questions/SecondQuestion";
 import ThirdQuestion from "../questions/ThirdQuestion";
 import FourthQuestion from "../questions/FourthQuestion";
-import FifthQuestion from "../questions/FifthQuestion";
-import SixthQuestion from "../questions/SixthQuestion";
 import Resumen from "../questions/Resumen";
 
 
@@ -31,11 +29,7 @@ const QuizCanva = () => {
     }else if(nQuestion == 4) {
       return <FourthQuestion {...userLooged!} />
     }else if(nQuestion == 5)  {
-      return <FifthQuestion {...userLooged!} />
-    }else if(nQuestion == 6) {
-      return <SixthQuestion {...userLooged!} />
-    }else if(nQuestion == 7) {
-      return <Resumen {...userLooged!} />
+      return <Resumen {...userLooged!} /> 
     }else {
       return <WelcomeQuiz {...userLooged!} />
     }
