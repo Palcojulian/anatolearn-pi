@@ -7,8 +7,6 @@ import FirstQuestion from "../questions/FirstQuestion";
 import SecondQuestion from "../questions/SecondQuestion";
 import ThirdQuestion from "../questions/ThirdQuestion";
 import FourthQuestion from "../questions/FourthQuestion";
-import FifthQuestion from "../questions/FifthQuestion";
-import SixthQuestion from "../questions/SixthQuestion";
 import Resumen from "../questions/Resumen";
 
 
