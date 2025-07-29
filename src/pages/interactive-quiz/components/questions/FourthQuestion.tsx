@@ -1,89 +1,128 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState } from "react";
 import { Vector3 } from "three";
-import Texto3D from "../../../../components/Texto3D";
 import Btn3DHtml from "../html-3d/Btn3DHtml";
 import { useProgressQuiz, useQuiz } from "../../composables/useActionsQuiz";
 import { type User } from "firebase/auth";
-
-interface Option {
-  key: string;
-  text: string;
-}
+import { Physics, RigidBody } from "@react-three/rapier";
+import Text2D from "../../../../components/Text2D";
+import BallToCatch from "../models-3d/BallToCatch";
+import FloorsAnswers from "../models-3d/FloorsAnswers";
 
 const FirstQuestion = (user: User) => {
   const { nextQuestion } = useProgressQuiz();
   const { setAnswer } = useQuiz(user);
 
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [optionSelected, setOption] = useState<string>("");
+  const [stateAnswer, setStateAnswer] = useState(false);
+
   const questionId = "pregunta_4";
   const correctAnswerKey = `${questionId}_D`;
   const questionText =
     "¿La obstrucción de arteria coronaria puede provocar infarto?";
 
-  const options: Option[] = [
-    { key: `${questionId}_A`, text: "Solo en niños" },
-    { key: `${questionId}_B`, text: "Nunca" },
-    { key: `${questionId}_C`, text: "Solo en mayores" },
-    { key: `${questionId}_D`, text: "Si" },
-  ];
-  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const catchAnswerUser = (respuesta: string): void => {
+    setStateAnswer(correctAnswerKey == respuesta);
+    setOption(respuesta);
+  };
 
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const saveAnswerUser = (): void => {
-    if (!selectedOption) return;
-    const isCorrect = selectedOption === correctAnswerKey;
-    setAnswer(questionId, isCorrect);
+  const saveAnswer = (): void => {
+    setAnswer(questionId, stateAnswer);
     nextQuestion();
   };
 
-  const buttonPositions = useMemo(() => {
-    return options.map((_, index) => {
-      return isMobile
-        ? new Vector3(0, 1 - index * 2.2, 0)
-        : new Vector3(-9 + index * 6, 0.5, 0);
-    });
-  }, [isMobile]);
-
-  const finalizarPosition = useMemo(() => {
-    return isMobile ? new Vector3(0, -8, 0) : new Vector3(8, -5, 0);
-  }, [isMobile]);
+  const renderBtn = () => {
+    if (optionSelected != "") {
+      return (
+        <Btn3DHtml
+          action={saveAnswer}
+          label="Siguiente"
+          position={new Vector3(9, 2, 0)}
+          key={1}
+          scale={0.5}
+        />
+      );
+    }
+  };
 
   return (
     <>
-      <Texto3D
-        text={questionText}
-        color="#3F72AF"
-        position={new Vector3(0, 3, -2)}
-        bevelEnabled
-        bevelSize={0.1}
-        bevelThickness={0.02}
-        height={0.2}
-        size={0.6}
-        letterSpacing={0.05}
-      />
-
-      {options.map((option, index) => (
-        <Btn3DHtml
-          key={option.key}
-          position={buttonPositions[index]}
-          label={option.text}
-          action={() => setSelectedOption(option.key)}
-          scale={selectedOption === option.key ? 0.8 : 0.7}
+      <Physics>
+        <BallToCatch disabledMove={optionSelected != ""} />
+        <FloorsAnswers
+          key={1}
+          questionId={questionId}
+          saveAnswerUser={catchAnswerUser}
+          answerSelected={optionSelected}
+          correctAnswer={correctAnswerKey}
         />
-      ))}
 
-      <Btn3DHtml
-        position={finalizarPosition}
-        action={saveAnswerUser}
-        label="Finalizar"
-        scale={0.7}
-      />
+        <RigidBody type="fixed">{renderBtn()}</RigidBody>
+
+        <RigidBody type="fixed">
+          <Text2D
+            position={new Vector3(0, 6.5, -1)}
+            color="#3F72AF"
+            fontSize={0.7}
+            text={questionText}
+          />
+        </RigidBody>
+
+        {/* ANSWER A  */}
+        <RigidBody type="fixed">
+          <Text2D
+            position={new Vector3(-6, -4, 0.1)}
+            color="#3F72AF"
+            fontSize={0.5}
+            text="Solo en"
+          />
+        </RigidBody>
+        <RigidBody type="fixed">
+          <Text2D
+            position={new Vector3(-6, -4.4, 0.1)}
+            color="#3F72AF"
+            fontSize={0.5}
+            text="niños"
+          />
+        </RigidBody>
+
+        {/* ANSWER B  */}
+        <RigidBody type="fixed">
+          <Text2D
+            position={new Vector3(-3, -4, 0.1)}
+            color="#3F72AF"
+            fontSize={0.5}
+            text="Nunca"
+          />
+        </RigidBody>
+        
+        {/* ANSWER C  */}
+        <RigidBody type="fixed">
+          <Text2D
+            position={new Vector3(3, -4, 0.1)}
+            color="#3F72AF"
+            fontSize={0.5}
+            text="Solo en"
+          />
+        </RigidBody>
+        <RigidBody type="fixed">
+          <Text2D
+            position={new Vector3(3, -4.4, 0.1)}
+            color="#3F72AF"
+            fontSize={0.5}
+            text="mayores"
+          />
+        </RigidBody>
+
+        {/* ANSWER D */}
+        <RigidBody type="fixed">
+          <Text2D
+            position={new Vector3(6, -4, 0.1)}
+            color="#3F72AF"
+            fontSize={0.5}
+            text="Si"
+          />
+        </RigidBody>
+      </Physics>
     </>
   );
 };
