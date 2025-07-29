@@ -10,7 +10,7 @@ import FloorsAnswers from "../models-3d/FloorsAnswers";
 
 const FirstQuestion = (user: User) => {
   const { nextQuestion } = useProgressQuiz();
-  const { setAnswer } = useQuiz(user);
+  const { setAnswer, setEndTime } = useQuiz(user);
 
   const [optionSelected, setOption] = useState<string>("");
   const [stateAnswer, setStateAnswer] = useState(false);
@@ -27,6 +27,7 @@ const FirstQuestion = (user: User) => {
 
   const saveAnswer = (): void => {
     setAnswer(questionId, stateAnswer);
+    setEndTime();
     nextQuestion();
   };
 

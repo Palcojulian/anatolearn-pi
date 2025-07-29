@@ -42,37 +42,23 @@ const Resumen = (user: User) => {
         position={new Vector3(0, 1.3, 0)}
         pregunta="Pregunta N° 2"
         respuesta={respuestas["pregunta_2"]}
-        key={1}
+        key={2}
       />
 
       <RowRespuesta
         position={new Vector3(0, 0.1, 0)}
         pregunta="Pregunta N° 3"
         respuesta={respuestas["pregunta_3"]}
-        key={1}
+        key={3}
       />
 
       <RowRespuesta
         position={new Vector3(0, -1.1, 0)}
         pregunta="Pregunta N° 4"
         respuesta={respuestas["pregunta_4"]}
-        key={1}
+        key={4}
       />
-
-      <RowRespuesta
-        position={new Vector3(0, -2.3, 0)}
-        pregunta="Pregunta N° 5"
-        respuesta={respuestas["pregunta_5"]}
-        key={1}
-      />
-
-      <RowRespuesta
-        position={new Vector3(0, -3.5, 0)}
-        pregunta="Pregunta N° 6"
-        respuesta={respuestas["pregunta_6"]}
-        key={1}
-      />
-
+      
       <Btn3DHtml
         position={new Vector3(0, -7.5, 0)}
         action={saveAllAnswers}

@@ -31,11 +31,7 @@ const QuizCanva = () => {
     }else if(nQuestion == 4) {
       return <FourthQuestion {...userLooged!} />
     }else if(nQuestion == 5)  {
-      return <FifthQuestion {...userLooged!} />
-    }else if(nQuestion == 6) {
-      return <SixthQuestion {...userLooged!} />
-    }else if(nQuestion == 7) {
-      return <Resumen {...userLooged!} />
+      return <Resumen {...userLooged!} /> 
     }else {
       return <WelcomeQuiz {...userLooged!} />
     }
