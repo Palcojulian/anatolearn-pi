@@ -13,6 +13,9 @@ interface Props {
   size: number;
   letterSpacing: number;
   scale?:number;
+  pointerEnter?: () => void;
+  pointerClick?: () => void;
+  pointerMove?: (e: any) => void;
 }
 
 const Texto3D = ({
@@ -26,6 +29,9 @@ const Texto3D = ({
   size,
   text,
   scale=1,
+  pointerEnter,
+  pointerMove,
+  pointerClick,
 }: Props) => {
   const text3DRef = useRef<Mesh>(null);
 
@@ -42,6 +48,11 @@ const Texto3D = ({
         letterSpacing={letterSpacing}
         castShadow
         scale={scale}
+        onPointerEnter={pointerEnter}
+        onClick={pointerClick}
+        onPointerMove={pointerMove}
+        
+        
       >
         {text}
         <meshStandardMaterial color={color} metalness={0.7} roughness={0.1} />
