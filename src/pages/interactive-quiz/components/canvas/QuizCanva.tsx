@@ -152,13 +152,14 @@ const QuizCanva = () => {
             </li>
             <br />
             <li>
-              <strong>Arrastrar el mouse:</strong> Mover suavemente el corazón
+              <strong>Arrastrar el corazón:</strong> Mover suavemente el corazón
               sobre la respuesta deseada.
             </li>
             <br />
             <li>
-              <strong>Doble click izquierdo:</strong> Soltar el corazón sobre la
-              respuesta.
+              <strong>Escoger la respuesta deseada:</strong> Soltar el corazón
+              sobre la respuesta deseada haciendo doble click izquierdo al
+              mouse.
             </li>
           </ul>
         </div>
