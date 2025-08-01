@@ -82,7 +82,7 @@ const Sitemap = () => {
                 </Link>
               </div>
             </div>
-            
+
             <div>
               <Link
                 to="/enfermedades-corazon/takotsubo"
@@ -117,7 +117,7 @@ const Sitemap = () => {
                 </Link>
               </div>
             </div>
-            
+
             <div>
               <Link
                 to="/enfermedades-corazon/stenosis"
@@ -152,7 +152,7 @@ const Sitemap = () => {
                 </Link>
               </div>
             </div>
-            
+
             <div>
               <Link
                 to="/enfermedades-corazon/coronary-artery"
@@ -258,10 +258,20 @@ const Sitemap = () => {
               Explora las principales secciones de Anatolearn:
             </p>
             <ul className="list-disc list-inside text-white space-y-2 opacity-90">
-              <li><strong>Inicio:</strong> Página principal con información general</li>
-              <li><strong>Enfermedades:</strong> Información detallada sobre enfermedades del corazón</li>
-              <li><strong>Quiz Interactivo:</strong> Pon a prueba tus conocimientos</li>
-              <li><strong>Sobre Nosotros:</strong> Conoce más sobre Anatolearn</li>
+              <li>
+                <strong>Inicio:</strong> Página principal con información
+                general
+              </li>
+              <li>
+                <strong>Enfermedades:</strong> Información detallada sobre
+                enfermedades del corazón
+              </li>
+              <li>
+                <strong>Quiz:</strong> Pon a prueba tus conocimientos
+              </li>
+              <li>
+                <strong>Nosotros:</strong> Conoce más sobre Anatolearn
+              </li>
             </ul>
           </div>
         </div>
@@ -270,4 +280,4 @@ const Sitemap = () => {
   );
 };
 
-export default Sitemap; 
+export default Sitemap;
