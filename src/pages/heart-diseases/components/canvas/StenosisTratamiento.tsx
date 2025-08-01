@@ -3,6 +3,7 @@ import { OrbitControls, Sky } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import TratamientoStenosis from "../models-3d/Stenosis_Tratamiento";
 import Floor from "../../../../components/Floor";
+import Texto3D from "../../../../components/Texto3D";
 import { Vector3 } from "three";
 
 const StenosisTratamiento = () => {
@@ -95,46 +96,67 @@ const StenosisTratamiento = () => {
   };
 
   return (
-    <Suspense fallback={<h5>Cargando...</h5>}>
-      <Canvas
-        camera={{ position: [0, 0, 7] }}
-        style={{ height: "68vh", width: "100%" }}
-        shadows={true}
-      >
-        <ambientLight intensity={3} />
-        <directionalLight
-          position={[2, 5, 10]}
-          intensity={4}
-          castShadow={true}
-        />
-        {/* <OrbitControls enableZoom={false} enableRotate={true} autoRotate autoRotateSpeed={3} /> */}
-        <OrbitControls
-          enableZoom={false}
-          enableRotate={true}
-          minAzimuthAngle={-Math.PI / 4}
-          maxAzimuthAngle={Math.PI / 4}
-          minPolarAngle={Math.PI / 2.2}
-          maxPolarAngle={Math.PI / 2}
-        />
+    <div
+      style={{
+        maxHeight: "80vh",
+        aspectRatio: "1 / 1",
+        marginLeft: "2rem",
+        marginRight: "auto",
+      }}
+    >
+      <Suspense fallback={<h5>Cargando...</h5>}>
+        <Canvas
+          camera={{ position: [0, 0, 7] }}
+          style={{ height: "68vh", width: "100%" }}
+          shadows={true}
+        >
+          <ambientLight intensity={3} />
+          <directionalLight
+            position={[2, 5, 10]}
+            intensity={4}
+            castShadow={true}
+          />
+          {/* <OrbitControls enableZoom={false} enableRotate={true} autoRotate autoRotateSpeed={3} /> */}
+          <OrbitControls
+            enableZoom={false}
+            enableRotate={true}
+            minAzimuthAngle={-Math.PI / 4}
+            maxAzimuthAngle={Math.PI / 4}
+            minPolarAngle={Math.PI / 2.2}
+            maxPolarAngle={Math.PI / 2}
+          />
 
-        <Sky />
-        <TratamientoStenosis
-          position={[0, 1, -6]}
-          scale={isHovered ? scale * 1.1 : scale}
-          rotation={rotation}
-          onPointerOver={handlePointerOver}
-          onPointerOut={handlePointerOut}
-          onClick={handleClick}
-        />
-        <Floor
-          color="#3F72AF"
-          position={position}
-          metalnesVal={0.5}
-          roughness={0.7}
-          scale={2.5}
-        />
-      </Canvas>
-    </Suspense>
+          <Sky />
+          <TratamientoStenosis
+            position={[0, 1, -6]}
+            scale={isHovered ? scale * 1.1 : scale}
+            rotation={rotation}
+            onPointerOver={handlePointerOver}
+            onPointerOut={handlePointerOut}
+            onClick={handleClick}
+          />
+          <Floor
+            color="#3F72AF"
+            position={position}
+            metalnesVal={0.5}
+            roughness={0.7}
+            scale={2.5}
+          />
+          <Texto3D
+            text="Haz click sobre el modelo"
+            color="#3F72AF"
+            position={new Vector3(0, 4, 0)}
+            bevelEnabled
+            bevelSize={0.1}
+            bevelThickness={0.02}
+            height={0.2}
+            letterSpacing={0.15}
+            size={2}
+            scale={0.2}
+          />
+        </Canvas>
+      </Suspense>
+    </div>
   );
 };
 

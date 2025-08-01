@@ -94,61 +94,70 @@ const Stenosis = () => {
   };
 
   return (
-    <Suspense fallback={<h5>Cargando...</h5>}>
-      <Canvas
-        camera={{ position: [2, 0, 6] }}
-        style={{ height: "70vh", width: "100%" }}
-        shadows={true}
-        //className=" mask-radial-[40%_50%] mask-radial-from-70% hover:cursor-pointer"
-      >
-        <Html position={[1, 5, -2]} style={{ pointerEvents: "none" }}>
-          <h2
-            style={{
-              color: "#3F72AF",
-              fontWeight: 800,
-              fontSize: "1.1em",
-              margin: 0,
-              textShadow: "0 2px 8px rgba(0,0,0,0.18)",
-              maxWidth: "750px",
-              whiteSpace: "nowrap",
-            }}
-          >
-            "Estructura interna del corazón"
-          </h2>
-        </Html>
-        <directionalLight
-          position={[0, 5, 5]}
-          intensity={6}
-          castShadow={true}
-        />
-        {/* <OrbitControls enableZoom={false} enableRotate={true} autoRotate autoRotateSpeed={3} /> */}
-        <OrbitControls
-          enableZoom={false}
-          enableRotate={true}
-          minAzimuthAngle={-Math.PI / 4}
-          maxAzimuthAngle={Math.PI / 4}
-          minPolarAngle={Math.PI / 2.2}
-          maxPolarAngle={Math.PI / 2}
-        />
-        <ambientLight intensity={3} />
+    <div
+      style={{
+        maxHeight: "80vh",
+        aspectRatio: "1 / 1",
+        marginLeft: "2rem",
+        marginRight: "auto",
+      }}
+    >
+      <Suspense fallback={<h5>Cargando...</h5>}>
+        <Canvas
+          camera={{ position: [2, 0, 6] }}
+          style={{ height: "70vh", width: "100%" }}
+          shadows={true}
+          //className=" mask-radial-[40%_50%] mask-radial-from-70% hover:cursor-pointer"
+        >
+          <Html position={[-1.5, 5, -2]} style={{ pointerEvents: "none" }}>
+            <h2
+              style={{
+                color: "#3F72AF",
+                fontWeight: 800,
+                fontSize: "1.1em",
+                margin: 0,
+                textShadow: "0 2px 8px rgba(0,0,0,0.18)",
+                maxWidth: "750px",
+                whiteSpace: "nowrap",
+              }}
+            >
+              "Estructura interna del corazón"
+            </h2>
+          </Html>
+          <directionalLight
+            position={[0, 5, 5]}
+            intensity={6}
+            castShadow={true}
+          />
+          {/* <OrbitControls enableZoom={false} enableRotate={true} autoRotate autoRotateSpeed={3} /> */}
+          <OrbitControls
+            enableZoom={false}
+            enableRotate={true}
+            minAzimuthAngle={-Math.PI / 4}
+            maxAzimuthAngle={Math.PI / 4}
+            minPolarAngle={Math.PI / 2.2}
+            maxPolarAngle={Math.PI / 2}
+          />
+          <ambientLight intensity={3} />
 
-        <Sky />
-        <StenosisHeart
-          position={[0, -2, 0.8]}
-          scale={isHovered ? scale * 1.1 : scale}
-          rotation={rotation}
-          onPointerOver={handlePointerOver}
-          onPointerOut={handlePointerOut}
-          onClick={handleClick}
-        />
-        <Floor
-          color="#3F72AF"
-          position={position}
-          metalnesVal={0.5}
-          roughness={1}
-        />
-      </Canvas>
-    </Suspense>
+          <Sky />
+          <StenosisHeart
+            position={[0, -2, 0.8]}
+            scale={isHovered ? scale * 1.1 : scale}
+            rotation={rotation}
+            onPointerOver={handlePointerOver}
+            onPointerOut={handlePointerOut}
+            onClick={handleClick}
+          />
+          <Floor
+            color="#3F72AF"
+            position={position}
+            metalnesVal={0.5}
+            roughness={1}
+          />
+        </Canvas>
+      </Suspense>
+    </div>
   );
 };
 
